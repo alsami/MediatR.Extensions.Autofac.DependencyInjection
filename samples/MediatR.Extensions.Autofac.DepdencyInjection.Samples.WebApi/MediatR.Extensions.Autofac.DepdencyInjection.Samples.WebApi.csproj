@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection">
+      <Version>4.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MediatR.Extensions.Autofac.DependencyInjection.Samples.Shared\MediatR.Extensions.Autofac.DependencyInjection.Samples.Shared.csproj" />
+  </ItemGroup>
+</Project>

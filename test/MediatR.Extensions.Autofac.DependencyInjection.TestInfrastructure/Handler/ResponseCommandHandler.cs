@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using MediatR.Extensions.AutoFac.DependencyInjection.TestInfrastructure.Commands;
+using MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.Commands;
 
-namespace MediatR.Extensions.AutoFac.DependencyInjection.TestInfrastructure.Handler
+namespace MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.Handler
 {
     public class ResponseCommandHandler : IRequestHandler<ResponseCommand, Response>
     {

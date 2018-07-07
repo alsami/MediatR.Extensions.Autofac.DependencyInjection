@@ -1,4 +1,4 @@
-﻿namespace MediatR.Extensions.AutoFac.DependencyInjection.TestInfrastructure.Commands
+﻿namespace MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.Commands
 {
     public class VoidCommand : IRequest
     {

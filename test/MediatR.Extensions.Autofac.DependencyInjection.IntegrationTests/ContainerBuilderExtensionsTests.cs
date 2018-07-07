@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Autofac;
-using MediatR.Extensions.AutoFac.DependencyInjection.TestInfrastructure.Commands;
+using MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.Commands;
 using MediatR.Pipeline;
 using Xunit;
 

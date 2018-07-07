@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MediatR.Extensions.Autofac.DependencyInjection.Samples.Shared\MediatR.Extensions.Autofac.DependencyInjection.Samples.Shared.csproj" />
+  </ItemGroup>
+</Project>
