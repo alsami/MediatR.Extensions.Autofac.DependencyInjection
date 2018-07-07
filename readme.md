@@ -1,5 +1,4 @@
 # MediatR.Extensions.Autofac.DependencyInjection
-===
 
 [![NuGet](https://img.shields.io/nuget/dt/MediatR.Extensions.Autofac.DependencyInjection.svg)](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection) 
 [![NuGet](https://img.shields.io/nuget/vpre/MediatR.Extensions.Autofac.DependencyInjection.svg)](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection)
