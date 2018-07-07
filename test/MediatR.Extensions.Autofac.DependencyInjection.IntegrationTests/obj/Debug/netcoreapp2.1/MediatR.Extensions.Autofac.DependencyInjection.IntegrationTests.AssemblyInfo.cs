@@ -7,10 +7,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("MediatR.Extensions.Autofac.DependencyInjection")]
+[assembly:
+    System.Reflection.AssemblyCompanyAttribute("MediatR.Extensions.Autofac.DependencyInjection.IntegrationTests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
-[assembly: System.Reflection.AssemblyProductAttribute("MediatR.Extensions.Autofac.DependencyInjection")]
-[assembly: System.Reflection.AssemblyTitleAttribute("MediatR.Extensions.Autofac.DependencyInjection")]
+[assembly:
+    System.Reflection.AssemblyProductAttribute("MediatR.Extensions.Autofac.DependencyInjection.IntegrationTests")]
+[assembly: System.Reflection.AssemblyTitleAttribute("MediatR.Extensions.Autofac.DependencyInjection.IntegrationTests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

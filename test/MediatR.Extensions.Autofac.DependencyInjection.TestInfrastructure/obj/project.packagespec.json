@@ -1,0 +1,47 @@
+﻿{
+  "version": "1.0.0",
+  "restore": {
+    "projectUniqueName": "/home/firebirdy/Dev/mediatr-extensions-autofac-dependenyinjection/test/MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure/MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.csproj",
+    "projectName": "MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure",
+    "projectPath": "/home/firebirdy/Dev/mediatr-extensions-autofac-dependenyinjection/test/MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure/MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.csproj",
+    "outputPath": "/home/firebirdy/Dev/mediatr-extensions-autofac-dependenyinjection/test/MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure/obj/",
+    "projectStyle": "PackageReference",
+    "fallbackFolders": [
+      "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+    ],
+    "originalTargetFrameworks": [
+      "netstandard2.0"
+    ],
+    "frameworks": {
+      "netstandard2.0": {
+        "projectReferences": {
+          "/home/firebirdy/Dev/mediatr-extensions-autofac-dependenyinjection/src/MediatR.Extensions.Autofac.DependencyInjection/MediatR.Extensions.Autofac.DependencyInjection.csproj": {
+            "projectPath": "/home/firebirdy/Dev/mediatr-extensions-autofac-dependenyinjection/src/MediatR.Extensions.Autofac.DependencyInjection/MediatR.Extensions.Autofac.DependencyInjection.csproj"
+          }
+        }
+      }
+    },
+    "warningProperties": {
+      "warnAsError": [
+        "NU1605"
+      ]
+    }
+  },
+  "frameworks": {
+    "netstandard2.0": {
+      "dependencies": {
+        "NETStandard.Library": {
+          "suppressParent": "All",
+          "target": "Package",
+          "version": "[2.0.3, )",
+          "autoReferenced": true
+        }
+      },
+      "imports": [
+        "net461"
+      ],
+      "assetTargetFallback": true,
+      "warn": true
+    }
+  }
+}
