@@ -1,20 +1,24 @@
 # MediatR.Extensions.Autofac.DependencyInjection
+===
+
+[![NuGet](https://img.shields.io/nuget/dt/MediatR.Extensions.Autofac.DependencyInjection.svg)](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection) 
+[![NuGet](https://img.shields.io/nuget/vpre/MediatR.Extensions.Autofac.DependencyInjection.svg)](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection)
 
 This is a small library that serves as an extension for [autofac's containerbuilder](https://autofac.org/).
 It will add all necessary classes and interfaces of Jimmy Bogard's [MediatR](https://github.com/jbogard/MediatR) implementation to the autofac-container so you can use cqrs right ahread without worrying about infrastracture code.
 
 ## Installation
 
-This package is available via nuget. You can install it using Visual-Studio-Package-Manager or by using the dotnet-cli
+This package is available via nuget. You can install it using Visual-Studio-Nuget-Browser or by using the dotnet-cli
 
 ```
-dotnet add MediatR.Extensions.Autofac.DependencyInjection
+dotnet add package MediatR.Extensions.Autofac.DependencyInjection
 ```
 
 If you want to add a specific version of this package
 
 ```
-dotnet add MediatR.Extensions.Autofac.DependencyInjection -v 1.0.0
+dotnet add package MediatR.Extensions.Autofac.DependencyInjection -v 1.0.0
 ```
 
 For more information please visit the official [dotnet-cli documentation](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package).
