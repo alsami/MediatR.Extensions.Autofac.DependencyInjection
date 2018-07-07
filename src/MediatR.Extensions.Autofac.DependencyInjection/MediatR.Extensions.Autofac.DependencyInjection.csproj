@@ -1,7 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>7.2</LangVersion>
+    <Authors>al.khatib.sami1990@gmail.com</Authors>
+    <Title>MediatR-Autofac-Extension</Title>
+    <Description>An extension for Autofac-IoC to use MediatR and CQRS with ease.</Description>
+    <PackageProjectUrl>https://github.com/alsami/MediatR.Extensions.Autofac.DependencyInjection</PackageProjectUrl>
+    <PackageTags>MediatR, Autofac, IoC, Cqrs</PackageTags>
     <Version>1.0.0</Version>
+    <FileVersion>1.0.0.0</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.8.1" />
