@@ -1,0 +1,9 @@
+/home/firebirdy/Dev/mediatr-extensions-autofac-dependenyinjection/src/MediatR.Extensions.Autofac.DependencyInjection/bin/Debug/netstandard2.0/MediatR.Extensions.Autofac.DependencyInjection.deps.json
+/home/firebirdy/Dev/mediatr-extensions-autofac-dependenyinjection/src/MediatR.Extensions.Autofac.DependencyInjection/bin/Debug/netstandard2.0/MediatR.Extensions.Autofac.DependencyInjection.dll
+/home/firebirdy/Dev/mediatr-extensions-autofac-dependenyinjection/src/MediatR.Extensions.Autofac.DependencyInjection/bin/Debug/netstandard2.0/MediatR.Extensions.Autofac.DependencyInjection.pdb
+/home/firebirdy/Dev/mediatr-extensions-autofac-dependenyinjection/src/MediatR.Extensions.Autofac.DependencyInjection/obj/Debug/netstandard2.0/MediatR.Extensions.Autofac.DependencyInjection.csprojAssemblyReference.cache
+/home/firebirdy/Dev/mediatr-extensions-autofac-dependenyinjection/src/MediatR.Extensions.Autofac.DependencyInjection/obj/Debug/netstandard2.0/MediatR.Extensions.Autofac.DependencyInjection.csproj.CoreCompileInputs.cache
+/home/firebirdy/Dev/mediatr-extensions-autofac-dependenyinjection/src/MediatR.Extensions.Autofac.DependencyInjection/obj/Debug/netstandard2.0/MediatR.Extensions.Autofac.DependencyInjection.AssemblyInfoInputs.cache
+/home/firebirdy/Dev/mediatr-extensions-autofac-dependenyinjection/src/MediatR.Extensions.Autofac.DependencyInjection/obj/Debug/netstandard2.0/MediatR.Extensions.Autofac.DependencyInjection.AssemblyInfo.cs
+/home/firebirdy/Dev/mediatr-extensions-autofac-dependenyinjection/src/MediatR.Extensions.Autofac.DependencyInjection/obj/Debug/netstandard2.0/MediatR.Extensions.Autofac.DependencyInjection.dll
+/home/firebirdy/Dev/mediatr-extensions-autofac-dependenyinjection/src/MediatR.Extensions.Autofac.DependencyInjection/obj/Debug/netstandard2.0/MediatR.Extensions.Autofac.DependencyInjection.pdb

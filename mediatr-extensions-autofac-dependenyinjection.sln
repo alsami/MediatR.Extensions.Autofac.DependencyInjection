@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediatR.Extensions.Autofac.DependencyInjection", "src\MediatR.Extensions.Autofac.DependencyInjection\MediatR.Extensions.Autofac.DependencyInjection.csproj", "{11E614FE-35FE-43CD-9A03-64C62AD3145F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{93E8D46E-9D32-4AD0-9E74-0B5DB6A21D14}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{429AF3E0-00B9-43F8-A449-0103AA372699}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{E03D3701-27BF-474A-B1ED-667D7B4DDFE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediatR.Extensions.AutoFac.DependencyInjection.TestInfrastructure", "test\MediatR.Extensions.AutoFac.DependencyInjection.TestInfrastructure\MediatR.Extensions.AutoFac.DependencyInjection.TestInfrastructure.csproj", "{A45137AF-9B39-4AD8-B1D9-47CE3CE594DB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{11E614FE-35FE-43CD-9A03-64C62AD3145F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11E614FE-35FE-43CD-9A03-64C62AD3145F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11E614FE-35FE-43CD-9A03-64C62AD3145F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11E614FE-35FE-43CD-9A03-64C62AD3145F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A45137AF-9B39-4AD8-B1D9-47CE3CE594DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A45137AF-9B39-4AD8-B1D9-47CE3CE594DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A45137AF-9B39-4AD8-B1D9-47CE3CE594DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A45137AF-9B39-4AD8-B1D9-47CE3CE594DB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{11E614FE-35FE-43CD-9A03-64C62AD3145F} = {93E8D46E-9D32-4AD0-9E74-0B5DB6A21D14}
+		{A45137AF-9B39-4AD8-B1D9-47CE3CE594DB} = {429AF3E0-00B9-43F8-A449-0103AA372699}
+	EndGlobalSection
+EndGlobal
