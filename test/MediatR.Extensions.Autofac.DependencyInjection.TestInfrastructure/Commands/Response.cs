@@ -2,11 +2,11 @@
 
 namespace MediatR.Extensions.AutoFac.DependencyInjection.TestInfrastructure.Commands
 {
-    public class PingResponse
+    public class Response
     {
         public DateTime PingReceivedAt { get; }
 
-        public PingResponse(DateTime pingReceivedAt)
+        public Response(DateTime pingReceivedAt)
         {
             this.PingReceivedAt = pingReceivedAt;
         }

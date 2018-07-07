@@ -19,16 +19,16 @@ namespace MediatR.Extensions.Autofac.DependencyInjection
             builder.RegisterAssemblyTypes(typeof(IMediator).Assembly)
                 .AsImplementedInterfaces();
 
-            var openGenericTypes = new[]
+            var openHandlerTypes = new[]
             {
                 typeof(IRequestHandler<,>),
                 typeof(INotificationHandler<>),
             };
 
-            foreach (var openGenericType in openGenericTypes)
+            foreach (var openHandlerType in openHandlerTypes)
             {
                 builder.RegisterAssemblyTypes(this.assemblies)
-                    .AsClosedTypesOf(openGenericType)
+                    .AsClosedTypesOf(openHandlerType)
                     .AsImplementedInterfaces();
             }
 

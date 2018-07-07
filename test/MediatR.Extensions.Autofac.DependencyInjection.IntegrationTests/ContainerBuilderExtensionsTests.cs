@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Reflection;
 using Autofac;
 using MediatR.Extensions.AutoFac.DependencyInjection.TestInfrastructure.Commands;
 using MediatR.Pipeline;
@@ -6,18 +8,18 @@ using Xunit;
 
 namespace MediatR.Extensions.Autofac.DependencyInjection.IntegrationTests
 {
-    public class ContainerExtensionsTest : IDisposable
+    public class ContainerBuilderExtensionsTests : IDisposable
     {
         private readonly ContainerBuilder builder;
         private IContainer container;
 
-        public ContainerExtensionsTest()
+        public ContainerBuilderExtensionsTests()
         {
             this.builder = new ContainerBuilder();
         }
         
         [Fact]
-        public void ContainerExtensions_AddMediatRWithAssembliesResolveTypes_ExpectInstances()
+        public void ContainerBuilderExtensions_AddMediatRWithAssembliesResolveTypes_ExpectInstances()
         {
             this.builder.AddMediatR(typeof(ResponseCommand).Assembly);
             this.container = this.builder.Build();
@@ -29,6 +31,15 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.IntegrationTests
             Assert.True(this.container.IsRegistered<IRequestHandler<ResponseCommand, Response>>(), "Responsehandler not registered");
             Assert.True(this.container.IsRegistered<IRequestHandler<VoidCommand>>(), "Voidhandler not registered");
         }
+
+        [Fact]
+        public void ContainerBuilderExtensions_AddMediatRNullAssemblies_ExpectExceptions()
+        {
+            Assert.Throws<ArgumentNullException>(() => this.builder.AddMediatR((Assembly[]) null));
+            Assert.Throws<ArgumentNullException>(() => this.builder.AddMediatR((Assembly) null));
+            Assert.Throws<ArgumentNullException>(() => this.builder.AddMediatR((ICollection<Assembly>) null));
+        }
+        
 
         public void Dispose()
         {

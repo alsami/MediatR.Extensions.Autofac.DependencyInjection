@@ -7,7 +7,7 @@ using Autofac;
 
 namespace MediatR.Extensions.Autofac.DependencyInjection
 {
-    public static class ContainerExtensions
+    public static class ContainerBuilderExtensions
     {
         public static void
             AddMediatR(this ContainerBuilder builder, params Assembly[] assemblies) =>
@@ -21,12 +21,14 @@ namespace MediatR.Extensions.Autofac.DependencyInjection
 
         private static void AddMediatRInternal(ContainerBuilder builder, IEnumerable<Assembly> assemblies)
         {
-            if (assemblies == null)
+            var enumerableAssemblies = assemblies as Assembly[] ?? assemblies.ToArray();
+            
+            if (enumerableAssemblies == null || !enumerableAssemblies.Any() || enumerableAssemblies.All(x => x == null))
             {
-                throw new ArgumentNullException(nameof(assemblies));
+                throw new ArgumentNullException(nameof(assemblies), $"Must provide assemblies in order to request {nameof(Mediator)}");
             }
             
-            builder.RegisterModule(new MediatRModule(assemblies as Assembly[] ?? assemblies.ToArray()));
+            builder.RegisterModule(new MediatRModule(enumerableAssemblies));
         }
     }
 }

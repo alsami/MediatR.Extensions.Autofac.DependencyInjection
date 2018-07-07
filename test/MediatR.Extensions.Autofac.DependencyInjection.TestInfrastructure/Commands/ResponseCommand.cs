@@ -1,6 +1,6 @@
 ﻿namespace MediatR.Extensions.AutoFac.DependencyInjection.TestInfrastructure.Commands
 {
-    public class PingCommand : IRequest<PingResponse>
+    public class ResponseCommand : IRequest<Response>
     {
         
     }
