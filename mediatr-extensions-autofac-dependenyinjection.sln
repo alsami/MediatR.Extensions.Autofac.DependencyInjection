@@ -12,6 +12,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediatR.Extensions.Autofac.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediatR.Extensions.Autofac.DependencyInjection.IntegrationTests", "test\MediatR.Extensions.Autofac.DependencyInjection.IntegrationTests\MediatR.Extensions.Autofac.DependencyInjection.IntegrationTests.csproj", "{6F8831B2-EE4B-4F95-82B5-57756674AAB8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{BC47F971-892E-485C-BB07-11BDC4035B90}"
+ProjectSection(SolutionItems) = preProject
+	.gitignore = .gitignore
+	readme.md = readme.md
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
