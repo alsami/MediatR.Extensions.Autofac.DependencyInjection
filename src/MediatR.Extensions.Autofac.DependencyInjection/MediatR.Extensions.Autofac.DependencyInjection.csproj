@@ -12,7 +12,6 @@
     <PackageTags>MediatR, Autofac, IoC, Cqrs</PackageTags>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>git://github.com/cleancodelabs/MediatR.Extensions.Autofac.DependencyInjection</RepositoryUrl>
-    <CodeAnalysisSummary></CodeAnalysisSummary>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.8.1" />
