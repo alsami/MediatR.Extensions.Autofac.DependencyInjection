@@ -67,4 +67,4 @@ public class Program
 }
 ```
 
-For more information about the usage please check out the [samples](https://github.com/alsami/MediatR.Extensions.Autofac.DependencyInjection/samples) I have provided.
+For more information about the usage please check out the [samples](https://github.com/cleancodelabs/MediatR.Extensions.Autofac.DependencyInjection/tree/master/samples) I have provided.
