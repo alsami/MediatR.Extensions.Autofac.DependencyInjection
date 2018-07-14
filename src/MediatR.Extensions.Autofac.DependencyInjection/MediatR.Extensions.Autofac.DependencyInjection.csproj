@@ -9,7 +9,7 @@
     <Title>MediatR-Autofac-Extension</Title>
     <Description>An extension for Autofac-IoC to use MediatR and CQRS with ease.</Description>
     <PackageProjectUrl>https://github.com/cleancodelabs/MediatR.Extensions.Autofac.DependencyInjection</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/cleancodelabs/MediatR.Extensions.Autofac.DependencyInjection/master/assets/logo/gradient_128x128.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/cleancodelabs/MediatR.Extensions.Autofac.DependencyInjection/master/assets/images/mediatr.png</PackageIconUrl>
     <PackageTags>MediatR, Autofac, IoC, Cqrs</PackageTags>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>git://github.com/cleancodelabs/MediatR.Extensions.Autofac.DependencyInjection</RepositoryUrl>
