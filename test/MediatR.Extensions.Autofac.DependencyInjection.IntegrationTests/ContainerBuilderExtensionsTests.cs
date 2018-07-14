@@ -21,8 +21,8 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.IntegrationTests
         [Fact]
         public void ContainerBuilderExtensions_AddMediatRWithAssembliesResolveTypes_ExpectInstances()
         {
-            this.builder.AddMediatR(typeof(ResponseCommand).Assembly);
-            this.container = this.builder.Build();
+            this.container = this.builder.AddMediatR(typeof(ResponseCommand).Assembly)
+                .Build();
 
             Assert.True(this.container.IsRegistered<IMediator>(), "Mediator not registered!");
             Assert.True(this.container.IsRegistered<ServiceFactory>(), "ServiceFactory not registered");

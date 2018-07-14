@@ -9,17 +9,17 @@ namespace MediatR.Extensions.Autofac.DependencyInjection
 {
     public static class ContainerBuilderExtensions
     {
-        public static void
+        public static ContainerBuilder
             AddMediatR(this ContainerBuilder builder, params Assembly[] assemblies) =>
             AddMediatRInternal(builder, assemblies);
 
-        public static void AddMediatR(this ContainerBuilder builder, IEnumerable<Assembly> assemblies) =>
+        public static ContainerBuilder AddMediatR(this ContainerBuilder builder, IEnumerable<Assembly> assemblies) =>
             AddMediatRInternal(builder, assemblies);
 
-        public static void AddMediatR(this ContainerBuilder builder, ICollection<Assembly> assemblies) =>
+        public static ContainerBuilder AddMediatR(this ContainerBuilder builder, ICollection<Assembly> assemblies) =>
             AddMediatRInternal(builder, assemblies);
 
-        private static void AddMediatRInternal(ContainerBuilder builder, IEnumerable<Assembly> assemblies)
+        private static ContainerBuilder AddMediatRInternal(ContainerBuilder builder, IEnumerable<Assembly> assemblies)
         {
             var enumerableAssemblies = assemblies as Assembly[] ?? assemblies.ToArray();
             
@@ -29,6 +29,8 @@ namespace MediatR.Extensions.Autofac.DependencyInjection
             }
             
             builder.RegisterModule(new MediatRModule(enumerableAssemblies));
+
+            return builder;
         }
     }
 }

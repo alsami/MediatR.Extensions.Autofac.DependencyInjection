@@ -1,3 +1,9 @@
+## [1.1.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/1.1.0) (2018-07-14)
+
+### Features
+
+* Allow chaining of method-calls
+
 ## [1.0.1](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/1.0.1) (2018-07-08)
 
 ### Chore
