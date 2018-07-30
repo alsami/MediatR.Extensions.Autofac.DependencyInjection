@@ -18,7 +18,7 @@ dotnet add package MediatR.Extensions.Autofac.DependencyInjection
 If you want to add a specific version of this package
 
 ```
-dotnet add package MediatR.Extensions.Autofac.DependencyInjection -v 1.0.0
+dotnet add package MediatR.Extensions.Autofac.DependencyInjection --version 1.0.0
 ```
 
 For more information please visit the official [dotnet-cli documentation](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package).
