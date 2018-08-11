@@ -1,3 +1,9 @@
+## [1.2.1](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/1.1.0) (2018-08-11)
+
+### Chore
+
+* Adjust package-infos
+
 ## [1.2.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/1.1.0) (2018-07-30)
 
 ### Features
