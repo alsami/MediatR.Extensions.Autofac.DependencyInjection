@@ -1,8 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure</AssemblyName>
-    <RootNamespace>MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\MediatR.Extensions.Autofac.DependencyInjection\MediatR.Extensions.Autofac.DependencyInjection.csproj" />

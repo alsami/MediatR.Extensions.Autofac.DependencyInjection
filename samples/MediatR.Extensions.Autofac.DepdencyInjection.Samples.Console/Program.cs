@@ -56,7 +56,7 @@ namespace MediatR.Extensions.Autofac.DepdencyInjection.Samples.Console
                 {
                     await mediator.Send(new CustomerLoadQuery(Guid.Empty), ctx);
                 }
-                catch (CustomerNotFoundException e)
+                catch (CustomerNotFoundException)
                 {
                     System.Console.WriteLine("Expected that the customer could not be found bc we didn't add him b4.");
                 }

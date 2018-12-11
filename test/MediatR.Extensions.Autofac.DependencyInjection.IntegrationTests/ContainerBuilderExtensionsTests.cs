@@ -30,6 +30,12 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.IntegrationTests
             Assert.True(this.container.IsRegistered<IPipelineBehavior<ResponseCommand, Unit>>(), "PiplineBehavior not registered");
             Assert.True(this.container.IsRegistered<IRequestHandler<ResponseCommand, Response>>(), "Responsehandler not registered");
             Assert.True(this.container.IsRegistered<IRequestHandler<VoidCommand>>(), "Voidhandler not registered");
+            Assert.True(this.container.IsRegistered<INotificationHandler<SampleNotification>>());
+
+            var mediator = this.container.Resolve<IMediator>();
+            var responseHandler = this.container.Resolve<IRequestHandler<ResponseCommand, Response>>();
+            var voidhandler = this.container.Resolve<IRequestHandler<VoidCommand>>();
+            var notificationhandler = this.container.Resolve<INotificationHandler<SampleNotification>>();
         }
 
         [Fact]
