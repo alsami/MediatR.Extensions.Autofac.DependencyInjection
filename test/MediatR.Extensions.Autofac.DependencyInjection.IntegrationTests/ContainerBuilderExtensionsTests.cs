@@ -41,7 +41,7 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.IntegrationTests
         [Fact]
         public void ContainerBuilderExtensions_AddMediatRNullAssemblies_ExpectExceptions()
         {
-            Assert.Throws<ArgumentNullException>(() => this.builder.AddMediatR((Assembly[]) null));
+            Assert.Throws<ArgumentNullException>(() => this.builder.AddMediatR(null));
             Assert.Throws<ArgumentNullException>(() => this.builder.AddMediatR((Assembly) null));
             Assert.Throws<ArgumentNullException>(() => this.builder.AddMediatR((ICollection<Assembly>) null));
         }

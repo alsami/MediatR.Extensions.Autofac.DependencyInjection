@@ -16,7 +16,7 @@ namespace MediatR.Extensions.Autofac.DependencyInjection
 
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterAssemblyTypes(typeof(IMediator).Assembly)
+            builder.RegisterAssemblyTypes(typeof(IMediator).GetTypeInfo().Assembly)
                 .AsImplementedInterfaces();
 
             var openHandlerTypes = new[]
