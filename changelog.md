@@ -1,4 +1,14 @@
-# [2.0.1](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/2.0.1) (2018-01-25)
+# [2.1.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/2.1.0) (2019-03-17)
+
+## Features
+
+* Update Autofac to version 4.9.1
+
+## Chore
+
+* Adjust copyright
+
+# [2.0.1](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/2.0.1) (2019-01-25)
 
 ## Bugfixes
 
