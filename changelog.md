@@ -1,8 +1,15 @@
+# [2.1.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/2.1.0) (2019-03-29)
+
+## Features
+
+* Update Autofac to version 4.9.2
+
 # [2.1.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/2.1.0) (2019-03-17)
 
 ## Features
 
 * Update Autofac to version 4.9.1
+* Update Autofac.Extensions.DependencyInjection 4.4.0
 
 ## Chore
 
@@ -18,7 +25,8 @@
 
 ## Features
 
-* Update to MediatR 6.0.0 and Autofac.Extensions.DependencyInjection 4.8.1
+* Update to MediatR 6.0.0
+* Update Autofac.Extensions.DependencyInjection 4.3.0
 
 ## Possible breaking changes
 

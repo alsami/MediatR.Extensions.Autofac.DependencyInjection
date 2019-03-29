@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>7.2</LangVersion>
-    <Version>2.1.0</Version>
-    <FileVersion>2.1.0.0</FileVersion>
+    <Version>2.1.1</Version>
+    <FileVersion>2.1.1.0</FileVersion>
     <Copyright>2019©CleanCode-Labs</Copyright>
     <Authors>Sami Al Khatib</Authors>
     <Title>MediatR-Autofac-Extension</Title>
