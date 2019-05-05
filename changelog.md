@@ -1,3 +1,9 @@
+# [3.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/3.0.0) (2019-05-05)
+
+## Features
+
+* Update MediatR to version 7.0.0. Please see the [changelog](https://github.com/jbogard/MediatR/releases/tag/v7.0.0) of MediatR since it contains breaking-changes for the request post-processors.
+
 # [2.1.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/2.1.0) (2019-03-29)
 
 ## Features
