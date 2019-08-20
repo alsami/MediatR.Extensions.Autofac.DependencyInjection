@@ -2,20 +2,12 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>7.2</LangVersion>
-    <Version>3.0.0</Version>
-    <FileVersion>3.0.0.0</FileVersion>
-    <Copyright>2019©CleanCode-Labs</Copyright>
-    <Authors>Sami Al Khatib</Authors>
-    <Title>MediatR-Autofac-Extension</Title>
-    <Description>An extension for Autofac-IoC to use MediatR and CQRS with ease.</Description>
-    <PackageProjectUrl>https://github.com/cleancodelabs/MediatR.Extensions.Autofac.DependencyInjection</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/cleancodelabs/MediatR.Extensions.Autofac.DependencyInjection/master/assets/images/mediatr.png</PackageIconUrl>
-    <PackageTags>MediatR, Autofac, Mediator, IoC, Cqrs, Commands, Queries, Notifications, Messages</PackageTags>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>git://github.com/cleancodelabs/MediatR.Extensions.Autofac.DependencyInjection</RepositoryUrl>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.9.4" />
     <PackageReference Include="MediatR" Version="7.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19367-01" />
   </ItemGroup>
 </Project>

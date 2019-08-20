@@ -1,3 +1,9 @@
+# [3.0.1](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/3.0.1) (2019-08-20)
+
+## Features
+
+* Update Autofac to version 4.9.4
+
 # [3.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/3.0.0) (2019-05-05)
 
 ## Features

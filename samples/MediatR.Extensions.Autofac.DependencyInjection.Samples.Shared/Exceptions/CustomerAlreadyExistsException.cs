@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.InteropServices.ComTypes;
 
 namespace MediatR.Extensions.Autofac.DependencyInjection.Samples.Shared.Exceptions
 {

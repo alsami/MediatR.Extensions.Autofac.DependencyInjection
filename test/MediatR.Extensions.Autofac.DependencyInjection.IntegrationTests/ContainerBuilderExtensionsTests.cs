@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using Autofac;
 using MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.Commands;
-using MediatR.Pipeline;
 using Xunit;
 
 namespace MediatR.Extensions.Autofac.DependencyInjection.IntegrationTests

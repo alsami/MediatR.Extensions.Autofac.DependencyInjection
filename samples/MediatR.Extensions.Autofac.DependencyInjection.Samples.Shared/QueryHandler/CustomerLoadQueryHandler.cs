@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR.Extensions.Autofac.DependencyInjection.Samples.Shared.Dto;
 using MediatR.Extensions.Autofac.DependencyInjection.Samples.Shared.Exceptions;

@@ -1,6 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediatR.Extensions.Autofac.DependencyInjection", "src\MediatR.Extensions.Autofac.DependencyInjection\MediatR.Extensions.Autofac.DependencyInjection.csproj", "{11E614FE-35FE-43CD-9A03-64C62AD3145F}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29209.62
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatR.Extensions.Autofac.DependencyInjection", "src\MediatR.Extensions.Autofac.DependencyInjection\MediatR.Extensions.Autofac.DependencyInjection.csproj", "{11E614FE-35FE-43CD-9A03-64C62AD3145F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{93E8D46E-9D32-4AD0-9E74-0B5DB6A21D14}"
 EndProject
@@ -8,25 +11,26 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{429AF3E0-0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{E03D3701-27BF-474A-B1ED-667D7B4DDFE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure", "test\MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure\MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.csproj", "{A5AE6172-5AD8-4910-8CE8-FB23D7841D26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure", "test\MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure\MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.csproj", "{A5AE6172-5AD8-4910-8CE8-FB23D7841D26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediatR.Extensions.Autofac.DependencyInjection.IntegrationTests", "test\MediatR.Extensions.Autofac.DependencyInjection.IntegrationTests\MediatR.Extensions.Autofac.DependencyInjection.IntegrationTests.csproj", "{6F8831B2-EE4B-4F95-82B5-57756674AAB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatR.Extensions.Autofac.DependencyInjection.IntegrationTests", "test\MediatR.Extensions.Autofac.DependencyInjection.IntegrationTests\MediatR.Extensions.Autofac.DependencyInjection.IntegrationTests.csproj", "{6F8831B2-EE4B-4F95-82B5-57756674AAB8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{BC47F971-892E-485C-BB07-11BDC4035B90}"
-ProjectSection(SolutionItems) = preProject
-	.gitignore = .gitignore
-	readme.md = readme.md
-	changelog.md = changelog.md
-	.travis.yml = .travis.yml
-	run-tests.sh = run-tests.sh
-	publish-packages.sh = publish-packages.sh
-EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		.travis.yml = .travis.yml
+		changelog.md = changelog.md
+		src\Directory.Build.props = src\Directory.Build.props
+		publish-packages.sh = publish-packages.sh
+		readme.md = readme.md
+		run-tests.sh = run-tests.sh
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediatR.Extensions.Autofac.DependencyInjection.Samples.Shared", "samples\MediatR.Extensions.Autofac.DependencyInjection.Samples.Shared\MediatR.Extensions.Autofac.DependencyInjection.Samples.Shared.csproj", "{5B643B10-9305-4555-BF13-671896719D40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatR.Extensions.Autofac.DependencyInjection.Samples.Shared", "samples\MediatR.Extensions.Autofac.DependencyInjection.Samples.Shared\MediatR.Extensions.Autofac.DependencyInjection.Samples.Shared.csproj", "{5B643B10-9305-4555-BF13-671896719D40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediatR.Extensions.Autofac.DepdencyInjection.Samples.Console", "samples\MediatR.Extensions.Autofac.DepdencyInjection.Samples.Console\MediatR.Extensions.Autofac.DepdencyInjection.Samples.Console.csproj", "{65C86DF5-D4F0-41A9-91FD-9055A4A538A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatR.Extensions.Autofac.DepdencyInjection.Samples.Console", "samples\MediatR.Extensions.Autofac.DepdencyInjection.Samples.Console\MediatR.Extensions.Autofac.DepdencyInjection.Samples.Console.csproj", "{65C86DF5-D4F0-41A9-91FD-9055A4A538A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediatR.Extensions.Autofac.DepdencyInjection.Samples.WebApi", "samples\MediatR.Extensions.Autofac.DepdencyInjection.Samples.WebApi\MediatR.Extensions.Autofac.DepdencyInjection.Samples.WebApi.csproj", "{AC542B52-915C-4FFC-852B-1906FFED480C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatR.Extensions.Autofac.DepdencyInjection.Samples.WebApi", "samples\MediatR.Extensions.Autofac.DepdencyInjection.Samples.WebApi\MediatR.Extensions.Autofac.DepdencyInjection.Samples.WebApi.csproj", "{AC542B52-915C-4FFC-852B-1906FFED480C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +63,9 @@ Global
 		{AC542B52-915C-4FFC-852B-1906FFED480C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC542B52-915C-4FFC-852B-1906FFED480C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{11E614FE-35FE-43CD-9A03-64C62AD3145F} = {93E8D46E-9D32-4AD0-9E74-0B5DB6A21D14}
 		{A5AE6172-5AD8-4910-8CE8-FB23D7841D26} = {429AF3E0-00B9-43F8-A449-0103AA372699}
@@ -66,5 +73,8 @@ Global
 		{5B643B10-9305-4555-BF13-671896719D40} = {E03D3701-27BF-474A-B1ED-667D7B4DDFE6}
 		{65C86DF5-D4F0-41A9-91FD-9055A4A538A6} = {E03D3701-27BF-474A-B1ED-667D7B4DDFE6}
 		{AC542B52-915C-4FFC-852B-1906FFED480C} = {E03D3701-27BF-474A-B1ED-667D7B4DDFE6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8CE85BDC-1FCB-41D5-AA8C-593B2398F050}
 	EndGlobalSection
 EndGlobal
