@@ -14,8 +14,8 @@ namespace MediatR.Extensions.Autofac.DepdencyInjection.Samples.WebApi
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(options => options.Filters.Add(typeof(CustomerNotFoundExceptionFilter)))
-                .AddJsonOptions(options =>
+            services.AddControllers(options => options.Filters.Add(typeof(CustomerNotFoundExceptionFilter)))
+                .AddNewtonsoftJson(options =>
                 {
                     options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                     options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
@@ -25,7 +25,9 @@ namespace MediatR.Extensions.Autofac.DepdencyInjection.Samples.WebApi
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseMvc();
+            app.UseRouting();
+
+            app.UseEndpoints(builder => builder.MapControllers());
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -33,7 +35,7 @@ namespace MediatR.Extensions.Autofac.DepdencyInjection.Samples.WebApi
             builder.RegisterType<CustomersRepository>()
                 .As<ICustomersRepository>()
                 .SingleInstance();
-            
+
             builder.AddMediatR(typeof(CustomerAddCommand).Assembly);
         }
     }

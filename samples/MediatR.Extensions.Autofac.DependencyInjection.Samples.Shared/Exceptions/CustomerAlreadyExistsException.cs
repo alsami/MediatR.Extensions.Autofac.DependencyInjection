@@ -6,7 +6,6 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.Samples.Shared.Exceptio
     {
         public CustomerAlreadyExistsException(string message = "The customer already exists") : base(message)
         {
-            
         }
     }
 }

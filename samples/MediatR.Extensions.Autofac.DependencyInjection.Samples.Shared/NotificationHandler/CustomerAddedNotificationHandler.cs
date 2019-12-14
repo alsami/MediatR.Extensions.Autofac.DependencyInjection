@@ -9,8 +9,8 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.Samples.Shared.Notifica
     {
         public async Task Handle(CustomerAddedNotification notification, CancellationToken cancellationToken)
         {
-            Console.WriteLine($"Received CustomerAddedNotification for Customer { notification.Name }");
-            
+            Console.WriteLine($"Received CustomerAddedNotification for Customer {notification.Name}");
+
             await Task.CompletedTask.ConfigureAwait(false);
         }
     }

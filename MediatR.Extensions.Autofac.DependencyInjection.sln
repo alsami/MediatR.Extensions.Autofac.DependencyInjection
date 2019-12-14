@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatR.Extensions.Autofac.DependencyInjection", "src\MediatR.Extensions.Autofac.DependencyInjection\MediatR.Extensions.Autofac.DependencyInjection.csproj", "{11E614FE-35FE-43CD-9A03-64C62AD3145F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{93E8D46E-9D32-4AD0-9E74-0B5DB6A21D14}"
+ProjectSection(SolutionItems) = preProject
+	src\Directory.Build.props = src\Directory.Build.props
+EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{429AF3E0-00B9-43F8-A449-0103AA372699}"
 EndProject
@@ -18,7 +21,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{BC47F971-8
 		.gitignore = .gitignore
 		.travis.yml = .travis.yml
 		changelog.md = changelog.md
-		src\Directory.Build.props = src\Directory.Build.props
 		publish-packages.sh = publish-packages.sh
 		readme.md = readme.md
 		run-tests.sh = run-tests.sh

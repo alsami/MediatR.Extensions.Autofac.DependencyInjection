@@ -8,13 +8,15 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.Samples.Shared.Reposito
 {
     public class CustomersRepository : ICustomersRepository
     {
-        private readonly ConcurrentDictionary<Guid, Customer> customersByCustomerId = new ConcurrentDictionary<Guid, Customer>();
-        
+        private readonly ConcurrentDictionary<Guid, Customer> customersByCustomerId =
+            new ConcurrentDictionary<Guid, Customer>();
+
         public bool AddCustomer(Customer customer)
         {
             var redudantCustomerName = this.customersByCustomerId
                 .Values
-                .Any(existingCustomer => string.Equals(existingCustomer.Name, customer.Name, StringComparison.OrdinalIgnoreCase));
+                .Any(existingCustomer =>
+                    string.Equals(existingCustomer.Name, customer.Name, StringComparison.OrdinalIgnoreCase));
 
             return !redudantCustomerName && this.customersByCustomerId.TryAdd(customer.Id, customer);
         }

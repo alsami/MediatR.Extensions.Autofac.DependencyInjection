@@ -6,7 +6,6 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.Samples.Shared.Exceptio
     {
         public CustomerNotFoundException(string message = "The customer could not be found!") : base(message)
         {
-            
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using Autofac;
 
@@ -18,16 +19,28 @@ namespace MediatR.Extensions.Autofac.DependencyInjection
         public static ContainerBuilder AddMediatR(this ContainerBuilder builder, ICollection<Assembly> assemblies) =>
             AddMediatRInternal(builder, assemblies);
 
-        private static ContainerBuilder AddMediatRInternal(ContainerBuilder builder, IEnumerable<Assembly> assemblies)
+        public static ContainerBuilder AddMediatR(this ContainerBuilder builder, IEnumerable<Type> customBehaviorTypes,
+            IEnumerable<Assembly> assemblies)
+            => AddMediatRInternal(builder, assemblies, customBehaviorTypes);
+
+        public static ContainerBuilder AddMediatR(this ContainerBuilder builder, Assembly assembly,
+            params Type[] customBehaviorTypes)
+            => AddMediatRInternal(builder, new[] {assembly}, customBehaviorTypes);
+
+        private static ContainerBuilder AddMediatRInternal(ContainerBuilder builder, IEnumerable<Assembly> assemblies,
+            IEnumerable<Type> customBehaviorTypes = null)
         {
-            var enumerableAssemblies = assemblies as Assembly[] ?? assemblies.ToArray();
-            
-            if (enumerableAssemblies == null || !enumerableAssemblies.Any() || enumerableAssemblies.All(x => x == null))
+            var enumeratedAssemblies = assemblies as Assembly[] ?? assemblies.ToArray();
+
+            if (enumeratedAssemblies == null || !enumeratedAssemblies.Any() || enumeratedAssemblies.All(x => x == null))
             {
-                throw new ArgumentNullException(nameof(assemblies), $"Must provide assemblies in order to request {nameof(Mediator)}");
+                throw new ArgumentNullException(nameof(assemblies),
+                    $"Must provide assemblies in order to request {nameof(Mediator)}");
             }
-            
-            builder.RegisterModule(new MediatRModule(enumerableAssemblies));
+
+            var enumeratedCustonBehaviorTypes = customBehaviorTypes as Type[] ?? customBehaviorTypes?.ToArray();
+
+            builder.RegisterModule(new MediatRModule(enumeratedAssemblies, enumeratedCustonBehaviorTypes));
 
             return builder;
         }

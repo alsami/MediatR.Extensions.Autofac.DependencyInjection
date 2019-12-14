@@ -14,7 +14,7 @@ namespace MediatR.Extensions.Autofac.DepdencyInjection.Samples.WebApi.Filter
             }
 
             context.ExceptionHandled = true;
-            
+
             context.Result = new NotFoundObjectResult(new
             {
                 context.Exception.Message,

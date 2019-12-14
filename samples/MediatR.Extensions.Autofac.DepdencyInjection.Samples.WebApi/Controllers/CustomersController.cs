@@ -8,8 +8,9 @@ using MediatR.Extensions.Autofac.DependencyInjection.Samples.Shared.Queries;
 
 namespace MediatR.Extensions.Autofac.DepdencyInjection.Samples.WebApi.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
-    public class CustomersController : Controller
+    public class CustomersController : ControllerBase
     {
         private readonly IMediator mediator;
 

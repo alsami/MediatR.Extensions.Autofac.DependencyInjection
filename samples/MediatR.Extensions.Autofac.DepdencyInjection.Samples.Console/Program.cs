@@ -22,9 +22,9 @@ namespace MediatR.Extensions.Autofac.DepdencyInjection.Samples.Console
                 y.Cancel = true;
                 ctxs.Cancel(false);
             };
-            
+
             var builder = new ContainerBuilder();
-            
+
             builder.AddMediatR(typeof(CustomerLoadQuery).Assembly);
 
             builder.RegisterType<CustomersRepository>()
@@ -49,7 +49,7 @@ namespace MediatR.Extensions.Autofac.DepdencyInjection.Samples.Console
                 var mediator = scope.Resolve<IMediator>();
 
                 var customer = await mediator.Send(new CustomerLoadQuery(googleCustomerAddCommand.Id), ctx);
-                
+
                 System.Console.WriteLine(googleCustomerAddCommand.Name == customer.Name);
 
                 try

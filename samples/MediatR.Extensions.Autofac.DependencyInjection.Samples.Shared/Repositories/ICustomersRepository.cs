@@ -8,8 +8,8 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.Samples.Shared.Reposito
     {
         bool AddCustomer(Customer customer);
 
-        ICollection<Customer> GetAll(); 
-        
+        ICollection<Customer> GetAll();
+
         Customer FindCustomer(Guid id);
     }
 }
