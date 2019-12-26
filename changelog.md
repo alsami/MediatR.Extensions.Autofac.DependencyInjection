@@ -2,7 +2,7 @@
 
 ## Bugfixes
 
-* Make sure that `MediatRModule` does not throw when no custom types are passed into the extension methods, fixes #4
+* Make sure that `MediatRModule` does not throw when no custom types are passed into the extension methods, fixes [#4](https://github.com/cleancodelabs/MediatR.Extensions.Autofac.DependencyInjection/issues/4)
 
 # [3.1.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/3.1.0) (2019-12-14)
 
