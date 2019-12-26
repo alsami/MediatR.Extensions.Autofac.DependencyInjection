@@ -8,7 +8,7 @@
 
 ## Features
 
-* It is now possible to pass in behaviors that implement `IPipelineBehavior<TRequest, TResponse>` that will be resolved after `RequestPreProcessorBehavior<TRequest, Tresponse>` and before `RequestPostProcessorBehavior<TRequest, Tresponse>`
+* It is now possible to pass in behaviors that implement `IPipelineBehavior<TRequest, TResponse>`.
 
 ### Given sample with two custom behaviors without constraints:
 
@@ -65,8 +65,6 @@ We would register `MediatR` like that
 ```csharp
 var containerBuilder = new ContainerBuilder();
 
-// Very important here is that we pass in the behavior we want to be executed first in the end.
-// `Autofac` resolves what ever was registered last in the first place when having multiple implementations for one interface and/or generics
 // Since there are two default behaviors the execution order would now be the following
 // 1. LoggingBehavior<TRequest, TResponse>
 // 2. CachingBehavior<TRequest, TResponse>
@@ -131,8 +129,6 @@ We would register `MediatR` like that again
 ```csharp
 var containerBuilder = new ContainerBuilder();
 
-// Very important here is that we pass in the behavior we want to be executed first in the end.
-// Unless it is constrainted to a specific type. Then it will always be executed first.
 // Since there are two default behaviors, two custom behaviors and one with a constraint, the execution order would now be the following
 // 1. CachingBehavior<TRequest, TResponse>
 // 2. LoggingBehavior<TRequest, TResponse>
