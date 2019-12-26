@@ -38,9 +38,10 @@ namespace MediatR.Extensions.Autofac.DependencyInjection
                     $"Must provide assemblies in order to request {nameof(Mediator)}");
             }
 
-            var enumeratedCustonBehaviorTypes = customBehaviorTypes as Type[] ?? customBehaviorTypes?.ToArray();
+            var enumeratedCustomBehaviorTypes 
+                = customBehaviorTypes as Type[] ?? customBehaviorTypes?.ToArray() ?? Array.Empty<Type>();
 
-            builder.RegisterModule(new MediatRModule(enumeratedAssemblies, enumeratedCustonBehaviorTypes));
+            builder.RegisterModule(new MediatRModule(enumeratedAssemblies, enumeratedCustomBehaviorTypes));
 
             return builder;
         }
