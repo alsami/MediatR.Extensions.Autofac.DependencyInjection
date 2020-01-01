@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Autofac;
 using MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.Behaviors;
 using MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.Commands;
+using MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.ExceptionActions;
+using MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.ExceptionHandler;
+using MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.Handler;
 using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 using Xunit;
 // ReSharper disable UnusedVariable
@@ -65,7 +68,7 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.Tests
             var voidhandler = this.container.Resolve<IRequestHandler<VoidCommand>>();
             var notificationhandler = this.container.Resolve<INotificationHandler<SampleNotification>>();
             var behaviors = this.container.Resolve<IEnumerable<IPipelineBehavior<ResponseCommand, Response>>>();
-            Assert.Equal(4, behaviors.Count());
+            Assert.Equal(6, behaviors.Count());
             await mediator.Send(new ResponseCommand());
             Assert.Equal(1, NoopBehavior<ResponseCommand, Response>.HitCount);
         }
@@ -86,7 +89,7 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.Tests
             var mediator = this.container.Resolve<IMediator>();
             var responseHandler = this.container.Resolve<IRequestHandler<UnconstraintedCommand, int>>();
             var behaviors = this.container.Resolve<IEnumerable<IPipelineBehavior<UnconstraintedCommand, int>>>();
-            Assert.Equal(4, behaviors.Count());
+            Assert.Equal(6, behaviors.Count());
             await mediator.Send(new UnconstraintedCommand());
         }
 
@@ -97,6 +100,45 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.Tests
             Assert.Throws<ArgumentNullException>(() => this.builder.AddMediatR((ICollection<Assembly>) null));
         }
 
+        [Fact]
+        public async Task
+            ContainerBuilderExtensions_AddMediatR_Call_Throwing_Handler_Exception_Handlers_Called()
+        {
+            var currentContainer = new ContainerBuilder()
+                .AddMediatR(typeof(CommandThatThrowsArgumentException).Assembly)
+                .Build();
+
+            var mediator = currentContainer.Resolve<IMediator>();
+            
+            await mediator.Send(new CommandThatThrowsArgumentException());
+            Assert.Equal(1, NonSpecificExceptionHandler.CallCount);
+            Assert.Equal(1, CommandThatThrowsArgumentExceptionHandler.CallCount);
+            // NonSpecificExceptionHandler must be called last!
+            Assert.True(NonSpecificExceptionHandler.CallTime.Ticks > CommandThatThrowsArgumentExceptionHandler.CallTime.Ticks);
+        }
+        
+        [Fact]
+        public async Task
+            ContainerBuilderExtensions_AddMediatR_Call_Throwing_Handler_Exception_Actions_Called()
+        {
+            var currentContainer = new ContainerBuilder()
+                .AddMediatR(typeof(CommandThatThrowsNullRefException).Assembly)
+                .Build();
+
+            var mediator = currentContainer.Resolve<IMediator>();
+
+            try
+            {
+                await mediator.Send(new CommandThatThrowsNullRefException());
+            }
+            catch (NullReferenceException)
+            {
+                Assert.Equal(1, CommandThatThrowsNullRefExceptionActionHandler.CallCount);
+                return;
+            }
+            
+            Assert.True(false, "This code shouldn't be reached");
+        }
 
         public void Dispose()
         {
