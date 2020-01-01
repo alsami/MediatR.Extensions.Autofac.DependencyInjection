@@ -1,4 +1,4 @@
-# [4.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/4.0.0) (2019-01-01)
+# [4.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/4.0.0) (2020-01-01)
 
 ## Breaking changes
 
