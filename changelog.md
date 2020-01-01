@@ -3,7 +3,7 @@
 ## Breaking changes
 
 * `MediatR` has been updated to `8.0.0`. This major release contains small breaking changes. Check out this [post](https://jimmybogard.com/mediatr-8-0-released) for more information.
-* Open types were previously registered with implementing interfaces which can cause handlers two be called twice when a class implements `IRequestHandler<,>` and `INotificationHandler<>`. To prevent this from happening, `.AsImplementedInterfaces()` has been removed from the registration.
+* Open types were previously registered with implementing interfaces which can cause handlers two be [called twice](https://github.com/jbogard/MediatR/issues/462) when a class implements `IRequestHandler<,>` and `INotificationHandler<>`. To prevent this from happening, `.AsImplementedInterfaces()` has been removed from the registration.
 If you wish to register it like before, use this code after calling the extension method `AddMediatR`.
 
 ```csharp
