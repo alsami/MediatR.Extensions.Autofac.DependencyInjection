@@ -8,8 +8,6 @@ using MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.Behavior
 using MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.Commands;
 using MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.ExceptionActions;
 using MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.ExceptionHandler;
-using MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.Handler;
-using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 using Xunit;
 // ReSharper disable UnusedVariable
 
