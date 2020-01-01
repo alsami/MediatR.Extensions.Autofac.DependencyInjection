@@ -1,3 +1,34 @@
+# [4.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/4.0.0) (2019-01-01)
+
+## Breaking changes
+
+* `MediatR` has been updated to `8.0.0`. This major release contains small breaking changes. Check out this [post](https://jimmybogard.com/mediatr-8-0-released) for more information.
+* Open types were previously registered with implementing interfaces which can cause handlers two be called twice when a class implements `IRequestHandler<,>` and `INotificationHandler<>`. To prevent this from happening, `.AsImplementedInterfaces()` has been removed from the registration.
+If you wish to register it like before, use this code after calling the extension method `AddMediatR`.
+
+```csharp
+var openHandlerTypes = new[]
+{
+    typeof(IRequestHandler<,>),
+    typeof(IRequestExceptionHandler<,,>),
+    typeof(IRequestExceptionAction<,>),
+    typeof(INotificationHandler<>),
+};
+
+foreach (var openHandlerType in openHandlerTypes)
+{
+    builder.RegisterAssemblyTypes(this.assemblies)
+        .AsClosedTypesOf(openHandlerType)
+        .AsImplementedInterfaces();
+}
+```
+* Two extensions that were likely not used have been removed from `ContainerBuilderExtensions`.
+
+## Features
+
+* Support for `MediatR` version `8.0.0` by registering the new behaviors and open-handlers for handling exceptions. Check out this [post](https://jimmybogard.com/mediatr-8-0-released) for more information.
+
+
 # [3.1.1](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/3.1.1) (2019-12-26)
 
 ## Bugfixes
