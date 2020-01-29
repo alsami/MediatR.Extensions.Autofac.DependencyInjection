@@ -6,7 +6,7 @@
 
         public SampleNotification(string message)
         {
-            Message = message;
+            this.Message = message;
         }
     }
 }

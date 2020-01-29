@@ -14,8 +14,8 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.Exce
         public Task Handle(CommandThatThrowsArgumentException request, ArgumentException exception,
             RequestExceptionHandlerState<object> state, CancellationToken cancellationToken)
         {
-            CommandThatThrowsArgumentExceptionHandler.CallTime = DateTime.UtcNow;
-            CommandThatThrowsArgumentExceptionHandler.CallCount++;
+            CallTime = DateTime.UtcNow;
+            CallCount++;
             return Task.CompletedTask;
         }
     }

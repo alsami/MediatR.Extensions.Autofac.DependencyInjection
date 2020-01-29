@@ -17,7 +17,7 @@ namespace MediatR.Extensions.Autofac.DepdencyInjection.ConsoleApp
             var ctx = new CancellationToken();
             var ctxs = CancellationTokenSource.CreateLinkedTokenSource(ctx);
 
-            System.Console.CancelKeyPress += (x, y) =>
+            Console.CancelKeyPress += (x, y) =>
             {
                 y.Cancel = true;
                 ctxs.Cancel(false);
@@ -58,11 +58,11 @@ namespace MediatR.Extensions.Autofac.DepdencyInjection.ConsoleApp
                 }
                 catch (CustomerNotFoundException)
                 {
-                    System.Console.WriteLine("Expected that the customer could not be found bc we didn't add him b4.");
+                    Console.WriteLine("Expected that the customer could not be found bc we didn't add him b4.");
                 }
             }
 
-            System.Console.ReadKey();
+            Console.ReadKey();
         }
     }
 }

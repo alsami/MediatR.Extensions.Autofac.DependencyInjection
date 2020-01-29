@@ -9,7 +9,7 @@ namespace MediatR.Extensions.Autofac.DepdencyInjection.WebApi
     {
         public static void Main(string[] args)
         {
-            Program.CreateWebHostBuilder(args).Build().Run();
+            CreateWebHostBuilder(args).Build().Run();
         }
 
         private static IHostBuilder CreateWebHostBuilder(string[] args) =>

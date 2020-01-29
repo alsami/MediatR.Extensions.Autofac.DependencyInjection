@@ -15,8 +15,8 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.Exce
             RequestExceptionHandlerState<object> state,
             CancellationToken cancellationToken)
         {
-            NonSpecificExceptionHandler.CallTime = DateTime.UtcNow;
-            NonSpecificExceptionHandler.CallCount++;
+            CallTime = DateTime.UtcNow;
+            CallCount++;
             state.SetHandled();
             return Task.CompletedTask;
         }

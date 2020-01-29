@@ -1,3 +1,9 @@
+# [5.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/5.0.0) (2020-01-29)
+
+## Breaking changes
+
+* `Autofac` has been updated to `5.0.0`. The release of `Autofac` contains breaking changes, mostly making the container immutable. You can read more about the changes [here](https://www.paraesthesia.com/archive/2020/01/27/autofac-5-released/).
+
 # [4.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/4.0.0) (2020-01-01)
 
 ## Breaking changes

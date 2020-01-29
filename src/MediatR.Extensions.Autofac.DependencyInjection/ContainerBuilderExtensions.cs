@@ -10,18 +10,18 @@ namespace MediatR.Extensions.Autofac.DependencyInjection
     {
         public static ContainerBuilder
             AddMediatR(this ContainerBuilder builder, params Assembly[] assemblies)
-                => ContainerBuilderExtensions.AddMediatRInternal(builder, assemblies);
+                => AddMediatRInternal(builder, assemblies);
 
         public static ContainerBuilder AddMediatR(this ContainerBuilder builder, IEnumerable<Assembly> assemblies)
-            => ContainerBuilderExtensions.AddMediatRInternal(builder, assemblies);
+            => AddMediatRInternal(builder, assemblies);
 
         public static ContainerBuilder AddMediatR(this ContainerBuilder builder, IEnumerable<Type> customBehaviorTypes,
             IEnumerable<Assembly> assemblies)
-            => ContainerBuilderExtensions.AddMediatRInternal(builder, assemblies, customBehaviorTypes);
+            => AddMediatRInternal(builder, assemblies, customBehaviorTypes);
 
         public static ContainerBuilder AddMediatR(this ContainerBuilder builder, Assembly assembly,
             params Type[] customBehaviorTypes)
-            => ContainerBuilderExtensions.AddMediatRInternal(builder, new[] {assembly}, customBehaviorTypes);
+            => AddMediatRInternal(builder, new[] {assembly}, customBehaviorTypes);
 
         private static ContainerBuilder AddMediatRInternal(ContainerBuilder builder, IEnumerable<Assembly> assemblies,
             IEnumerable<Type> customBehaviorTypes = null)

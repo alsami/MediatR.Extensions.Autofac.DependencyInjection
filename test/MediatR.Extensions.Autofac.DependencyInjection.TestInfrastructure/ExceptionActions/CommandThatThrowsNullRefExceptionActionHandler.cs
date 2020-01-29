@@ -14,7 +14,7 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.Exce
         public Task Execute(CommandThatThrowsNullRefException request, NullReferenceException exception,
             CancellationToken cancellationToken)
         {
-            CommandThatThrowsNullRefExceptionActionHandler.CallCount++;
+            CallCount++;
             return Task.CompletedTask;
         }
     }
