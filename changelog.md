@@ -1,3 +1,10 @@
+# [5.1.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/5.1.0) (2020-02-22)
+
+## Chore
+
+* Update `Autofac` to version `5.1.1`
+* Update sample project dependencies
+
 # [5.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/5.0.0) (2020-01-29)
 
 ## Breaking changes
