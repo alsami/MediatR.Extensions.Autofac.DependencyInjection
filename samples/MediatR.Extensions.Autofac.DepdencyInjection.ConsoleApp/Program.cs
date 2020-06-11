@@ -10,9 +10,9 @@ using MediatR.Extensions.Autofac.DependencyInjection.Shared.Repositories;
 
 namespace MediatR.Extensions.Autofac.DepdencyInjection.ConsoleApp
 {
-    public class Program
+    public static class Program
     {
-        public static async Task Main(string[] args)
+        public static async Task Main(string[] _)
         {
             var ctx = new CancellationToken();
             var ctxs = CancellationTokenSource.CreateLinkedTokenSource(ctx);
@@ -37,14 +37,14 @@ namespace MediatR.Extensions.Autofac.DepdencyInjection.ConsoleApp
 
             var googleCustomerAddCommand = new CustomerAddCommand(Guid.NewGuid(), "google");
 
-            using (var scope = lifetimeScope.BeginLifetimeScope())
+            await using (var scope = lifetimeScope.BeginLifetimeScope())
             {
                 var mediator = scope.Resolve<IMediator>();
 
                 await mediator.Send(googleCustomerAddCommand, ctx);
             }
 
-            using (var scope = lifetimeScope.BeginLifetimeScope())
+            await using (var scope = lifetimeScope.BeginLifetimeScope())
             {
                 var mediator = scope.Resolve<IMediator>();
 
