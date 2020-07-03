@@ -17,7 +17,7 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.Exce
         {
             CallTime = DateTime.UtcNow;
             CallCount++;
-            state.SetHandled();
+            state.SetHandled(new object());
             return Task.CompletedTask;
         }
     }
