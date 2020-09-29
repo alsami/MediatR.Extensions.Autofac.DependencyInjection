@@ -10,7 +10,7 @@
 
 ## Features
 
-* Wew extensions were added that are more aligned with the `Autofac` syntax for registering dependencies. Please use `RegisterMediatR` instead of `AddMediatR`
+* New extensions were added that are more aligned with the `Autofac` syntax for registering dependencies. Please use `RegisterMediatR` instead of `AddMediatR`
 
 
 # [5.3.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/5.3.0) (2020-08-02)
