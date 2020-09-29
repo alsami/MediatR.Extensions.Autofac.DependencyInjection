@@ -1,3 +1,18 @@
+# [6.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/5.3.0) (2020-09-29)
+
+## Breaking Changes
+
+* `Autofac` has been updated to version `6.0.0`. This release contains many new features but also breaking-changes. Check out this [blog-post](https://alistairevans.co.uk/2020/09/28/autofac-6-0-released/) for more information.
+
+## Deprecation notice
+
+* `AddMediatR` has been marked as deprecated and will be removed with version `7.0.0`.
+
+## Features
+
+* Wew extensions were added that are more aligned with the `Autofac` syntax for registering dependencies. Please use `RegisterMediatR` instead of `AddMediatR`
+
+
 # [5.3.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/5.3.0) (2020-08-02)
 
 ## Features

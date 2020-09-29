@@ -8,22 +8,44 @@ namespace MediatR.Extensions.Autofac.DependencyInjection
 {
     public static class ContainerBuilderExtensions
     {
+        private const string ObsoleteMessage =
+            "This extension method is obsolete. Please use the new extension 'RegisterMediatR' instead.";
+        
+        [Obsolete(ObsoleteMessage)]
         public static ContainerBuilder
             AddMediatR(this ContainerBuilder builder, params Assembly[] assemblies)
-                => AddMediatRInternal(builder, assemblies);
+                => RegisterMediatRInternal(builder, assemblies);
 
+        [Obsolete(ObsoleteMessage)]
         public static ContainerBuilder AddMediatR(this ContainerBuilder builder, IEnumerable<Assembly> assemblies)
-            => AddMediatRInternal(builder, assemblies);
+            => RegisterMediatRInternal(builder, assemblies);
 
+        [Obsolete(ObsoleteMessage)]
         public static ContainerBuilder AddMediatR(this ContainerBuilder builder, IEnumerable<Type> customBehaviorTypes,
             IEnumerable<Assembly> assemblies)
-            => AddMediatRInternal(builder, assemblies, customBehaviorTypes);
+            => RegisterMediatRInternal(builder, assemblies, customBehaviorTypes);
 
+        [Obsolete]
         public static ContainerBuilder AddMediatR(this ContainerBuilder builder, Assembly assembly,
             params Type[] customBehaviorTypes)
-            => AddMediatRInternal(builder, new[] {assembly}, customBehaviorTypes);
+            => RegisterMediatRInternal(builder, new[] {assembly}, customBehaviorTypes);
 
-        private static ContainerBuilder AddMediatRInternal(ContainerBuilder builder, IEnumerable<Assembly> assemblies,
+        public static ContainerBuilder
+            RegisterMediatR(this ContainerBuilder builder, params Assembly[] assemblies)
+            => RegisterMediatRInternal(builder, assemblies);
+
+        public static ContainerBuilder RegisterMediatR(this ContainerBuilder builder, IEnumerable<Assembly> assemblies)
+            => RegisterMediatRInternal(builder, assemblies);
+
+        public static ContainerBuilder RegisterMediatR(this ContainerBuilder builder, IEnumerable<Type> customBehaviorTypes,
+            IEnumerable<Assembly> assemblies)
+            => RegisterMediatRInternal(builder, assemblies, customBehaviorTypes);
+
+        public static ContainerBuilder RegisterMediatR(this ContainerBuilder builder, Assembly assembly,
+            params Type[] customBehaviorTypes)
+            => RegisterMediatRInternal(builder, new[] {assembly}, customBehaviorTypes);
+
+        private static ContainerBuilder RegisterMediatRInternal(ContainerBuilder builder, IEnumerable<Assembly> assemblies,
             IEnumerable<Type> customBehaviorTypes = null)
         {
             var enumeratedAssemblies = assemblies as Assembly[] ?? assemblies.ToArray();

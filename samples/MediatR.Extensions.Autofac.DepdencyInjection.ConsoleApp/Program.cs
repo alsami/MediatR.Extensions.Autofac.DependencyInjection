@@ -25,7 +25,7 @@ namespace MediatR.Extensions.Autofac.DepdencyInjection.ConsoleApp
 
             var builder = new ContainerBuilder();
 
-            builder.AddMediatR(typeof(CustomerLoadQuery).Assembly);
+            builder.RegisterMediatR(typeof(CustomerLoadQuery).Assembly);
 
             builder.RegisterType<CustomersRepository>()
                 .As<ICustomersRepository>()

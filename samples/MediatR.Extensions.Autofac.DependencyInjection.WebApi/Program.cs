@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace MediatR.Extensions.Autofac.DepdencyInjection.WebApi
+namespace MediatR.Extensions.Autofac.DependencyInjection.WebApi
 {
     // ReSharper disable once ClassNeverInstantiated.Global
     public class Program

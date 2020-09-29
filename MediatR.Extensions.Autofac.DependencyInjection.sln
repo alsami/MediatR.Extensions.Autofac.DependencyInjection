@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatR.Extensions.Autofac.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatR.Extensions.Autofac.DepdencyInjection.ConsoleApp", "samples\MediatR.Extensions.Autofac.DepdencyInjection.ConsoleApp\MediatR.Extensions.Autofac.DepdencyInjection.ConsoleApp.csproj", "{65C86DF5-D4F0-41A9-91FD-9055A4A538A6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatR.Extensions.Autofac.DepdencyInjection.WebApi", "samples\MediatR.Extensions.Autofac.DepdencyInjection.WebApi\MediatR.Extensions.Autofac.DepdencyInjection.WebApi.csproj", "{AC542B52-915C-4FFC-852B-1906FFED480C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatR.Extensions.Autofac.DependencyInjection.WebApi", "samples\MediatR.Extensions.Autofac.DependencyInjection.WebApi\MediatR.Extensions.Autofac.DependencyInjection.WebApi.csproj", "{AC542B52-915C-4FFC-852B-1906FFED480C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatR.Extensions.Autofac.DependencyInjection.Tests", "test\MediatR.Extensions.Autofac.DependencyInjection.Tests\MediatR.Extensions.Autofac.DependencyInjection.Tests.csproj", "{11A2F7A2-A6DD-4437-8734-C897024FE842}"
 EndProject

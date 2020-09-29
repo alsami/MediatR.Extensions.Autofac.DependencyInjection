@@ -26,7 +26,7 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.Tests
         [Fact]
         public void ContainerBuilderExtensions_AddMediatRWithAssembliesResolveTypes_ExpectInstances()
         {
-            this.container = this.builder.AddMediatR(typeof(ResponseCommand).Assembly, typeof(ResponseCommand).Assembly)
+            this.container = this.builder.RegisterMediatR(typeof(ResponseCommand).Assembly, typeof(ResponseCommand).Assembly)
                 .Build();
 
             Assert.True(this.container.IsRegistered<IMediator>(), "Mediator not registered!");
@@ -49,7 +49,7 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.Tests
         [Fact]
         public async Task ContainerBuilderExtensions_AddMediatRWithAssembliesAndCustomBehaviorsResolveTypes_ExpectInstances()
         {
-            this.container = this.builder.AddMediatR(typeof(ResponseCommand).Assembly, typeof(LoggingBehavior<,>), typeof(NoopBehavior<,>))
+            this.container = this.builder.RegisterMediatR(typeof(ResponseCommand).Assembly, typeof(LoggingBehavior<,>), typeof(NoopBehavior<,>))
                 .Build();
 
             Assert.True(this.container.IsRegistered<IMediator>(), "Mediator not registered!");
@@ -74,7 +74,7 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.Tests
         [Fact]
         public async Task ContainerBuilderExtensions_AddMediatRWithAssembliesAndCustomBehaviorsUnconstrainted_ResolveTypes_ExpectInstances()
         {
-            this.container = this.builder.AddMediatR(typeof(ResponseCommand).Assembly, typeof(LoggingBehavior<,>), typeof(UnconstraintedBehavior<,>))
+            this.container = this.builder.RegisterMediatR(typeof(ResponseCommand).Assembly, typeof(LoggingBehavior<,>), typeof(UnconstraintedBehavior<,>))
                 .Build();
 
             Assert.True(this.container.IsRegistered<IMediator>(), "Mediator not registered!");
@@ -94,8 +94,8 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.Tests
         [Fact]
         public void ContainerBuilderExtensions_AddMediatRNullAssemblies_ExpectExceptions()
         {
-            Assert.Throws<ArgumentNullException>(() => this.builder.AddMediatR((Assembly) null));
-            Assert.Throws<ArgumentNullException>(() => this.builder.AddMediatR((ICollection<Assembly>) null));
+            Assert.Throws<ArgumentNullException>(() => this.builder.RegisterMediatR((Assembly) null));
+            Assert.Throws<ArgumentNullException>(() => this.builder.RegisterMediatR((ICollection<Assembly>) null));
         }
 
         [Fact]
@@ -103,7 +103,7 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.Tests
             ContainerBuilderExtensions_AddMediatR_Call_Throwing_Handler_Exception_Handlers_Called()
         {
             var currentContainer = new ContainerBuilder()
-                .AddMediatR(typeof(CommandThatThrowsArgumentException).Assembly)
+                .RegisterMediatR(typeof(CommandThatThrowsArgumentException).Assembly)
                 .Build();
 
             var mediator = currentContainer.Resolve<IMediator>();
@@ -120,7 +120,7 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.Tests
             ContainerBuilderExtensions_AddMediatR_Call_Throwing_Handler_Exception_Actions_Called()
         {
             var currentContainer = new ContainerBuilder()
-                .AddMediatR(typeof(CommandThatThrowsNullRefException).Assembly)
+                .RegisterMediatR(typeof(CommandThatThrowsNullRefException).Assembly)
                 .Build();
 
             var mediator = currentContainer.Resolve<IMediator>();

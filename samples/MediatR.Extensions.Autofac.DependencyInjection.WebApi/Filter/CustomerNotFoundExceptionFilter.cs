@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace MediatR.Extensions.Autofac.DepdencyInjection.WebApi.Filter
+namespace MediatR.Extensions.Autofac.DependencyInjection.WebApi.Filter
 {
     public class CustomerNotFoundExceptionFilter : IExceptionFilter
     {

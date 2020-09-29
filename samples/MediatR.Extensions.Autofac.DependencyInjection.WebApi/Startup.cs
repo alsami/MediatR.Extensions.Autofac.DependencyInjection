@@ -1,14 +1,13 @@
 ﻿using Autofac;
-using MediatR.Extensions.Autofac.DepdencyInjection.WebApi.Filter;
-using MediatR.Extensions.Autofac.DependencyInjection;
 using MediatR.Extensions.Autofac.DependencyInjection.Shared.Commands;
 using MediatR.Extensions.Autofac.DependencyInjection.Shared.Repositories;
+using MediatR.Extensions.Autofac.DependencyInjection.WebApi.Filter;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace MediatR.Extensions.Autofac.DepdencyInjection.WebApi
+namespace MediatR.Extensions.Autofac.DependencyInjection.WebApi
 {
     public class Startup
     {
@@ -36,7 +35,7 @@ namespace MediatR.Extensions.Autofac.DepdencyInjection.WebApi
                 .As<ICustomersRepository>()
                 .SingleInstance();
 
-            builder.AddMediatR(typeof(CustomerAddCommand).Assembly);
+            builder.RegisterMediatR(typeof(CustomerAddCommand).Assembly);
         }
     }
 }

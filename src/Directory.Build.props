@@ -6,13 +6,14 @@
     <Authors>Sami Al Khatib</Authors>
     <Title>MediatR-Autofac-Extension</Title>
     <Description>An extension for Autofac-IoC to use MediatR and CQRS with ease.</Description>
-    <PackageProjectUrl>https://github.com/cleancodelabs/MediatR.Extensions.Autofac.DependencyInjection</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/cleancodelabs/MediatR.Extensions.Autofac.DependencyInjection/master/assets/images/mediatr.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/alsami/MediatR.Extensions.Autofac.DependencyInjection</PackageProjectUrl>
+    <PackageReleaseNotes>https://github.com/alsami/MediatR.Extensions.Autofac.DependencyInjection/blob/master/changelog.md</PackageReleaseNotes>
+    <PackageIconUrl>https://raw.githubusercontent.com/alsami/MediatR.Extensions.Autofac.DependencyInjection/master/assets/images/mediatr.png</PackageIconUrl>
     <PackageTags>MediatR, Autofac, Mediator, IoC, Cqrs, Commands, Queries, Notifications, Messages</PackageTags>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>git://github.com/alsami/MediatR.Extensions.Autofac.DependencyInjection</RepositoryUrl>
-    <Version>5.3.0</Version>
-    <FileVersion>5.3.0.0</FileVersion>
+    <Version>6.0.0</Version>
+    <FileVersion>6.0.0.0</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
