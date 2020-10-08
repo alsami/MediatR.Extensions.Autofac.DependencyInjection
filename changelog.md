@@ -1,4 +1,10 @@
-# [6.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/5.3.0) (2020-09-29)
+# [7.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/7.0.0) (2020-10-08)
+
+## Breaking Changes
+
+* `MediatR` has been updated to version `9.0.0`. This release may contain breaking-changes.
+
+# [6.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/6.0.0) (2020-09-29)
 
 ## Breaking Changes
 

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-cd src || exit
+cd src
 for directory in *; do 
     if [[ -d ${directory} ]]; then
-        cd "${directory}" || exit
+        cd "${directory}"
         dotnet build -c Release
         dotnet pack *.csproj --include-symbols -c Release --output "."
         ls
