@@ -243,3 +243,6 @@ ModelManifest.xml
 
 # Rider files
 .idea/
+
+# codecoverage
+coverage/

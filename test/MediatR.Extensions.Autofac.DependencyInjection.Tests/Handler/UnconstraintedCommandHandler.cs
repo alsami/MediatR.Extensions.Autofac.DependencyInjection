@@ -1,8 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.Commands;
+using MediatR.Extensions.Autofac.DependencyInjection.Tests.Commands;
 
-namespace MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.Handler
+namespace MediatR.Extensions.Autofac.DependencyInjection.Tests.Handler
 {
     public class UnconstraintedCommandHandler : IRequestHandler<UnconstraintedCommand, int>
     {

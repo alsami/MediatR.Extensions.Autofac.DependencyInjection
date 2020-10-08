@@ -14,17 +14,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{429AF3E0-0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{E03D3701-27BF-474A-B1ED-667D7B4DDFE6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure", "test\MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure\MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.csproj", "{A5AE6172-5AD8-4910-8CE8-FB23D7841D26}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{BC47F971-892E-485C-BB07-11BDC4035B90}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		.travis.yml = .travis.yml
-		changelog.md = changelog.md
 		publish-packages.sh = publish-packages.sh
-		readme.md = readme.md
-		run-tests.sh = run-tests.sh
+		test.sh = test.sh
 		global.json = global.json
+		README.md = README.md
+		CHANGELOG.md = CHANGELOG.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatR.Extensions.Autofac.DependencyInjection.Shared", "samples\MediatR.Extensions.Autofac.DependencyInjection.Shared\MediatR.Extensions.Autofac.DependencyInjection.Shared.csproj", "{5B643B10-9305-4555-BF13-671896719D40}"
@@ -45,10 +43,6 @@ Global
 		{11E614FE-35FE-43CD-9A03-64C62AD3145F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11E614FE-35FE-43CD-9A03-64C62AD3145F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11E614FE-35FE-43CD-9A03-64C62AD3145F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A5AE6172-5AD8-4910-8CE8-FB23D7841D26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A5AE6172-5AD8-4910-8CE8-FB23D7841D26}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A5AE6172-5AD8-4910-8CE8-FB23D7841D26}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A5AE6172-5AD8-4910-8CE8-FB23D7841D26}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5B643B10-9305-4555-BF13-671896719D40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5B643B10-9305-4555-BF13-671896719D40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B643B10-9305-4555-BF13-671896719D40}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -71,7 +65,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{11E614FE-35FE-43CD-9A03-64C62AD3145F} = {93E8D46E-9D32-4AD0-9E74-0B5DB6A21D14}
-		{A5AE6172-5AD8-4910-8CE8-FB23D7841D26} = {429AF3E0-00B9-43F8-A449-0103AA372699}
 		{5B643B10-9305-4555-BF13-671896719D40} = {E03D3701-27BF-474A-B1ED-667D7B4DDFE6}
 		{65C86DF5-D4F0-41A9-91FD-9055A4A538A6} = {E03D3701-27BF-474A-B1ED-667D7B4DDFE6}
 		{AC542B52-915C-4FFC-852B-1906FFED480C} = {E03D3701-27BF-474A-B1ED-667D7B4DDFE6}

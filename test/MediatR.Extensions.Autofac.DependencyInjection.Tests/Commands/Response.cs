@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.Commands
+namespace MediatR.Extensions.Autofac.DependencyInjection.Tests.Commands
 {
     public class Response
     {

@@ -1,10 +1,10 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.Commands;
+using MediatR.Extensions.Autofac.DependencyInjection.Tests.Commands;
 using MediatR.Pipeline;
 
-namespace MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.ExceptionHandler
+namespace MediatR.Extensions.Autofac.DependencyInjection.Tests.ExceptionHandler
 {
     public class CommandThatThrowsArgumentExceptionHandler : IRequestExceptionHandler<CommandThatThrowsArgumentException, object, ArgumentException>
     {

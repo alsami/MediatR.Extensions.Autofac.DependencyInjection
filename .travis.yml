@@ -3,10 +3,16 @@ language: csharp
 solution: MediatR.Extensions.Autofac.DependencyInjection.sln
 mono: none
 dotnet: 3.1.402
+
 env:
   global:
     - DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true
     - DOTNET_CLI_TELEMETRY_OPTOUT=true
+
+addons:
+  apt:
+    update: true
+
 stages:
   - build
   - test
@@ -14,11 +20,13 @@ stages:
 jobs:
   include:
     - stage: build
-      name: build solution
-      script: dotnet restore && dotnet build
+      name: dotnet build
+      script: dotnet build
     - stage: test
-      name: run-tests
-      script: ./run-tests.sh
+      name: dotnet test
+      before_script:
+        - sudo apt-get update && sudo apt-get install curl -y
+      script: ./test.sh
     - stage: publish
       name: publish-packages
       if: tag IS present

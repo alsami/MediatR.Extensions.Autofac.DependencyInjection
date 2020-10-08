@@ -1,4 +1,4 @@
-﻿namespace MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.Behaviors
+﻿namespace MediatR.Extensions.Autofac.DependencyInjection.Tests.Behaviors
 {
     public interface INoopRequest<out TResponse> : IRequest<TResponse>
     {

@@ -1,10 +1,10 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.Commands;
+using MediatR.Extensions.Autofac.DependencyInjection.Tests.Commands;
 using MediatR.Pipeline;
 
-namespace MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.ExceptionActions
+namespace MediatR.Extensions.Autofac.DependencyInjection.Tests.ExceptionActions
 {
     public class CommandThatThrowsNullRefExceptionActionHandler : IRequestExceptionAction<CommandThatThrowsNullRefException,NullReferenceException>
     {

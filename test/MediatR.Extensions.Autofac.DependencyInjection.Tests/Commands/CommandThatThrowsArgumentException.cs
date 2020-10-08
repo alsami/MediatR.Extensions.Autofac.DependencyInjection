@@ -1,4 +1,4 @@
-namespace MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.Commands
+namespace MediatR.Extensions.Autofac.DependencyInjection.Tests.Commands
 {
     public class CommandThatThrowsArgumentException : IRequest<object>
     {

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Autofac;
-using MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.Behaviors;
-using MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.Commands;
-using MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.ExceptionActions;
-using MediatR.Extensions.Autofac.DependencyInjection.TestInfrastructure.ExceptionHandler;
+using MediatR.Extensions.Autofac.DependencyInjection.Tests.Behaviors;
+using MediatR.Extensions.Autofac.DependencyInjection.Tests.Commands;
+using MediatR.Extensions.Autofac.DependencyInjection.Tests.ExceptionActions;
+using MediatR.Extensions.Autofac.DependencyInjection.Tests.ExceptionHandler;
 using Xunit;
 // ReSharper disable UnusedVariable
 
