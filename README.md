@@ -3,6 +3,7 @@
 [![codecov](https://codecov.io/gh/alsami/MediatR.Extensions.Autofac.DependencyInjection/branch/master/graph/badge.svg)](https://codecov.io/gh/alsami/MediatR.Extensions.Autofac.DependencyInjection)
 
 [![NuGet](https://img.shields.io/nuget/vpre/MediatR.Extensions.Autofac.DependencyInjection.svg)](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection)
+![Nuget](https://img.shields.io/nuget/dt/MediatR.Extensions.Autofac.DependencyInjection)
 
 This is a cross platform library, written in .netstandard 2.0, that serves as an extension for [autofac's containerbuilder](https://autofac.org/).
 It will register all necessary classes and interfaces of Jimmy Bogard's [MediatR](https://github.com/jbogard/MediatR) implementation to the autofac-container 
