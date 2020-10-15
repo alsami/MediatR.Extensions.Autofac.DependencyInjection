@@ -30,6 +30,8 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.Tests
                 .Build();
 
             Assert.True(this.container.IsRegistered<IMediator>(), "Mediator not registered!");
+            Assert.True(this.container.IsRegistered<ISender>(), "ISender not registered!");
+            Assert.True(this.container.IsRegistered<IPublisher>(), "IPublisher not registered!");
             Assert.True(this.container.IsRegistered<ServiceFactory>(), "ServiceFactory not registered");
             Assert.True(this.container.IsRegistered<IPipelineBehavior<ResponseCommand, Response>>(),
                 "PiplineBehavior not registered");
