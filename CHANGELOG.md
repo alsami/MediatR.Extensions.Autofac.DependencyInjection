@@ -2,7 +2,7 @@
 
 ## Breaking Changes
 
-* `MediatR` has been updated to version `9.0.0`. This release may contain breaking-changes.
+* `MediatR` has been updated to version `9.0.0`. This release contains minor breaking changes. Check out the [blog-post](https://jimmybogard.com/mediatr-9-0-released/) for more details.
 
 # [6.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/6.0.0) (2020-09-29)
 
