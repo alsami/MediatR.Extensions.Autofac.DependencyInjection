@@ -57,7 +57,7 @@ public class Program
         var builder = new ContainerBuilder();
         // this will add all your Request- and Notificationhandler
         // that are located in the same project as your program-class
-        builder.AddMediatR(typeof(Program).Assembly);
+        builder.RegisterMediatR(typeof(Program).Assembly);
         
         var container = builder.Build();
         
