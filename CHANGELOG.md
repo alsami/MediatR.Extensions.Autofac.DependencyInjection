@@ -1,3 +1,14 @@
+# [7.1.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/7.1.0) (2021-01-09)
+
+## Features
+
+* Upgrade `Autofac` to version 6.1.0
+* Add dedicated TFM for `netstandard2.1`
+
+## Fixes
+
+* Make sure release-notes URL is correctly set in package meta-data.
+
 # [7.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/7.0.0) (2020-10-08)
 
 ## Breaking Changes

@@ -7,14 +7,14 @@
     <Title>MediatR-Autofac-Extension</Title>
     <Description>An extension for Autofac-IoC to use MediatR and CQRS with ease.</Description>
     <PackageProjectUrl>https://github.com/alsami/MediatR.Extensions.Autofac.DependencyInjection</PackageProjectUrl>
-    <PackageReleaseNotes>https://github.com/alsami/MediatR.Extensions.Autofac.DependencyInjection/blob/master/changelog.md</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/alsami/MediatR.Extensions.Autofac.DependencyInjection/blob/master/CHANGELOG.md</PackageReleaseNotes>
     <PackageTags>MediatR, Autofac, Mediator, IoC, Cqrs, Commands, Queries, Notifications, Messages</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>icon.png</PackageIcon>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>git://github.com/alsami/MediatR.Extensions.Autofac.DependencyInjection</RepositoryUrl>
-    <Version>7.0.0</Version>
-    <FileVersion>7.0.0.0</FileVersion>
+    <Version>7.1.0</Version>
+    <FileVersion>7.1.0.0</FileVersion>
     <EmbedAllSources>true</EmbedAllSources>
   </PropertyGroup>
 

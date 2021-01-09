@@ -2,7 +2,7 @@ dist: bionic
 language: csharp
 solution: MediatR.Extensions.Autofac.DependencyInjection.sln
 mono: none
-dotnet: 3.1.402
+dotnet: 5.0.101
 
 env:
   global:
