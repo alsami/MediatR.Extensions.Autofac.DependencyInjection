@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>9.0</LangVersion>
     <IsPackable>true</IsPackable>
     <Copyright>2020©Sami Al Khatib</Copyright>
     <Authors>Sami Al Khatib</Authors>
@@ -13,9 +13,10 @@
     <PackageIcon>icon.png</PackageIcon>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>git://github.com/alsami/MediatR.Extensions.Autofac.DependencyInjection</RepositoryUrl>
-    <Version>7.1.0</Version>
-    <FileVersion>7.1.0.0</FileVersion>
+    <Version>7.2.0</Version>
+    <FileVersion>7.2.0.0</FileVersion>
     <EmbedAllSources>true</EmbedAllSources>
+    <TreatWarningAsError>true</TreatWarningAsError>
   </PropertyGroup>
 
   <ItemGroup>
