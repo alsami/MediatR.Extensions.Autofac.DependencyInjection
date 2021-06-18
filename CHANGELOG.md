@@ -1,3 +1,7 @@
+# [7.3.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/7.3.0) (2021-06-18)
+
+* Register types `IRequestPreProcessor<>` and `IRequestPostProcessor<,>` of provided assembly. Implements [#7](https://github.com/alsami/MediatR.Extensions.Autofac.DependencyInjection/issues/7)
+
 # [7.2.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/7.2.0) (2021-04-23)
 
 ## Features

@@ -23,7 +23,9 @@ namespace MediatR.Extensions.Autofac.DependencyInjection
 
             var openHandlerTypes = new[]
             {
+                typeof(IRequestPreProcessor<>),
                 typeof(IRequestHandler<,>),
+                typeof(IRequestPostProcessor<,>),
                 typeof(IRequestExceptionHandler<,,>),
                 typeof(IRequestExceptionAction<,>),
                 typeof(INotificationHandler<>),

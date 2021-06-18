@@ -8,6 +8,7 @@ using MediatR.Extensions.Autofac.DependencyInjection.Tests.Behaviors;
 using MediatR.Extensions.Autofac.DependencyInjection.Tests.Commands;
 using MediatR.Extensions.Autofac.DependencyInjection.Tests.ExceptionActions;
 using MediatR.Extensions.Autofac.DependencyInjection.Tests.ExceptionHandler;
+using MediatR.Pipeline;
 using Xunit;
 // ReSharper disable UnusedVariable
 
@@ -40,6 +41,8 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.Tests
             Assert.True(this.container.IsRegistered<IRequestHandler<ResponseCommand, Response>>(),
                 "Responsehandler not registered");
             Assert.True(this.container.IsRegistered<IRequestHandler<VoidCommand>>(), "Voidhandler not registered");
+            Assert.True(this.container.IsRegistered<IRequestPreProcessor<VoidCommand>>(), "Void Request Pre Processor not registered");
+            Assert.True(this.container.IsRegistered<IRequestPostProcessor<VoidCommand, Unit>>(), "Void Request Post Processor not registered");
             Assert.True(this.container.IsRegistered<INotificationHandler<SampleNotification>>());
 
             var mediator = this.container.Resolve<IMediator>();
