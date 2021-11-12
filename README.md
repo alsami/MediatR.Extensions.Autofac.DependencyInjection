@@ -1,5 +1,5 @@
 # MediatR.Extensions.Autofac.DependencyInjection
-[![.github/workflows/pipeline.yml](https://github.com/alsami/MediatR.Extensions.Autofac.DependencyInjection/actions/workflows/pipeline.yml/badge.svg)](https://github.com/alsami/MediatR.Extensions.Autofac.DependencyInjection/actions/workflows/pipeline.yml)
+[![Build Status](https://app.travis-ci.com/alsami/MediatR.Extensions.Autofac.DependencyInjection.svg?branch=main)](https://app.travis-ci.com/alsami/MediatR.Extensions.Autofac.DependencyInjection)
 [![codecov](https://codecov.io/gh/alsami/MediatR.Extensions.Autofac.DependencyInjection/branch/master/graph/badge.svg)](https://codecov.io/gh/alsami/MediatR.Extensions.Autofac.DependencyInjection)
 
 [![NuGet](https://img.shields.io/nuget/vpre/MediatR.Extensions.Autofac.DependencyInjection.svg)](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection)
