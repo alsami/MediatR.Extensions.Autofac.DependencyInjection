@@ -41,10 +41,10 @@ public class ContainerBuilderExtensionsTests : IDisposable
         Assert.True(this.container.IsRegistered<IRequestPostProcessor<VoidCommand, Unit>>(), "Void Request Post Processor not registered");
         Assert.True(this.container.IsRegistered<INotificationHandler<SampleNotification>>());
 
-        var mediator = this.container.Resolve<IMediator>();
-        var responseHandler = this.container.Resolve<IRequestHandler<ResponseCommand, Response>>();
-        var voidhandler = this.container.Resolve<IRequestHandler<VoidCommand>>();
-        var notificationhandler = this.container.Resolve<INotificationHandler<SampleNotification>>();
+        this.container.Resolve<IMediator>();
+        this.container.Resolve<IRequestHandler<ResponseCommand, Response>>();
+        this.container.Resolve<IRequestHandler<VoidCommand>>();
+        this.container.Resolve<INotificationHandler<SampleNotification>>();
     }
         
     [Fact]
@@ -63,9 +63,9 @@ public class ContainerBuilderExtensionsTests : IDisposable
         Assert.True(this.container.IsRegistered<INotificationHandler<SampleNotification>>());
 
         var mediator = this.container.Resolve<IMediator>();
-        var responseHandler = this.container.Resolve<IRequestHandler<ResponseCommand, Response>>();
-        var voidhandler = this.container.Resolve<IRequestHandler<VoidCommand>>();
-        var notificationhandler = this.container.Resolve<INotificationHandler<SampleNotification>>();
+        this.container.Resolve<IRequestHandler<ResponseCommand, Response>>();
+        this.container.Resolve<IRequestHandler<VoidCommand>>();
+        this.container.Resolve<INotificationHandler<SampleNotification>>();
         var behaviors = this.container.Resolve<IEnumerable<IPipelineBehavior<ResponseCommand, Response>>>();
         Assert.Equal(6, behaviors.Count());
         await mediator.Send(new ResponseCommand());
@@ -86,7 +86,7 @@ public class ContainerBuilderExtensionsTests : IDisposable
             "Responsehandler not registered");
 
         var mediator = this.container.Resolve<IMediator>();
-        var responseHandler = this.container.Resolve<IRequestHandler<UnconstraintedCommand, int>>();
+        this.container.Resolve<IRequestHandler<UnconstraintedCommand, int>>();
         var behaviors = this.container.Resolve<IEnumerable<IPipelineBehavior<UnconstraintedCommand, int>>>();
         Assert.Equal(6, behaviors.Count());
         await mediator.Send(new UnconstraintedCommand());
