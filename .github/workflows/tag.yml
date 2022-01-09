@@ -1,0 +1,28 @@
+on:
+  push:
+    tags:
+      - '*'
+name: Release package
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet: ['6.0.x']
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
+
+      - name: Publish package
+        run: |
+          export TAG=${{github.ref_name}}
+          export NUGET_API_URL=https://api.nuget.org/v3/index.json
+          export NUGET_KEY=${{secrets.NUGET_KEY}}
+          chmod +x ./publish-packages.sh
+          ./publish-packages.sh

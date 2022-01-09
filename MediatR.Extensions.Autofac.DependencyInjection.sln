@@ -22,7 +22,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{BC47F971-8
 		global.json = global.json
 		README.md = README.md
 		CHANGELOG.md = CHANGELOG.md
-		.travis.yml = .travis.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatR.Extensions.Autofac.DependencyInjection.Shared", "samples\MediatR.Extensions.Autofac.DependencyInjection.Shared\MediatR.Extensions.Autofac.DependencyInjection.Shared.csproj", "{5B643B10-9305-4555-BF13-671896719D40}"
@@ -32,6 +31,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatR.Extensions.Autofac.DependencyInjection.WebApi", "samples\MediatR.Extensions.Autofac.DependencyInjection.WebApi\MediatR.Extensions.Autofac.DependencyInjection.WebApi.csproj", "{AC542B52-915C-4FFC-852B-1906FFED480C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatR.Extensions.Autofac.DependencyInjection.Tests", "test\MediatR.Extensions.Autofac.DependencyInjection.Tests\MediatR.Extensions.Autofac.DependencyInjection.Tests.csproj", "{11A2F7A2-A6DD-4437-8734-C897024FE842}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{74DFFEFC-97B5-4B06-8352-BF2043294377}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{2F08D854-860A-4BF4-8587-6BD004493747}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\push.yml = .github\workflows\push.yml
+		.github\workflows\tag.yml = .github\workflows\tag.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +76,7 @@ Global
 		{65C86DF5-D4F0-41A9-91FD-9055A4A538A6} = {E03D3701-27BF-474A-B1ED-667D7B4DDFE6}
 		{AC542B52-915C-4FFC-852B-1906FFED480C} = {E03D3701-27BF-474A-B1ED-667D7B4DDFE6}
 		{11A2F7A2-A6DD-4437-8734-C897024FE842} = {429AF3E0-00B9-43F8-A449-0103AA372699}
+		{2F08D854-860A-4BF4-8587-6BD004493747} = {74DFFEFC-97B5-4B06-8352-BF2043294377}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8CE85BDC-1FCB-41D5-AA8C-593B2398F050}
