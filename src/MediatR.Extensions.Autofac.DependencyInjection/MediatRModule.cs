@@ -8,52 +8,74 @@ namespace MediatR.Extensions.Autofac.DependencyInjection;
 
 internal class MediatRModule : Module
 {
-    private readonly Assembly[] assemblies;
-    private readonly Type[] customBehaviorTypes;
-
-    public MediatRModule(Assembly[] assemblies, Type[] customBehaviorTypes)
+    private readonly MediatRConfiguration mediatRConfiguration;
+    
+    private readonly Type[] openHandlerTypes = 
     {
-        this.assemblies = assemblies;
-        this.customBehaviorTypes = customBehaviorTypes;
+        typeof(IRequestPreProcessor<>),
+        typeof(IRequestHandler<,>),
+        typeof(IStreamRequestHandler<,>),
+        typeof(IRequestPostProcessor<,>),
+        typeof(IRequestExceptionHandler<,,>),
+        typeof(IRequestExceptionAction<,>),
+        typeof(INotificationHandler<>),
+    };
+
+    private readonly Type[] builtInPipelineBehaviorTypes =
+    {
+        typeof(RequestPostProcessorBehavior<,>),
+        typeof(RequestPreProcessorBehavior<,>),
+        typeof(RequestExceptionActionProcessorBehavior<,>),
+        typeof(RequestExceptionProcessorBehavior<,>),
+    };
+
+    public MediatRModule(MediatRConfiguration mediatRConfiguration)
+    {
+        this.mediatRConfiguration = mediatRConfiguration;
     }
 
     protected override void Load(ContainerBuilder builder)
     {
-        builder.RegisterAssemblyTypes(typeof(IMediator).GetTypeInfo().Assembly).AsImplementedInterfaces();
+        builder.RegisterAssemblyTypes(typeof(IMediator).GetTypeInfo().Assembly)
+            .AsImplementedInterfaces()
+            .InstancePerDependency();
 
-        var openHandlerTypes = new[]
+        foreach (var openHandlerType in this.openHandlerTypes)
         {
-            typeof(IRequestPreProcessor<>),
-            typeof(IRequestHandler<,>),
-            typeof(IRequestPostProcessor<,>),
-            typeof(IRequestExceptionHandler<,,>),
-            typeof(IRequestExceptionAction<,>),
-            typeof(INotificationHandler<>),
-        };
-
-        foreach (var openHandlerType in openHandlerTypes)
-        {
-            builder.RegisterAssemblyTypes(this.assemblies)
-                .AsClosedTypesOf(openHandlerType);
-        }
-            
-        builder.RegisterGeneric(typeof(RequestPostProcessorBehavior<,>)).As(typeof(IPipelineBehavior<,>));
-        builder.RegisterGeneric(typeof(RequestPreProcessorBehavior<,>)).As(typeof(IPipelineBehavior<,>));
-            
-        builder.RegisterGeneric(typeof(RequestExceptionActionProcessorBehavior<,>)).As(typeof(IPipelineBehavior<,>));
-        builder.RegisterGeneric(typeof(RequestExceptionProcessorBehavior<,>)).As(typeof(IPipelineBehavior<,>));
-            
-        foreach (var customBehaviorType in this.customBehaviorTypes)
-        {
-            builder.RegisterGeneric(customBehaviorType)
-                .As(typeof(IPipelineBehavior<,>));
+            builder.RegisterAssemblyTypes(this.mediatRConfiguration.HandlersFromAssemblies)
+                .AsClosedTypesOf(openHandlerType)
+                .InstancePerDependency();
         }
 
-        builder.Register<ServiceFactory>(outerContext =>
+        foreach (var builtInPipelineBehaviorType in this.builtInPipelineBehaviorTypes)
         {
-            var innerContext = outerContext.Resolve<IComponentContext>();
+            RegisterGeneric(builder, builtInPipelineBehaviorType, typeof(IPipelineBehavior<,>));
+        }
+            
+        foreach (var customBehaviorType in this.mediatRConfiguration.CustomPipelineBehaviors)
+        {
+            RegisterGeneric(builder, customBehaviorType, typeof(IPipelineBehavior<,>));
+        }
+        
+        foreach (var customBehaviorType in this.mediatRConfiguration.CustomStreamPipelineBehaviors)
+        {
+            RegisterGeneric(builder, customBehaviorType, typeof(IStreamPipelineBehavior<,>));
+        }
 
-            return serviceType => innerContext.Resolve(serviceType);
-        });
+        builder
+            .Register<ServiceFactory>(outerContext =>
+            {
+                var innerContext = outerContext.Resolve<IComponentContext>();
+
+                return serviceType => innerContext.Resolve(serviceType);
+            })
+            .InstancePerDependency();
+    }
+
+    private static void RegisterGeneric(ContainerBuilder builder, Type implementationType, Type asType)
+    {
+        builder.RegisterGeneric(implementationType)
+            .As(asType)
+            .InstancePerDependency();
     }
 }

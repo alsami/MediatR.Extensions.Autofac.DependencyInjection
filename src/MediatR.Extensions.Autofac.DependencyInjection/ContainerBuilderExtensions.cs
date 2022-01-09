@@ -9,34 +9,42 @@ namespace MediatR.Extensions.Autofac.DependencyInjection;
 public static class ContainerBuilderExtensions
 {
     public static ContainerBuilder
-        RegisterMediatR(this ContainerBuilder builder, params Assembly[] assemblies)
-        => RegisterMediatRInternal(builder, assemblies);
+        RegisterMediatR(this ContainerBuilder builder, params Assembly[] assemblies) => RegisterMediatRInternal(builder, assemblies);
 
-    public static ContainerBuilder RegisterMediatR(this ContainerBuilder builder, IEnumerable<Assembly> assemblies)
-        => RegisterMediatRInternal(builder, assemblies);
+    public static ContainerBuilder RegisterMediatR(
+        this ContainerBuilder builder, 
+        IEnumerable<Assembly> assemblies) => RegisterMediatRInternal(builder, assemblies);
 
-    public static ContainerBuilder RegisterMediatR(this ContainerBuilder builder, IEnumerable<Type> customBehaviorTypes,
-        IEnumerable<Assembly> assemblies)
-        => RegisterMediatRInternal(builder, assemblies, customBehaviorTypes);
+    public static ContainerBuilder RegisterMediatR(
+        this ContainerBuilder builder, 
+        IEnumerable<Type> customPipeLineBehaviorTypes,
+        IEnumerable<Assembly> assemblies) => RegisterMediatRInternal(builder, assemblies, customPipeLineBehaviorTypes);
+    
+    public static ContainerBuilder RegisterMediatR(
+        this ContainerBuilder builder, 
+        IEnumerable<Type> customPipeLineBehaviorTypes,
+        IEnumerable<Type> customStreamPipeLineBehaviorTypes,
+        IEnumerable<Assembly> assemblies) => RegisterMediatRInternal(builder, assemblies, customPipeLineBehaviorTypes, customStreamPipeLineBehaviorTypes);
 
-    public static ContainerBuilder RegisterMediatR(this ContainerBuilder builder, Assembly assembly,
-        params Type[] customBehaviorTypes)
-        => RegisterMediatRInternal(builder, new[] {assembly}, customBehaviorTypes);
+    public static ContainerBuilder RegisterMediatR(
+        this ContainerBuilder builder, 
+        Assembly assembly,
+        params Type[] customPipeLineBehaviorTypes) => RegisterMediatRInternal(builder, new[] {assembly}, customPipeLineBehaviorTypes);
 
-    private static ContainerBuilder RegisterMediatRInternal(ContainerBuilder builder, IEnumerable<Assembly> assemblies,
-        IEnumerable<Type>? customBehaviorTypes = null)
+    private static ContainerBuilder RegisterMediatRInternal(
+        ContainerBuilder builder, 
+        IEnumerable<Assembly> assemblies,
+        IEnumerable<Type>? customPipeLineBehaviorTypes = null,
+        IEnumerable<Type>? customStreamPipelineBehaviorTypes = null)
     {
         var enumeratedAssemblies = assemblies as Assembly[] ?? assemblies.ToArray();
 
-        if (enumeratedAssemblies == null || !enumeratedAssemblies.Any() || enumeratedAssemblies.All(x => x == null))
-        {
-            throw new ArgumentNullException(nameof(assemblies),
-                $"Must provide assemblies in order to request {nameof(Mediator)}");
-        }
+        var configuration = MediatRConfigurationBuilder.Create(enumeratedAssemblies)
+            .WithCustomPipelineBehaviors(customPipeLineBehaviorTypes ?? Array.Empty<Type>())
+            .WithCustomStreamPipelineBehaviors(customStreamPipelineBehaviorTypes ?? Array.Empty<Type>())
+            .Build();
 
-        var enumeratedCustomBehaviorTypes = customBehaviorTypes as Type[] ?? customBehaviorTypes?.ToArray() ?? Array.Empty<Type>();
-
-        builder.RegisterModule(new MediatRModule(enumeratedAssemblies, enumeratedCustomBehaviorTypes));
+        builder.RegisterModule(new MediatRModule(configuration));
 
         return builder;
     }

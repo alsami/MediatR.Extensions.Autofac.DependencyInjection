@@ -34,12 +34,8 @@ public class ContainerBuilderExtensionsTests : IDisposable
         Assert.True(this.container.IsRegistered<ISender>(), "ISender not registered!");
         Assert.True(this.container.IsRegistered<IPublisher>(), "IPublisher not registered!");
         Assert.True(this.container.IsRegistered<ServiceFactory>(), "ServiceFactory not registered");
-        Assert.True(this.container.IsRegistered<IPipelineBehavior<ResponseCommand, Response>>(),
-            "PiplineBehavior not registered");
-        Assert.True(this.container.IsRegistered<IPipelineBehavior<ResponseCommand, Unit>>(),
-            "PiplineBehavior not registered");
-        Assert.True(this.container.IsRegistered<IRequestHandler<ResponseCommand, Response>>(),
-            "Responsehandler not registered");
+        Assert.True(this.container.IsRegistered<IPipelineBehavior<ResponseCommand, Response>>(), "PiplineBehavior not registered");
+        Assert.True(this.container.IsRegistered<IRequestHandler<ResponseCommand, Response>>(), "Responsehandler not registered");
         Assert.True(this.container.IsRegistered<IRequestHandler<VoidCommand>>(), "Voidhandler not registered");
         Assert.True(this.container.IsRegistered<IRequestPreProcessor<VoidCommand>>(), "Void Request Pre Processor not registered");
         Assert.True(this.container.IsRegistered<IRequestPostProcessor<VoidCommand, Unit>>(), "Void Request Post Processor not registered");
@@ -79,7 +75,7 @@ public class ContainerBuilderExtensionsTests : IDisposable
     [Fact]
     public async Task ContainerBuilderExtensions_AddMediatRWithAssembliesAndCustomBehaviorsUnconstrainted_ResolveTypes_ExpectInstances()
     {
-        this.container = this.builder.RegisterMediatR(typeof(ResponseCommand).Assembly, typeof(LoggingBehavior<,>), typeof(UnconstraintedBehavior<,>))
+        this.container = this.builder.RegisterMediatR(typeof(ResponseCommand).Assembly, typeof(LoggingBehavior<,>), typeof(UnconstrainedBehavior<,>))
             .Build();
 
         Assert.True(this.container.IsRegistered<IMediator>(), "Mediator not registered!");
