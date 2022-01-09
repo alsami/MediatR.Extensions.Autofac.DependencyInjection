@@ -1,8 +1,23 @@
+# [8.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/8.0.0) (2022-01-09)
+
+## Breaking changes
+
+* `MediatR` version 10.0.0 dropped support for `netstandard2.0`. From now own only `netstandard2.1` is supported
+* Previously marked obsolete methods `AddMediatR` have been removed
+
+## Features
+
+* Add support for `IStreamRequestHandler<,>` and `IStreamRequestPipelineBehavior<,>`
+
 # [7.4.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/7.4.0) (2021-11-12)
+
+## Features
 
 * Update `Autofac` to `6.3.0`
 
 # [7.3.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/7.3.0) (2021-06-21)
+
+## Features
 
 * Register types `IRequestPreProcessor<>` and `IRequestPostProcessor<,>` of provided assembly. Implements [#7](https://github.com/alsami/MediatR.Extensions.Autofac.DependencyInjection/issues/7)
 
