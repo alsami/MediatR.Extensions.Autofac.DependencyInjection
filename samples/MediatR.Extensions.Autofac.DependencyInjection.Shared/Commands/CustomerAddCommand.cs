@@ -1,17 +1,16 @@
 ﻿using System;
 
-namespace MediatR.Extensions.Autofac.DependencyInjection.Shared.Commands
+namespace MediatR.Extensions.Autofac.DependencyInjection.Shared.Commands;
+
+public class CustomerAddCommand : IRequest
 {
-    public class CustomerAddCommand : IRequest
+    public Guid Id { get; }
+
+    public string Name { get; }
+
+    public CustomerAddCommand(Guid id, string name)
     {
-        public Guid Id { get; }
-
-        public string Name { get; }
-
-        public CustomerAddCommand(Guid id, string name)
-        {
-            this.Id = id;
-            this.Name = name;
-        }
+        this.Id = id;
+        this.Name = name;
     }
 }

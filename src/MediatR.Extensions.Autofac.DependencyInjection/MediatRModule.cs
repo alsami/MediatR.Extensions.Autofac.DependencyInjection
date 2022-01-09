@@ -4,57 +4,56 @@ using Autofac;
 using MediatR.Pipeline;
 using Module = Autofac.Module;
 
-namespace MediatR.Extensions.Autofac.DependencyInjection
+namespace MediatR.Extensions.Autofac.DependencyInjection;
+
+internal class MediatRModule : Module
 {
-    internal class MediatRModule : Module
+    private readonly Assembly[] assemblies;
+    private readonly Type[] customBehaviorTypes;
+
+    public MediatRModule(Assembly[] assemblies, Type[] customBehaviorTypes)
     {
-        private readonly Assembly[] assemblies;
-        private readonly Type[] customBehaviorTypes;
+        this.assemblies = assemblies;
+        this.customBehaviorTypes = customBehaviorTypes;
+    }
 
-        public MediatRModule(Assembly[] assemblies, Type[] customBehaviorTypes)
+    protected override void Load(ContainerBuilder builder)
+    {
+        builder.RegisterAssemblyTypes(typeof(IMediator).GetTypeInfo().Assembly).AsImplementedInterfaces();
+
+        var openHandlerTypes = new[]
         {
-            this.assemblies = assemblies;
-            this.customBehaviorTypes = customBehaviorTypes;
+            typeof(IRequestPreProcessor<>),
+            typeof(IRequestHandler<,>),
+            typeof(IRequestPostProcessor<,>),
+            typeof(IRequestExceptionHandler<,,>),
+            typeof(IRequestExceptionAction<,>),
+            typeof(INotificationHandler<>),
+        };
+
+        foreach (var openHandlerType in openHandlerTypes)
+        {
+            builder.RegisterAssemblyTypes(this.assemblies)
+                .AsClosedTypesOf(openHandlerType);
+        }
+            
+        builder.RegisterGeneric(typeof(RequestPostProcessorBehavior<,>)).As(typeof(IPipelineBehavior<,>));
+        builder.RegisterGeneric(typeof(RequestPreProcessorBehavior<,>)).As(typeof(IPipelineBehavior<,>));
+            
+        builder.RegisterGeneric(typeof(RequestExceptionActionProcessorBehavior<,>)).As(typeof(IPipelineBehavior<,>));
+        builder.RegisterGeneric(typeof(RequestExceptionProcessorBehavior<,>)).As(typeof(IPipelineBehavior<,>));
+            
+        foreach (var customBehaviorType in this.customBehaviorTypes)
+        {
+            builder.RegisterGeneric(customBehaviorType)
+                .As(typeof(IPipelineBehavior<,>));
         }
 
-        protected override void Load(ContainerBuilder builder)
+        builder.Register<ServiceFactory>(outerContext =>
         {
-            builder.RegisterAssemblyTypes(typeof(IMediator).GetTypeInfo().Assembly).AsImplementedInterfaces();
+            var innerContext = outerContext.Resolve<IComponentContext>();
 
-            var openHandlerTypes = new[]
-            {
-                typeof(IRequestPreProcessor<>),
-                typeof(IRequestHandler<,>),
-                typeof(IRequestPostProcessor<,>),
-                typeof(IRequestExceptionHandler<,,>),
-                typeof(IRequestExceptionAction<,>),
-                typeof(INotificationHandler<>),
-            };
-
-            foreach (var openHandlerType in openHandlerTypes)
-            {
-                builder.RegisterAssemblyTypes(this.assemblies)
-                    .AsClosedTypesOf(openHandlerType);
-            }
-            
-            builder.RegisterGeneric(typeof(RequestPostProcessorBehavior<,>)).As(typeof(IPipelineBehavior<,>));
-            builder.RegisterGeneric(typeof(RequestPreProcessorBehavior<,>)).As(typeof(IPipelineBehavior<,>));
-            
-            builder.RegisterGeneric(typeof(RequestExceptionActionProcessorBehavior<,>)).As(typeof(IPipelineBehavior<,>));
-            builder.RegisterGeneric(typeof(RequestExceptionProcessorBehavior<,>)).As(typeof(IPipelineBehavior<,>));
-            
-            foreach (var customBehaviorType in this.customBehaviorTypes)
-            {
-                builder.RegisterGeneric(customBehaviorType)
-                    .As(typeof(IPipelineBehavior<,>));
-            }
-
-            builder.Register<ServiceFactory>(outerContext =>
-            {
-                var innerContext = outerContext.Resolve<IComponentContext>();
-
-                return serviceType => innerContext.Resolve(serviceType);
-            });
-        }
+            return serviceType => innerContext.Resolve(serviceType);
+        });
     }
 }

@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using MediatR.Extensions.Autofac.DependencyInjection.Shared.Entities;
 
-namespace MediatR.Extensions.Autofac.DependencyInjection.Shared.Repositories
+namespace MediatR.Extensions.Autofac.DependencyInjection.Shared.Repositories;
+
+public interface ICustomersRepository
 {
-    public interface ICustomersRepository
-    {
-        bool AddCustomer(Customer customer);
+    bool AddCustomer(Customer customer);
 
-        ICollection<Customer> GetAll();
+    ICollection<Customer> GetAll();
 
-        Customer FindCustomer(Guid id);
-    }
+    Customer FindCustomer(Guid id);
 }

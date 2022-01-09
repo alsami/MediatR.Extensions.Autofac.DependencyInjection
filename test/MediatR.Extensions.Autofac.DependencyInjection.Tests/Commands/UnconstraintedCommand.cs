@@ -1,7 +1,6 @@
-﻿namespace MediatR.Extensions.Autofac.DependencyInjection.Tests.Commands
+﻿namespace MediatR.Extensions.Autofac.DependencyInjection.Tests.Commands;
+
+public class UnconstraintedCommand : IRequest<int>
 {
-    public class UnconstraintedCommand : IRequest<int>
-    {
         
-    }
 }

@@ -1,11 +1,10 @@
 ﻿using System;
 
-namespace MediatR.Extensions.Autofac.DependencyInjection.Shared.Dto
-{
-    public class CustomerDto
-    {
-        public Guid Id { get; set; }
+namespace MediatR.Extensions.Autofac.DependencyInjection.Shared.Dto;
 
-        public string Name { get; set; }
-    }
+public class CustomerDto
+{
+    public Guid Id { get; set; }
+
+    public string Name { get; set; }
 }

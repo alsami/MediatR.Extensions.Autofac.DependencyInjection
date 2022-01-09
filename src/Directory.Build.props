@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <LangVersion>9.0</LangVersion>
+    <LangVersion>10.0</LangVersion>
     <IsPackable>true</IsPackable>
     <Copyright>2021©Sami Al Khatib</Copyright>
     <Authors>Sami Al Khatib</Authors>
@@ -17,6 +17,8 @@
     <FileVersion>7.4.0.0</FileVersion>
     <EmbedAllSources>true</EmbedAllSources>
     <TreatWarningAsError>true</TreatWarningAsError>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>

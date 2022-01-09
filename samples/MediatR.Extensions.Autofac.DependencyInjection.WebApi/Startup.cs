@@ -7,35 +7,34 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace MediatR.Extensions.Autofac.DependencyInjection.WebApi
+namespace MediatR.Extensions.Autofac.DependencyInjection.WebApi;
+
+public class Startup
 {
-    public class Startup
+    public void ConfigureServices(IServiceCollection services)
     {
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddControllers(options => options.Filters.Add(typeof(CustomerNotFoundExceptionFilter)))
-                .AddNewtonsoftJson(options =>
-                {
-                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                    options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                });
-        }
+        services.AddControllers(options => options.Filters.Add(typeof(CustomerNotFoundExceptionFilter)))
+            .AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
+    }
 
-        public void Configure(IApplicationBuilder app)
-        {
-            app.UseRouting();
+    public void Configure(IApplicationBuilder app)
+    {
+        app.UseRouting();
 
-            app.UseEndpoints(builder => builder.MapControllers());
-        }
+        app.UseEndpoints(builder => builder.MapControllers());
+    }
 
-        public void ConfigureContainer(ContainerBuilder builder)
-        {
-            builder.RegisterType<CustomersRepository>()
-                .As<ICustomersRepository>()
-                .SingleInstance();
+    public void ConfigureContainer(ContainerBuilder builder)
+    {
+        builder.RegisterType<CustomersRepository>()
+            .As<ICustomersRepository>()
+            .SingleInstance();
 
-            builder.RegisterMediatR(typeof(CustomerAddCommand).Assembly);
-        }
+        builder.RegisterMediatR(typeof(CustomerAddCommand).Assembly);
     }
 }

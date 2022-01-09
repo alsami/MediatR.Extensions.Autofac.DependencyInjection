@@ -6,31 +6,30 @@ using MediatR.Extensions.Autofac.DependencyInjection.Shared.Exceptions;
 using MediatR.Extensions.Autofac.DependencyInjection.Shared.Notifications;
 using MediatR.Extensions.Autofac.DependencyInjection.Shared.Repositories;
 
-namespace MediatR.Extensions.Autofac.DependencyInjection.Shared.CommandHandler
+namespace MediatR.Extensions.Autofac.DependencyInjection.Shared.CommandHandler;
+
+public class CustomerAddCommandHandler : IRequestHandler<CustomerAddCommand>
 {
-    public class CustomerAddCommandHandler : IRequestHandler<CustomerAddCommand>
+    private readonly ICustomersRepository customersRepository;
+    private readonly IMediator mediator;
+
+    public CustomerAddCommandHandler(ICustomersRepository customersRepository, IMediator mediator)
     {
-        private readonly ICustomersRepository customersRepository;
-        private readonly IMediator mediator;
+        this.customersRepository = customersRepository;
+        this.mediator = mediator;
+    }
 
-        public CustomerAddCommandHandler(ICustomersRepository customersRepository, IMediator mediator)
+    public async Task<Unit> Handle(CustomerAddCommand request, CancellationToken cancellationToken)
+    {
+        if (!this.customersRepository.AddCustomer(new Customer(request.Id, request.Name)))
         {
-            this.customersRepository = customersRepository;
-            this.mediator = mediator;
+            throw new CustomerAlreadyExistsException();
         }
 
-        public async Task<Unit> Handle(CustomerAddCommand request, CancellationToken cancellationToken)
-        {
-            if (!this.customersRepository.AddCustomer(new Customer(request.Id, request.Name)))
-            {
-                throw new CustomerAlreadyExistsException();
-            }
+        await this.mediator
+            .Publish(new CustomerAddedNotification(request.Name), cancellationToken)
+            .ConfigureAwait(false);
 
-            await this.mediator
-                .Publish(new CustomerAddedNotification(request.Name), cancellationToken)
-                .ConfigureAwait(false);
-
-            return Unit.Value;
-        }
+        return Unit.Value;
     }
 }

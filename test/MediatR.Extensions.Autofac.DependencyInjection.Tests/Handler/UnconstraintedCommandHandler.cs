@@ -2,13 +2,12 @@
 using System.Threading.Tasks;
 using MediatR.Extensions.Autofac.DependencyInjection.Tests.Commands;
 
-namespace MediatR.Extensions.Autofac.DependencyInjection.Tests.Handler
+namespace MediatR.Extensions.Autofac.DependencyInjection.Tests.Handler;
+
+public class UnconstraintedCommandHandler : IRequestHandler<UnconstraintedCommand, int>
 {
-    public class UnconstraintedCommandHandler : IRequestHandler<UnconstraintedCommand, int>
+    public Task<int> Handle(UnconstraintedCommand request, CancellationToken cancellationToken)
     {
-        public Task<int> Handle(UnconstraintedCommand request, CancellationToken cancellationToken)
-        {
-            return Task.FromResult(0);
-        }
+        return Task.FromResult(0);
     }
 }

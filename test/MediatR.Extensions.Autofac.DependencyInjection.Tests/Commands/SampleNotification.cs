@@ -1,12 +1,11 @@
-﻿namespace MediatR.Extensions.Autofac.DependencyInjection.Tests.Commands
-{
-    public class SampleNotification : INotification
-    {
-        public string Message { get; }
+﻿namespace MediatR.Extensions.Autofac.DependencyInjection.Tests.Commands;
 
-        public SampleNotification(string message)
-        {
-            this.Message = message;
-        }
+public class SampleNotification : INotification
+{
+    public string Message { get; }
+
+    public SampleNotification(string message)
+    {
+        this.Message = message;
     }
 }
