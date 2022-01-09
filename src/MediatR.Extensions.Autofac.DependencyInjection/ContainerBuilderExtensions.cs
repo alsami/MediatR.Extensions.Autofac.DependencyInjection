@@ -8,28 +8,6 @@ namespace MediatR.Extensions.Autofac.DependencyInjection;
 
 public static class ContainerBuilderExtensions
 {
-    private const string ObsoleteMessage =
-        "This extension method is obsolete. Please use the new extension 'RegisterMediatR' instead.";
-        
-    [Obsolete(ObsoleteMessage)]
-    public static ContainerBuilder
-        AddMediatR(this ContainerBuilder builder, params Assembly[] assemblies)
-        => RegisterMediatRInternal(builder, assemblies);
-
-    [Obsolete(ObsoleteMessage)]
-    public static ContainerBuilder AddMediatR(this ContainerBuilder builder, IEnumerable<Assembly> assemblies)
-        => RegisterMediatRInternal(builder, assemblies);
-
-    [Obsolete(ObsoleteMessage)]
-    public static ContainerBuilder AddMediatR(this ContainerBuilder builder, IEnumerable<Type> customBehaviorTypes,
-        IEnumerable<Assembly> assemblies)
-        => RegisterMediatRInternal(builder, assemblies, customBehaviorTypes);
-
-    [Obsolete]
-    public static ContainerBuilder AddMediatR(this ContainerBuilder builder, Assembly assembly,
-        params Type[] customBehaviorTypes)
-        => RegisterMediatRInternal(builder, new[] {assembly}, customBehaviorTypes);
-
     public static ContainerBuilder
         RegisterMediatR(this ContainerBuilder builder, params Assembly[] assemblies)
         => RegisterMediatRInternal(builder, assemblies);
