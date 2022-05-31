@@ -1,3 +1,9 @@
+# [8.1.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/8.1.0) (2022-05-31)
+
+## Features
+
+* Update `Autofac` to `6.4.0`
+
 # [8.0.1](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/8.0.1) (2022-01-30)
 
 ## Features
