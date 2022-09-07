@@ -10,6 +10,7 @@ using MediatR.Extensions.Autofac.DependencyInjection.Tests.Behaviors;
 using MediatR.Extensions.Autofac.DependencyInjection.Tests.Commands;
 using MediatR.Extensions.Autofac.DependencyInjection.Tests.ExceptionActions;
 using MediatR.Extensions.Autofac.DependencyInjection.Tests.ExceptionHandler;
+using MediatR.Extensions.Autofac.DependencyInjection.Tests.Handler;
 using MediatR.Pipeline;
 using Xunit;
 // ReSharper disable UnusedVariable
@@ -38,6 +39,24 @@ public class ContainerBuilderExtensionsTests : IAsyncLifetime
         
         this.AssertServiceRegistered();
         this.AssertServiceResolvable();
+    }
+    
+    [Fact]
+    public void RegisterMediatR_Manual_ExpectInstances()
+    {
+        var configuration = MediatRConfigurationBuilder
+            .Create(typeof(ResponseCommand).Assembly)
+            .WithRequestHandlersManuallyRegistered()
+            .Build();
+
+         this.builder
+            .RegisterMediatR(configuration)
+            .RegisterType<ResponseCommandHandler>()
+            .As<IRequestHandler<ResponseCommand, Response>>();
+
+         this.container = this.builder.Build();
+        
+         Assert.True(this.container.IsRegistered<IRequestHandler<ResponseCommand, Response>>(), "Responsehandler not registered");
     }
     
     [Fact]
