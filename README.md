@@ -56,9 +56,15 @@ public class Program
     public async Task Main(string[] args)
     {
         var builder = new ContainerBuilder();
+
+        var configuration = MediatRConfigurationBuilder
+            .Create(typeof(ResponseCommand).Assembly)
+            .WithAllOpenGenericHandlerTypesRegistered()
+            .Build();
+
         // this will add all your Request- and Notificationhandler
         // that are located in the same project as your program-class
-        builder.RegisterMediatR(typeof(Program).Assembly);
+        builder.RegisterMediatR(configuration);
         
         var container = builder.Build();
         
@@ -71,4 +77,4 @@ public class Program
 }
 ```
 
-For more information about the usage please check out the [samples](https://github.com/cleancodelabs/MediatR.Extensions.Autofac.DependencyInjection/tree/master/samples) I have provided.
+For more information about the usage please check out the [samples](https://github.com/alsami/MediatR.Extensions.Autofac.DependencyInjection/tree/main/samples) and [tests](https://github.com/alsami/MediatR.Extensions.Autofac.DependencyInjection/tree/main/test) of the solution.

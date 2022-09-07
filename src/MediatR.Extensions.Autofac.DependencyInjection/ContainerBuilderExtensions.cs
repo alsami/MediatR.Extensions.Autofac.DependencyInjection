@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Autofac;
+using MediatR.Extensions.Autofac.DependencyInjection.Builder;
 
 namespace MediatR.Extensions.Autofac.DependencyInjection;
 
@@ -15,11 +16,13 @@ public static class ContainerBuilderExtensions
         this ContainerBuilder builder, 
         IEnumerable<Assembly> assemblies) => RegisterMediatRInternal(builder, assemblies);
 
+    // ReSharper disable once UnusedMember.Global
     public static ContainerBuilder RegisterMediatR(
         this ContainerBuilder builder, 
         IEnumerable<Type> customPipeLineBehaviorTypes,
         IEnumerable<Assembly> assemblies) => RegisterMediatRInternal(builder, assemblies, customPipeLineBehaviorTypes);
     
+    // ReSharper disable once UnusedMember.Global
     public static ContainerBuilder RegisterMediatR(
         this ContainerBuilder builder, 
         IEnumerable<Type> customPipeLineBehaviorTypes,
@@ -31,6 +34,15 @@ public static class ContainerBuilderExtensions
         Assembly assembly,
         params Type[] customPipeLineBehaviorTypes) => RegisterMediatRInternal(builder, new[] {assembly}, customPipeLineBehaviorTypes);
 
+    public static ContainerBuilder RegisterMediatR(
+        this ContainerBuilder builder,
+        MediatRConfiguration configuration)
+    {
+        builder.RegisterModule(new MediatRModule(configuration));
+
+        return builder;
+    }
+
     private static ContainerBuilder RegisterMediatRInternal(
         ContainerBuilder builder, 
         IEnumerable<Assembly> assemblies,
@@ -39,7 +51,9 @@ public static class ContainerBuilderExtensions
     {
         var enumeratedAssemblies = assemblies as Assembly[] ?? assemblies.ToArray();
 
-        var configuration = MediatRConfigurationBuilder.Create(enumeratedAssemblies)
+        var configuration = MediatRConfigurationBuilder
+            .Create(enumeratedAssemblies)
+            .WithAllOpenGenericHandlerTypesRegistered()
             .WithCustomPipelineBehaviors(customPipeLineBehaviorTypes ?? Array.Empty<Type>())
             .WithCustomStreamPipelineBehaviors(customStreamPipelineBehaviorTypes ?? Array.Empty<Type>())
             .Build();

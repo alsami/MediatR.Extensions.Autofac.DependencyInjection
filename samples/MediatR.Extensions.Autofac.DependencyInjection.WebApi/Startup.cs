@@ -1,5 +1,7 @@
 ﻿using Autofac;
+using MediatR.Extensions.Autofac.DependencyInjection.Builder;
 using MediatR.Extensions.Autofac.DependencyInjection.Shared.Commands;
+using MediatR.Extensions.Autofac.DependencyInjection.Shared.Queries;
 using MediatR.Extensions.Autofac.DependencyInjection.Shared.Repositories;
 using MediatR.Extensions.Autofac.DependencyInjection.WebApi.Filter;
 using Microsoft.AspNetCore.Builder;
@@ -35,6 +37,8 @@ public class Startup
             .As<ICustomersRepository>()
             .SingleInstance();
 
-        builder.RegisterMediatR(typeof(CustomerAddCommand).Assembly);
+        var configuration = MediatRConfigurationBuilder.Create(typeof(CustomerLoadQuery).Assembly).Build();
+        
+        builder.RegisterMediatR(configuration);
     }
 }
