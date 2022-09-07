@@ -1,3 +1,11 @@
+# [8.2.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/8.2.0) (2022-09-07)
+
+## Features
+
+* Expose `MediatRConfiguration` and `MediatRConfigurationBuilder` as a new way to build the `MediatR` configuration
+* Add new extension that takes an instance of `MediatRConfiguration` as a parameter
+* Allow automatic registration to be disabled using `MediatRConfiguration`. Closes [#10](https://github.com/alsami/MediatR.Extensions.Autofac.DependencyInjection/issues/10)
+
 # [8.1.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/8.1.0) (2022-05-31)
 
 ## Features

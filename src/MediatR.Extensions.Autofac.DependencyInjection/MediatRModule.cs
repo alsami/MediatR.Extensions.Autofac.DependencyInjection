@@ -10,17 +10,6 @@ internal class MediatRModule : Module
 {
     private readonly MediatRConfiguration mediatRConfiguration;
     
-    private readonly Type[] openHandlerTypes = 
-    {
-        typeof(IRequestPreProcessor<>),
-        typeof(IRequestHandler<,>),
-        typeof(IStreamRequestHandler<,>),
-        typeof(IRequestPostProcessor<,>),
-        typeof(IRequestExceptionHandler<,,>),
-        typeof(IRequestExceptionAction<,>),
-        typeof(INotificationHandler<>),
-    };
-
     private readonly Type[] builtInPipelineBehaviorTypes =
     {
         typeof(RequestPostProcessorBehavior<,>),
@@ -40,7 +29,7 @@ internal class MediatRModule : Module
             .AsImplementedInterfaces()
             .InstancePerDependency();
 
-        foreach (var openHandlerType in this.openHandlerTypes)
+        foreach (var openHandlerType in this.mediatRConfiguration.OpenGenericTypesToRegister)
         {
             builder.RegisterAssemblyTypes(this.mediatRConfiguration.HandlersFromAssemblies)
                 .AsClosedTypesOf(openHandlerType)

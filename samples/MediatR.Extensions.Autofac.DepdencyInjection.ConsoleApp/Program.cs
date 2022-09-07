@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Autofac;
 using MediatR.Extensions.Autofac.DependencyInjection;
+using MediatR.Extensions.Autofac.DependencyInjection.Builder;
 using MediatR.Extensions.Autofac.DependencyInjection.Shared.Commands;
 using MediatR.Extensions.Autofac.DependencyInjection.Shared.Exceptions;
 using MediatR.Extensions.Autofac.DependencyInjection.Shared.Queries;
@@ -15,17 +16,18 @@ public static class Program
     public static async Task Main(string[] _)
     {
         var ctx = new CancellationToken();
-        var ctxs = CancellationTokenSource.CreateLinkedTokenSource(ctx);
+        var cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(ctx);
 
         Console.CancelKeyPress += (x, y) =>
         {
             y.Cancel = true;
-            ctxs.Cancel(false);
+            cancellationTokenSource.Cancel(false);
         };
 
         var builder = new ContainerBuilder();
 
-        builder.RegisterMediatR(typeof(CustomerLoadQuery).Assembly);
+        var configuration = MediatRConfigurationBuilder.Create(typeof(CustomerLoadQuery).Assembly).Build();
+        builder.RegisterMediatR(configuration);
 
         builder.RegisterType<CustomersRepository>()
             .As<ICustomersRepository>()

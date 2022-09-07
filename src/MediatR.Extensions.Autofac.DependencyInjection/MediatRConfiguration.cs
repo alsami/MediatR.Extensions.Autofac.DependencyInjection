@@ -3,17 +3,24 @@ using System.Reflection;
 
 namespace MediatR.Extensions.Autofac.DependencyInjection;
 
-internal class MediatRConfiguration
+public class MediatRConfiguration
 {
-    public Assembly[] HandlersFromAssemblies { get; }
+    internal Assembly[] HandlersFromAssemblies { get; }
 
-    public Type[] CustomPipelineBehaviors { get; }
+    internal Type[] CustomPipelineBehaviors { get; }
 
-    public Type[] CustomStreamPipelineBehaviors { get; }
+    internal Type[] CustomStreamPipelineBehaviors { get; }
+    
+    internal Type[] OpenGenericTypesToRegister { get; }
 
-    public MediatRConfiguration(Assembly[] fromAssemblies, Type[]? customPipelineBehaviors = null, Type[]? customStreamPipelineBehaviors = null)
+    internal MediatRConfiguration(
+        Assembly[] fromAssemblies,
+        Type[] openGenericTypesToRegister,
+        Type[]? customPipelineBehaviors = null,
+        Type[]? customStreamPipelineBehaviors = null)
     {
         this.HandlersFromAssemblies = fromAssemblies ?? throw new ArgumentNullException(nameof(fromAssemblies));
+        this.OpenGenericTypesToRegister = openGenericTypesToRegister ?? throw new ArgumentNullException(nameof(openGenericTypesToRegister));
         this.CustomPipelineBehaviors = customPipelineBehaviors ?? Array.Empty<Type>();
         this.CustomStreamPipelineBehaviors = customStreamPipelineBehaviors ?? Array.Empty<Type>();
     }
