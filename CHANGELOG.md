@@ -1,4 +1,4 @@
-# [9.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/8.2.0) (2022-09-30)
+# [9.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/9.0.0) (2022-09-30)
 
 ## Features
 
