@@ -1,4 +1,3 @@
-using System;
 using MediatR.Pipeline;
 
 namespace MediatR.Extensions.Autofac.DependencyInjection;

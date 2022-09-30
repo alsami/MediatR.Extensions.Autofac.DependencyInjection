@@ -1,5 +1,4 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using Autofac;
 using MediatR.Pipeline;
 using Module = Autofac.Module;

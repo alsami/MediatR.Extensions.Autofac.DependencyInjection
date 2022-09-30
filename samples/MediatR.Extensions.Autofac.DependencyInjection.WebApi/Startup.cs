@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using MediatR.Extensions.Autofac.DependencyInjection.Builder;
-using MediatR.Extensions.Autofac.DependencyInjection.Shared.Commands;
 using MediatR.Extensions.Autofac.DependencyInjection.Shared.Queries;
 using MediatR.Extensions.Autofac.DependencyInjection.Shared.Repositories;
 using MediatR.Extensions.Autofac.DependencyInjection.WebApi.Filter;

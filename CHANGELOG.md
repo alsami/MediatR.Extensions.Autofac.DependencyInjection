@@ -1,3 +1,13 @@
+# [9.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/8.2.0) (2022-09-30)
+
+## Features
+
+* Update `MediatR` to version `11.0.0`
+
+## Breaking changes
+
+* There is a small breaking-change regarding the order of parameters in classes that implement `IPipelineBehavior<TRequest, TResponse>`. Please see the release-notes of [MediatR](https://github.com/jbogard/MediatR/releases/tag/v11.0.0) for more details.
+
 # [8.2.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/8.2.0) (2022-09-07)
 
 ## Features
