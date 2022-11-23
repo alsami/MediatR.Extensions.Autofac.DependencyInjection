@@ -3,18 +3,15 @@ name: Build Application
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet: ['6.0.x']
 
     steps:
     - name: Checkout
       uses: actions/checkout@v2
 
     - name: Setup dotnet
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: ${{ matrix.dotnet }}
+        global-json-file: global.json
     
     - name: Build solution
       run: dotnet build -c Release

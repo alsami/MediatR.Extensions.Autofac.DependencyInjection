@@ -1,3 +1,10 @@
+# [9.1.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/9.1.0) (2022-11-23)
+
+## Features
+
+* Update `MediatR` to version `11.0.0`
+* Update `Autofac` to version `6.5.0`
+
 # [9.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/9.0.0) (2022-09-30)
 
 ## Features
