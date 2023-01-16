@@ -26,6 +26,42 @@ public class ContainerBuilderExtensionsTests : IAsyncLifetime
     {
         this.builder = new ContainerBuilder();
     }
+    
+    [Fact]
+    public void RegisterMediatR_RegistrationScopeScoped_InstancesSameInScope()
+    {
+        var configuration = MediatRConfigurationBuilder
+            .Create(typeof(ResponseCommand).Assembly)
+            .WithAllOpenGenericHandlerTypesRegistered()
+            .WithRegistrationScope(RegistrationScope.Scoped)
+            .Build();
+
+        this.container = this.builder.RegisterMediatR(configuration).Build();
+        
+        this.AssertServiceRegistered();
+        this.AssertServiceResolvable();
+        var mediatorOne = this.container.Resolve<IMediator>();
+        var mediatorTwo = this.container.Resolve<IMediator>();
+        mediatorOne.Should().BeSameAs(mediatorTwo);
+    }
+    
+    [Fact]
+    public void RegisterMediatR_RegistrationScopeTransient_InstancesNotSameInScope()
+    {
+        var configuration = MediatRConfigurationBuilder
+            .Create(typeof(ResponseCommand).Assembly)
+            .WithAllOpenGenericHandlerTypesRegistered()
+            .WithRegistrationScope(RegistrationScope.Transient)
+            .Build();
+
+        this.container = this.builder.RegisterMediatR(configuration).Build();
+        
+        this.AssertServiceRegistered();
+        this.AssertServiceResolvable();
+        var mediatorOne = this.container.Resolve<IMediator>();
+        var mediatorTwo = this.container.Resolve<IMediator>();
+        mediatorOne.Should().NotBeSameAs(mediatorTwo);
+    }
 
     [Fact]
     public void RegisterMediatR_ConfigurationProvided_ExpectInstances()
