@@ -1,3 +1,9 @@
+# [9.2.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/9.2.0) (2023-01-16)
+
+## Features
+
+* Add possibility to register `MediatR` dependencies as either `Transient` or `Scoped`. `Transient` translates to `InstancePerDependency` whereas `Scoped` translates to `InstancePerLifetimeScope`
+
 # [9.1.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/9.1.0) (2022-11-23)
 
 ## Features

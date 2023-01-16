@@ -6,7 +6,7 @@
 [![NuGet](https://img.shields.io/nuget/vpre/MediatR.Extensions.Autofac.DependencyInjection.svg)](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection)
 ![Nuget](https://img.shields.io/nuget/dt/MediatR.Extensions.Autofac.DependencyInjection)
 
-This is a cross platform library, written in .netstandard 2.0, that serves as an extension for [autofac's containerbuilder](https://autofac.org/).
+This is a cross platform library, written in .netstandard 2.1, that serves as an extension for [autofac's containerbuilder](https://autofac.org/).
 It will register all necessary classes and interfaces of Jimmy Bogard's [MediatR](https://github.com/jbogard/MediatR) implementation to the autofac-container 
 so you can use cqrs and the [mediator pattern](https://sourcemaking.com/design_patterns/mediator) right ahread without worrying about setting up required infrastracture code.
 
@@ -75,6 +75,20 @@ public class Program
         // more code here
     }
 }
+```
+
+By default all `MediatR` dependencies will be registered as transient (`InstancePerDependency`). Start from version `9.2.0` you can configure the scope
+
+```csharp
+var builder = new ContainerBuilder();
+
+var configuration = MediatRConfigurationBuilder
+    .Create(typeof(ResponseCommand).Assembly)
+    .WithAllOpenGenericHandlerTypesRegistered()
+    .WithRegistrationScope(RegistrationScope.Scoped) // currently only supported values are `Transient` and `Scoped`
+    .Build();
+
+builder.RegisterMediatR(configuration);
 ```
 
 For more information about the usage please check out the [samples](https://github.com/alsami/MediatR.Extensions.Autofac.DependencyInjection/tree/main/samples) and [tests](https://github.com/alsami/MediatR.Extensions.Autofac.DependencyInjection/tree/main/test) of the solution.
