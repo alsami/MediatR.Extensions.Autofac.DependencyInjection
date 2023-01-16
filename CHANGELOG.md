@@ -4,6 +4,10 @@
 
 * Add possibility to register `MediatR` dependencies as either `Transient` or `Scoped`. `Transient` translates to `InstancePerDependency` whereas `Scoped` translates to `InstancePerLifetimeScope`
 
+## Deprecation
+
+* All extensions method on `ContainerBuilder` have been marked as deprecated and will be removed with version `10.0.0`. Please use `builder.RegisterMediatR(MediatRConfiguration)`
+
 # [9.1.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/9.1.0) (2022-11-23)
 
 ## Features
