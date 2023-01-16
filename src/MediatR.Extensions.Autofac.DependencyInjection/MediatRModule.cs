@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
 using Autofac;
+using Autofac.Features.Scanning;
+using MediatR.Extensions.Autofac.DependencyInjection.Extensions;
 using MediatR.Pipeline;
 using Module = Autofac.Module;
 
@@ -23,31 +25,32 @@ internal class MediatRModule : Module
     }
 
     protected override void Load(ContainerBuilder builder)
-    {
-        builder.RegisterAssemblyTypes(typeof(IMediator).GetTypeInfo().Assembly)
+    { 
+        builder
+            .RegisterAssemblyTypes(typeof(IMediator).GetTypeInfo().Assembly)
             .AsImplementedInterfaces()
-            .InstancePerDependency();
+            .ApplyTargetScope(this.mediatRConfiguration.RegistrationScope);
 
         foreach (var openHandlerType in this.mediatRConfiguration.OpenGenericTypesToRegister)
         {
             builder.RegisterAssemblyTypes(this.mediatRConfiguration.HandlersFromAssemblies)
                 .AsClosedTypesOf(openHandlerType)
-                .InstancePerDependency();
+                .ApplyTargetScope(this.mediatRConfiguration.RegistrationScope);
         }
 
         foreach (var builtInPipelineBehaviorType in this.builtInPipelineBehaviorTypes)
         {
-            RegisterGeneric(builder, builtInPipelineBehaviorType, typeof(IPipelineBehavior<,>));
+            this.RegisterGeneric(builder, builtInPipelineBehaviorType, typeof(IPipelineBehavior<,>));
         }
             
         foreach (var customBehaviorType in this.mediatRConfiguration.CustomPipelineBehaviors)
         {
-            RegisterGeneric(builder, customBehaviorType, typeof(IPipelineBehavior<,>));
+            this.RegisterGeneric(builder, customBehaviorType, typeof(IPipelineBehavior<,>));
         }
         
         foreach (var customBehaviorType in this.mediatRConfiguration.CustomStreamPipelineBehaviors)
         {
-            RegisterGeneric(builder, customBehaviorType, typeof(IStreamPipelineBehavior<,>));
+            this.RegisterGeneric(builder, customBehaviorType, typeof(IStreamPipelineBehavior<,>));
         }
 
         builder
@@ -57,13 +60,13 @@ internal class MediatRModule : Module
 
                 return serviceType => innerContext.Resolve(serviceType);
             })
-            .InstancePerDependency();
+            .ApplyTargetScope(this.mediatRConfiguration.RegistrationScope);
     }
 
-    private static void RegisterGeneric(ContainerBuilder builder, Type implementationType, Type asType)
+    private void RegisterGeneric(ContainerBuilder builder, Type implementationType, Type asType)
     {
         builder.RegisterGeneric(implementationType)
             .As(asType)
-            .InstancePerDependency();
+            .ApplyTargetScope(this.mediatRConfiguration.RegistrationScope);
     }
 }

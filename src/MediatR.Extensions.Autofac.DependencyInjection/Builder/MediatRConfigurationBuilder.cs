@@ -10,6 +10,8 @@ public class MediatRConfigurationBuilder
     private readonly HashSet<Type> internalCustomStreamPipelineBehaviorTypes = new();
     private readonly HashSet<Type> internalOpenGenericHandlerTypesToRegister = new();
 
+    private RegistrationScope registrationScope = RegistrationScope.Transient;
+
     private MediatRConfigurationBuilder(Assembly[] handlersFromAssembly)
     {
         if (handlersFromAssembly == null || !handlersFromAssembly.Any() || handlersFromAssembly.All(x => x == null))
@@ -72,9 +74,10 @@ public class MediatRConfigurationBuilder
         return this;
     }
 
-    private void AddOpenGenericHandlerToRegister(Type openHandlerType)
+    public MediatRConfigurationBuilder WithRegistrationScope(RegistrationScope registrationScope)
     {
-        this.internalOpenGenericHandlerTypesToRegister.Add(openHandlerType);
+        this.registrationScope = registrationScope;
+        return this;
     }
 
     public MediatRConfigurationBuilder WithOpenGenericHandlerTypeToRegister(Type openGenericHandlerType)
@@ -111,10 +114,15 @@ public class MediatRConfigurationBuilder
         return this;
     }
 
-    public MediatRConfiguration Build()
-        => new(
+    public MediatRConfiguration Build() => new(
             this.handlersFromAssembly,
             this.internalOpenGenericHandlerTypesToRegister.ToArray(),
             this.internalCustomPipelineBehaviorTypes.ToArray(),
-            this.internalCustomStreamPipelineBehaviorTypes.ToArray());
+            this.internalCustomStreamPipelineBehaviorTypes.ToArray(),
+            this.registrationScope);
+    
+    private void AddOpenGenericHandlerToRegister(Type openHandlerType)
+    {
+        this.internalOpenGenericHandlerTypesToRegister.Add(openHandlerType);
+    }
 }
