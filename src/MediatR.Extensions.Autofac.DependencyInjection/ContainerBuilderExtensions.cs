@@ -6,26 +6,31 @@ namespace MediatR.Extensions.Autofac.DependencyInjection;
 
 public static class ContainerBuilderExtensions
 {
+    [Obsolete($"Please use the extension to pass in an instance of {nameof(MediatRConfiguration)} using {nameof(MediatRConfigurationBuilder)} to build it. Will be removed with version 10.0.0", false)]
     public static ContainerBuilder
         RegisterMediatR(this ContainerBuilder builder, params Assembly[] assemblies) => RegisterMediatRInternal(builder, assemblies);
 
+    [Obsolete($"Please use the extension to pass in an instance of {nameof(MediatRConfiguration)} using {nameof(MediatRConfigurationBuilder)} to build it. Will be removed with version 10.0.0", false)]
     public static ContainerBuilder RegisterMediatR(
         this ContainerBuilder builder, 
         IEnumerable<Assembly> assemblies) => RegisterMediatRInternal(builder, assemblies);
 
     // ReSharper disable once UnusedMember.Global
+    [Obsolete($"Please use the extension to pass in an instance of {nameof(MediatRConfiguration)} using {nameof(MediatRConfigurationBuilder)} to build it. Will be removed with version 10.0.0", false)]
     public static ContainerBuilder RegisterMediatR(
         this ContainerBuilder builder, 
         IEnumerable<Type> customPipeLineBehaviorTypes,
         IEnumerable<Assembly> assemblies) => RegisterMediatRInternal(builder, assemblies, customPipeLineBehaviorTypes);
     
     // ReSharper disable once UnusedMember.Global
+    [Obsolete($"Please use the extension to pass in an instance of {nameof(MediatRConfiguration)} using {nameof(MediatRConfigurationBuilder)} to build it. Will be removed with version 10.0.0", false)]
     public static ContainerBuilder RegisterMediatR(
         this ContainerBuilder builder, 
         IEnumerable<Type> customPipeLineBehaviorTypes,
         IEnumerable<Type> customStreamPipeLineBehaviorTypes,
         IEnumerable<Assembly> assemblies) => RegisterMediatRInternal(builder, assemblies, customPipeLineBehaviorTypes, customStreamPipeLineBehaviorTypes);
 
+    [Obsolete($"Please use the extension to pass in an instance of {nameof(MediatRConfiguration)} using {nameof(MediatRConfigurationBuilder)} to build it. Will be removed with version 10.0.0", false)]
     public static ContainerBuilder RegisterMediatR(
         this ContainerBuilder builder, 
         Assembly assembly,

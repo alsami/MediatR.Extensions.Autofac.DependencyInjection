@@ -77,7 +77,7 @@ public class Program
 }
 ```
 
-By default all `MediatR` dependencies will be registered as transient (`InstancePerDependency`). Start from version `9.2.0` you can configure the scope
+By default all `MediatR` dependencies will be registered as transient (`InstancePerDependency`). Starting with version `9.2.0` you can configure the scope
 
 ```csharp
 var builder = new ContainerBuilder();
