@@ -8,7 +8,7 @@ using MediatR.Extensions.Autofac.DependencyInjection.Shared.Repositories;
 
 namespace MediatR.Extensions.Autofac.DependencyInjection.Shared.CommandHandler;
 
-public class CustomerAddCommandHandler : IRequestHandler<CustomerAddCommand>
+public class CustomerAddCommandHandler : IRequestHandler<CustomerAddCommand,Unit>
 {
     private readonly ICustomersRepository customersRepository;
     private readonly IMediator mediator;

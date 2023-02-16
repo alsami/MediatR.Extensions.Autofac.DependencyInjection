@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using Autofac;
-using Autofac.Features.Scanning;
 using MediatR.Extensions.Autofac.DependencyInjection.Extensions;
 using MediatR.Pipeline;
 using Module = Autofac.Module;
@@ -52,15 +51,6 @@ internal class MediatRModule : Module
         {
             this.RegisterGeneric(builder, customBehaviorType, typeof(IStreamPipelineBehavior<,>));
         }
-
-        builder
-            .Register<ServiceFactory>(outerContext =>
-            {
-                var innerContext = outerContext.Resolve<IComponentContext>();
-
-                return serviceType => innerContext.Resolve(serviceType);
-            })
-            .ApplyTargetScope(this.mediatRConfiguration.RegistrationScope);
     }
 
     private void RegisterGeneric(ContainerBuilder builder, Type implementationType, Type asType)

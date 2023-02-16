@@ -1,4 +1,6 @@
-﻿using Autofac;
+﻿using System.Linq;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using MediatR.Extensions.Autofac.DependencyInjection.Builder;
 using MediatR.Extensions.Autofac.DependencyInjection.Shared.Queries;
 using MediatR.Extensions.Autofac.DependencyInjection.Shared.Repositories;
@@ -39,5 +41,6 @@ public class Startup
         var configuration = MediatRConfigurationBuilder.Create(typeof(CustomerLoadQuery).Assembly).Build();
         
         builder.RegisterMediatR(configuration);
+        builder.Populate(Enumerable.Empty<ServiceDescriptor>());
     }
 }

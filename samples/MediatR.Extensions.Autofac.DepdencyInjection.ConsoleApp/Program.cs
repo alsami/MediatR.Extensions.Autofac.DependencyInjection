@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using MediatR.Extensions.Autofac.DependencyInjection;
 using MediatR.Extensions.Autofac.DependencyInjection.Builder;
 using MediatR.Extensions.Autofac.DependencyInjection.Shared.Commands;
 using MediatR.Extensions.Autofac.DependencyInjection.Shared.Exceptions;
 using MediatR.Extensions.Autofac.DependencyInjection.Shared.Queries;
 using MediatR.Extensions.Autofac.DependencyInjection.Shared.Repositories;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MediatR.Extensions.Autofac.DepdencyInjection.ConsoleApp;
 
@@ -28,6 +31,7 @@ public static class Program
 
         var configuration = MediatRConfigurationBuilder.Create(typeof(CustomerLoadQuery).Assembly).Build();
         builder.RegisterMediatR(configuration);
+        builder.Populate(Enumerable.Empty<ServiceDescriptor>());
 
         builder.RegisterType<CustomersRepository>()
             .As<ICustomersRepository>()

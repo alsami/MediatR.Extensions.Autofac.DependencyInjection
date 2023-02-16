@@ -2,7 +2,7 @@
 
 namespace MediatR.Extensions.Autofac.DependencyInjection.Shared.Commands;
 
-public class CustomerAddCommand : IRequest
+public class CustomerAddCommand : IRequest<Unit>
 {
     public Guid Id { get; }
 

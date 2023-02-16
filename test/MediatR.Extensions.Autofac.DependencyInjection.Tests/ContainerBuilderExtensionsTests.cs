@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using FluentAssertions;
 using MediatR.Extensions.Autofac.DependencyInjection.Builder;
 using MediatR.Extensions.Autofac.DependencyInjection.Tests.Behaviors;
@@ -12,6 +13,7 @@ using MediatR.Extensions.Autofac.DependencyInjection.Tests.ExceptionActions;
 using MediatR.Extensions.Autofac.DependencyInjection.Tests.ExceptionHandler;
 using MediatR.Extensions.Autofac.DependencyInjection.Tests.Handler;
 using MediatR.Pipeline;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 // ReSharper disable UnusedVariable
 
@@ -36,8 +38,10 @@ public class ContainerBuilderExtensionsTests : IAsyncLifetime
             .WithRegistrationScope(RegistrationScope.Scoped)
             .Build();
 
-        this.container = this.builder.RegisterMediatR(configuration).Build();
-        
+        var containerBuilder = this.builder.RegisterMediatR(configuration);
+        containerBuilder.Populate(Enumerable.Empty<ServiceDescriptor>());  //handle registering stuff from an IServiceCollection and auto register AutofacServiceProvider
+        this.container = containerBuilder.Build();
+
         this.AssertServiceRegistered();
         this.AssertServiceResolvable();
         var mediatorOne = this.container.Resolve<IMediator>();
@@ -54,8 +58,10 @@ public class ContainerBuilderExtensionsTests : IAsyncLifetime
             .WithRegistrationScope(RegistrationScope.Transient)
             .Build();
 
-        this.container = this.builder.RegisterMediatR(configuration).Build();
-        
+        var containerBuilder = this.builder.RegisterMediatR(configuration);
+        containerBuilder.Populate(Enumerable.Empty<ServiceDescriptor>());  //handle registering stuff from an IServiceCollection and auto register AutofacServiceProvider
+        this.container = containerBuilder.Build();
+
         this.AssertServiceRegistered();
         this.AssertServiceResolvable();
         var mediatorOne = this.container.Resolve<IMediator>();
@@ -71,8 +77,10 @@ public class ContainerBuilderExtensionsTests : IAsyncLifetime
             .WithAllOpenGenericHandlerTypesRegistered()
             .Build();
 
-        this.container = this.builder.RegisterMediatR(configuration).Build();
-        
+        var containerBuilder = this.builder.RegisterMediatR(configuration);
+        containerBuilder.Populate(Enumerable.Empty<ServiceDescriptor>());  //handle registering stuff from an IServiceCollection and auto register AutofacServiceProvider
+        this.container = containerBuilder.Build();
+
         this.AssertServiceRegistered();
         this.AssertServiceResolvable();
     }
@@ -90,9 +98,10 @@ public class ContainerBuilderExtensionsTests : IAsyncLifetime
             .RegisterType<ResponseCommandHandler>()
             .As<IRequestHandler<ResponseCommand, Response>>();
 
-         this.container = this.builder.Build();
-        
-         Assert.True(this.container.IsRegistered<IRequestHandler<ResponseCommand, Response>>(), "Responsehandler not registered");
+         this.builder.Populate(Enumerable.Empty<ServiceDescriptor>());  //handle registering stuff from an IServiceCollection and auto register AutofacServiceProvider
+        this.container = this.builder.Build();
+
+        Assert.True(this.container.IsRegistered<IRequestHandler<ResponseCommand, Response>>(), "Responsehandler not registered");
     }
     
     [Fact]
@@ -104,8 +113,10 @@ public class ContainerBuilderExtensionsTests : IAsyncLifetime
             .WithAllOpenGenericHandlerTypesRegistered()
             .Build();
 
-        this.container = this.builder.RegisterMediatR(configuration).Build();
-        
+        this.builder.RegisterMediatR(configuration);
+        this.builder.Populate(Enumerable.Empty<ServiceDescriptor>());  //handle registering stuff from an IServiceCollection and auto register AutofacServiceProvider
+        this.container = this.builder.Build();
+
         this.AssertServiceRegistered();
         this.AssertServiceResolvable();
         this.container.IsRegistered(typeof(IPipelineBehavior<ResponseCommand, Response>));
@@ -119,9 +130,10 @@ public class ContainerBuilderExtensionsTests : IAsyncLifetime
     [Fact]
     public void ContainerBuilderExtensions_RegisterMediatRWithAssembliesResolveTypes_ExpectInstances()
     {
-        this.container = this.builder
-            .RegisterMediatR(typeof(ResponseCommand).Assembly, typeof(ResponseCommand).Assembly)
-            .Build();
+        var containerBuilder = this.builder
+            .RegisterMediatR(typeof(ResponseCommand).Assembly, typeof(ResponseCommand).Assembly);
+        containerBuilder.Populate(Enumerable.Empty<ServiceDescriptor>());  // handle registering stuff from an IServiceCollection and auto register AutofacServiceProvider
+        this.container = containerBuilder.Build();
 
         this.AssertServiceRegistered();
         this.AssertServiceResolvable();
@@ -130,21 +142,23 @@ public class ContainerBuilderExtensionsTests : IAsyncLifetime
     [Fact]
     public async Task ContainerBuilderExtensions_RegisterMediatRWithAssembliesAndCustomBehaviorsResolveTypes_ExpectInstances()
     {
-        this.container = this.builder.RegisterMediatR(typeof(ResponseCommand).Assembly, typeof(LoggingBehavior<,>), typeof(NoopBehavior<,>))
-            .Build();
-
+        var containerBuilder =
+            this.builder.RegisterMediatR(typeof(ResponseCommand).Assembly, typeof(LoggingBehavior<,>), typeof(NoopBehavior<,>));
+        containerBuilder.Populate(Enumerable.Empty<ServiceDescriptor>());  //handle registering stuff from an IServiceCollection and auto register AutofacServiceProvider
+        this.container = containerBuilder.Build();
+        
         Assert.True(this.container.IsRegistered<IMediator>(), "Mediator not registered!");
-        Assert.True(this.container.IsRegistered<ServiceFactory>(), "ServiceFactory not registered");
+        Assert.True(this.container.IsRegistered<IServiceProvider>(), "IServiceProvider not registered");
         Assert.True(this.container.IsRegistered<IPipelineBehavior<ResponseCommand, Response>>(),
             "PiplineBehavior not registered");
         Assert.True(this.container.IsRegistered<IRequestHandler<ResponseCommand, Response>>(),
             "Responsehandler not registered");
-        Assert.True(this.container.IsRegistered<IRequestHandler<VoidCommand>>(), "Voidhandler not registered");
+        Assert.True(this.container.IsRegistered<IRequestHandler<VoidCommand,Unit>>(), "Voidhandler not registered");
         Assert.True(this.container.IsRegistered<INotificationHandler<SampleNotification>>());
 
         var mediator = this.container.Resolve<IMediator>();
         this.container.Resolve<IRequestHandler<ResponseCommand, Response>>();
-        this.container.Resolve<IRequestHandler<VoidCommand>>();
+        this.container.Resolve<IRequestHandler<VoidCommand,Unit>>();
         this.container.Resolve<INotificationHandler<SampleNotification>>();
         var behaviors = this.container.Resolve<IEnumerable<IPipelineBehavior<ResponseCommand, Response>>>();
         Assert.Equal(6, behaviors.Count());
@@ -155,11 +169,12 @@ public class ContainerBuilderExtensionsTests : IAsyncLifetime
     [Fact]
     public async Task ContainerBuilderExtensions_RegisterMediatRWithAssembliesAndCustomBehaviorsUnconstrainted_ResolveTypes_ExpectInstances()
     {
-        this.container = this.builder.RegisterMediatR(typeof(ResponseCommand).Assembly, typeof(LoggingBehavior<,>))
-            .Build();
+        var containerBuilder = this.builder.RegisterMediatR(typeof(ResponseCommand).Assembly, typeof(LoggingBehavior<,>));
+        containerBuilder.Populate(Enumerable.Empty<ServiceDescriptor>());  //handle registering stuff from an 
+        this.container = containerBuilder.Build();
 
         Assert.True(this.container.IsRegistered<IMediator>(), "Mediator not registered!");
-        Assert.True(this.container.IsRegistered<ServiceFactory>(), "ServiceFactory not registered");
+        Assert.True(this.container.IsRegistered<IServiceProvider>(), "IServiceProvider not registered");
         Assert.True(this.container.IsRegistered<IPipelineBehavior<UnconstraintedCommand, int>>(),
             "PiplineBehavior not registered");
         Assert.True(this.container.IsRegistered<IRequestHandler<UnconstraintedCommand, int>>(),
@@ -183,10 +198,10 @@ public class ContainerBuilderExtensionsTests : IAsyncLifetime
     public async Task
         ContainerBuilderExtensions_RegisterMediatR_Call_Throwing_Handler_Exception_Handlers_Called()
     {
-        var currentContainer = new ContainerBuilder()
-            .RegisterMediatR(typeof(CommandThatThrowsArgumentException).Assembly)
-            .Build();
-
+        var containerBuilder = new ContainerBuilder()
+            .RegisterMediatR(typeof(CommandThatThrowsNullRefException).Assembly);
+        containerBuilder.Populate(Enumerable.Empty<ServiceDescriptor>());  //handle registering stuff from an IServiceCollection and auto register AutofacServiceProvider
+        var currentContainer = containerBuilder.Build();
         var mediator = currentContainer.Resolve<IMediator>();
             
         await mediator.Send(new CommandThatThrowsArgumentException());
@@ -200,10 +215,10 @@ public class ContainerBuilderExtensionsTests : IAsyncLifetime
     public async Task
         ContainerBuilderExtensions_RegisterMediatR_Call_Throwing_Handler_Exception_Actions_Called()
     {
-        var currentContainer = new ContainerBuilder()
-            .RegisterMediatR(typeof(CommandThatThrowsNullRefException).Assembly)
-            .Build();
-
+        var containerBuilder = new ContainerBuilder()
+            .RegisterMediatR(typeof(CommandThatThrowsNullRefException).Assembly);
+        containerBuilder.Populate(Enumerable.Empty<ServiceDescriptor>());  //handle registering stuff from an IServiceCollection and auto register AutofacServiceProvider
+        var currentContainer = containerBuilder.Build();
         var mediator = currentContainer.Resolve<IMediator>();
 
         try
@@ -223,7 +238,7 @@ public class ContainerBuilderExtensionsTests : IAsyncLifetime
     {
         this.container.Resolve<IMediator>();
         this.container.Resolve<IRequestHandler<ResponseCommand, Response>>();
-        this.container.Resolve<IRequestHandler<VoidCommand>>();
+        this.container.Resolve<IRequestHandler<VoidCommand,Unit>>();
         this.container.Resolve<INotificationHandler<SampleNotification>>();
     }
 
@@ -232,10 +247,9 @@ public class ContainerBuilderExtensionsTests : IAsyncLifetime
         Assert.True(this.container.IsRegistered<IMediator>(), "Mediator not registered!");
         Assert.True(this.container.IsRegistered<ISender>(), "ISender not registered!");
         Assert.True(this.container.IsRegistered<IPublisher>(), "IPublisher not registered!");
-        Assert.True(this.container.IsRegistered<ServiceFactory>(), "ServiceFactory not registered");
         Assert.True(this.container.IsRegistered<IPipelineBehavior<ResponseCommand, Response>>(), "PiplineBehavior not registered");
         Assert.True(this.container.IsRegistered<IRequestHandler<ResponseCommand, Response>>(), "Responsehandler not registered");
-        Assert.True(this.container.IsRegistered<IRequestHandler<VoidCommand>>(), "Voidhandler not registered");
+        Assert.True(this.container.IsRegistered<IRequestHandler<VoidCommand,Unit>>(), "Voidhandler not registered");
         Assert.True(this.container.IsRegistered<IRequestPreProcessor<VoidCommand>>(), "Void Request Pre Processor not registered");
         Assert.True(this.container.IsRegistered<IRequestPostProcessor<VoidCommand, Unit>>(), "Void Request Post Processor not registered");
         Assert.True(this.container.IsRegistered<INotificationHandler<SampleNotification>>());
