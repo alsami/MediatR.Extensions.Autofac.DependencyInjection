@@ -29,7 +29,9 @@ public static class Program
 
         var builder = new ContainerBuilder();
 
-        var configuration = MediatRConfigurationBuilder.Create(typeof(CustomerLoadQuery).Assembly).Build();
+        var configuration = MediatRConfigurationBuilder.Create(typeof(CustomerLoadQuery).Assembly)
+            .WithAllOpenGenericHandlerTypesRegistered()
+            .Build();
         builder.RegisterMediatR(configuration);
         builder.Populate(Enumerable.Empty<ServiceDescriptor>());
 
