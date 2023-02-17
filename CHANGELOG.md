@@ -1,3 +1,19 @@
+# [10.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/10.0.0) (2023-02-17)
+
+## Breaking changes
+
+* Remove obsolete extension method to register `MediatR`. From now on you will require to use `builder.RegisterMediatR(MediatRConfiguration)` and provide a `MediatRConfiguration` using `MediatRConfigurationBuilder`.
+* `MediatR` has been updated to version `12.0.0`. There are a set of breaking changes that you will need to fix. Please [follow the migration guide](https://github.com/jbogard/MediatR/wiki/Migration-Guide-11.x-to-12.0) for more details.
+
+## Features
+
+* Add support to register a custom implementation that implements all mediator interface (`IMediator`, `ISender`, `IPublisher`)
+* Add support to register a custom implementation of `INotificationPublisher`
+* Add support for `IRequestHandler<>` which is required for `MediatR` version `12.0.0`
+* Add `ServiceProviderWrapper` that implements `IServiceProvider` and uses `ILifeTimeScope` to resolve services
+* Add `ServiceProviderWrapper` to the container but only if `typeof(IServiceProvider)` has not been registered yet
+* Re-add support for `netstandard2.0` to align with `MediatR`
+
 # [9.2.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/9.2.0) (2023-01-16)
 
 ## Features

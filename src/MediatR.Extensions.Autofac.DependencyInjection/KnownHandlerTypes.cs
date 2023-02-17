@@ -8,6 +8,7 @@ public static class KnownHandlerTypes
     {
         typeof(IRequestPreProcessor<>),
         typeof(IRequestHandler<,>),
+        typeof(IRequestHandler<>),
         typeof(IStreamRequestHandler<,>),
         typeof(IRequestPostProcessor<,>),
         typeof(IRequestExceptionHandler<,,>),
