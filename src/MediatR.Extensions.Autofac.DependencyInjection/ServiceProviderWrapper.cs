@@ -4,12 +4,12 @@ namespace MediatR.Extensions.Autofac.DependencyInjection;
 
 internal class ServiceProviderWrapper : IServiceProvider
 {
-    private readonly ILifetimeScope _lifeTimeScope;
+    private readonly ILifetimeScope lifeTimeScope;
 
     public ServiceProviderWrapper(ILifetimeScope lifeTimeScope)
     {
-        this._lifeTimeScope = lifeTimeScope;
+        this.lifeTimeScope = lifeTimeScope;
     }
 
-    public object GetService(Type serviceType) => this._lifeTimeScope.ResolveOptional(serviceType);
+    public object? GetService(Type serviceType) => this.lifeTimeScope.ResolveOptional(serviceType);
 }
