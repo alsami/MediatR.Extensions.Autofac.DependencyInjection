@@ -1,6 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Runtime.CompilerServices;
 using Autofac;
-using Autofac.Features.Scanning;
 using MediatR.Extensions.Autofac.DependencyInjection.Extensions;
 using MediatR.Pipeline;
 using Module = Autofac.Module;
@@ -25,10 +24,22 @@ internal class MediatRModule : Module
     }
 
     protected override void Load(ContainerBuilder builder)
-    { 
+    {
+        builder.RegisterType<ServiceProviderWrapper>()
+            .As<IServiceProvider>()
+            .InstancePerDependency()
+            .IfNotRegistered(typeof(IServiceProvider));
+        
         builder
-            .RegisterAssemblyTypes(typeof(IMediator).GetTypeInfo().Assembly)
-            .AsImplementedInterfaces()
+            .RegisterType(this.mediatRConfiguration.MediatorType)
+            .As<IMediator>()
+            .As<IPublisher>()
+            .As<ISender>()
+            .ApplyTargetScope(this.mediatRConfiguration.RegistrationScope);
+
+        builder
+            .RegisterType(this.mediatRConfiguration.NotificationPublisherType)
+            .As<INotificationPublisher>()
             .ApplyTargetScope(this.mediatRConfiguration.RegistrationScope);
 
         foreach (var openHandlerType in this.mediatRConfiguration.OpenGenericTypesToRegister)
@@ -52,15 +63,6 @@ internal class MediatRModule : Module
         {
             this.RegisterGeneric(builder, customBehaviorType, typeof(IStreamPipelineBehavior<,>));
         }
-
-        builder
-            .Register<ServiceFactory>(outerContext =>
-            {
-                var innerContext = outerContext.Resolve<IComponentContext>();
-
-                return serviceType => innerContext.Resolve(serviceType);
-            })
-            .ApplyTargetScope(this.mediatRConfiguration.RegistrationScope);
     }
 
     private void RegisterGeneric(ContainerBuilder builder, Type implementationType, Type asType)

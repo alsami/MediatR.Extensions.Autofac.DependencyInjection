@@ -1,4 +1,6 @@
 using System.Reflection;
+using Autofac;
+using MediatR.NotificationPublishers;
 
 namespace MediatR.Extensions.Autofac.DependencyInjection.Builder;
 
@@ -6,6 +8,9 @@ public class MediatRConfigurationBuilder
 {
     private readonly Assembly[] handlersFromAssembly;
 
+    private Type mediatorType = typeof(Mediator);
+    private Type notificationPublisherType = typeof(ForeachAwaitPublisher);
+    
     private readonly HashSet<Type> internalCustomPipelineBehaviorTypes = new();
     private readonly HashSet<Type> internalCustomStreamPipelineBehaviorTypes = new();
     private readonly HashSet<Type> internalOpenGenericHandlerTypesToRegister = new();
@@ -24,6 +29,32 @@ public class MediatRConfigurationBuilder
     }
 
     public static MediatRConfigurationBuilder Create(params Assembly[] handlersFromAssembly) => new(handlersFromAssembly);
+    
+    public MediatRConfigurationBuilder UseMediatorType(Type customMediatorType)
+    {
+        if (!customMediatorType.IsAssignableTo<IMediator>() || !customMediatorType.IsAssignableTo<ISender>() || !customMediatorType.IsAssignableTo<IPublisher>())
+        {
+            throw new ArgumentException(
+                $"{customMediatorType.Name} needs to be assignable to the following interfaces {nameof(IMediator)}, {nameof(ISender)}, {nameof(IPublisher)}!",
+                nameof(customMediatorType));
+        }
+
+        this.mediatorType = customMediatorType;
+        return this;
+    }
+
+    public MediatRConfigurationBuilder UseNotificationPublisher(Type customNotificationPublisherType)
+    {
+        if (!customNotificationPublisherType.IsAssignableTo<INotificationPublisher>())
+        {
+            throw new ArgumentException(
+                $"{customNotificationPublisherType.Name} is not assignable to type {nameof(INotificationPublisher)}!",
+                nameof(customNotificationPublisherType));
+        }
+
+        this.notificationPublisherType = customNotificationPublisherType;
+        return this;
+    }
 
     public MediatRConfigurationBuilder WithCustomPipelineBehavior(Type customPipelineBehaviorType)
     {
@@ -116,6 +147,8 @@ public class MediatRConfigurationBuilder
 
     public MediatRConfiguration Build() => new(
             this.handlersFromAssembly,
+            this.mediatorType,
+            this.notificationPublisherType,
             this.internalOpenGenericHandlerTypesToRegister.ToArray(),
             this.internalCustomPipelineBehaviorTypes.ToArray(),
             this.internalCustomStreamPipelineBehaviorTypes.ToArray(),

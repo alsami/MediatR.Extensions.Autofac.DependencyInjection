@@ -2,14 +2,13 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Autofac;
-using MediatR.Extensions.Autofac.DependencyInjection;
 using MediatR.Extensions.Autofac.DependencyInjection.Builder;
 using MediatR.Extensions.Autofac.DependencyInjection.Shared.Commands;
 using MediatR.Extensions.Autofac.DependencyInjection.Shared.Exceptions;
 using MediatR.Extensions.Autofac.DependencyInjection.Shared.Queries;
 using MediatR.Extensions.Autofac.DependencyInjection.Shared.Repositories;
 
-namespace MediatR.Extensions.Autofac.DepdencyInjection.ConsoleApp;
+namespace MediatR.Extensions.Autofac.DependencyInjection.ConsoleApp;
 
 public static class Program
 {

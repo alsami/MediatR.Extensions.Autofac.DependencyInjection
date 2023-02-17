@@ -19,7 +19,7 @@ public class CustomerAddCommandHandler : IRequestHandler<CustomerAddCommand>
         this.mediator = mediator;
     }
 
-    public async Task<Unit> Handle(CustomerAddCommand request, CancellationToken cancellationToken)
+    public async Task Handle(CustomerAddCommand request, CancellationToken cancellationToken)
     {
         if (!this.customersRepository.AddCustomer(new Customer(request.Id, request.Name)))
         {
@@ -29,7 +29,5 @@ public class CustomerAddCommandHandler : IRequestHandler<CustomerAddCommand>
         await this.mediator
             .Publish(new CustomerAddedNotification(request.Name), cancellationToken)
             .ConfigureAwait(false);
-
-        return Unit.Value;
     }
 }
