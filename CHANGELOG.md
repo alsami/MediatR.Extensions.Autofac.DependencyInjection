@@ -1,3 +1,15 @@
+# [11.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/11.0.0) (2023-03-08)
+
+## Breaking changes
+
+* Remove obsolete extension method to register `MediatR`. From now on you will require to use `builder.RegisterMediatR(MediatRConfiguration)` and provide a `MediatRConfiguration` using `MediatRConfigurationBuilder`.
+* `Autofac` has been updated to version `7.0.0`. There are a set of breaking changes. Some of them will not have any effects on you but you will need to evaluate that. Please [check out this link](https://github.com/autofac/Autofac/releases/tag/v7.0.0) for more details.
+
+## Chores
+
+* Update `Autofac` to `7.0.0`
+* Update `MediatR` to `11.0.1`
+
 # [10.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/10.0.0) (2023-02-17)
 
 ## Breaking changes
