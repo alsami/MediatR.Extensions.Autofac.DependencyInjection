@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Autofac.Features.AttributeFilters;
 using MediatR.Extensions.Autofac.DependencyInjection.Builder;
 using MediatR.Extensions.Autofac.DependencyInjection.Shared.Queries;
 using MediatR.Extensions.Autofac.DependencyInjection.Shared.Repositories;
@@ -37,6 +38,7 @@ public class Startup
             .SingleInstance();
 
         var configuration = MediatRConfigurationBuilder.Create(typeof(CustomerLoadQuery).Assembly)
+            .WithOpenGenericHandlerTypeToRegisterCallback(x=>x.WithAttributeFiltering())
             .WithAllOpenGenericHandlerTypesRegistered()
             .Build();
         

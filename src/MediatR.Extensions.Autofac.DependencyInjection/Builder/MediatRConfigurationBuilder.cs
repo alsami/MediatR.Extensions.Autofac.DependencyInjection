@@ -1,5 +1,7 @@
 using System.Reflection;
 using Autofac;
+using Autofac.Builder;
+using Autofac.Features.Scanning;
 using MediatR.NotificationPublishers;
 
 namespace MediatR.Extensions.Autofac.DependencyInjection.Builder;
@@ -15,6 +17,9 @@ public class MediatRConfigurationBuilder
     private readonly HashSet<Type> internalCustomStreamPipelineBehaviorTypes = new();
     private readonly HashSet<Type> internalOpenGenericHandlerTypesToRegister = new();
 
+    private Action<IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle>>
+        internalCustomRegistrationAction = _ => { };
+    
     private RegistrationScope registrationScope = RegistrationScope.Transient;
 
     private MediatRConfigurationBuilder(Assembly[] handlersFromAssembly)
@@ -152,10 +157,16 @@ public class MediatRConfigurationBuilder
             this.internalOpenGenericHandlerTypesToRegister.ToArray(),
             this.internalCustomPipelineBehaviorTypes.ToArray(),
             this.internalCustomStreamPipelineBehaviorTypes.ToArray(),
-            this.registrationScope);
+            this.registrationScope, this.internalCustomRegistrationAction);
     
     private void AddOpenGenericHandlerToRegister(Type openHandlerType)
     {
         this.internalOpenGenericHandlerTypesToRegister.Add(openHandlerType);
+    }
+
+    public MediatRConfigurationBuilder WithOpenGenericHandlerTypeToRegisterCallback(Action<IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle>> openGenericHandlerTypeToRegisterCallback)
+    {
+        this.internalCustomRegistrationAction = openGenericHandlerTypeToRegisterCallback;
+        return this;
     }
 }

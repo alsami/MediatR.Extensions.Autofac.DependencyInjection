@@ -9,7 +9,6 @@ public static class ContainerBuilderExtensions
         MediatRConfiguration configuration)
     {
         builder.RegisterModule(new MediatRModule(configuration));
-
         return builder;
     }
 }
