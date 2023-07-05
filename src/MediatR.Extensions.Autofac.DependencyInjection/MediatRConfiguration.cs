@@ -6,7 +6,7 @@ namespace MediatR.Extensions.Autofac.DependencyInjection;
 
 public class MediatRConfiguration
 {
-    internal Action<IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle>>? InternalCustomRegistrationAction
+    internal IReadOnlyDictionary<Type?, Action<IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle>>>? InternalCustomRegistrationAction
     {
         get;
     }
@@ -32,7 +32,7 @@ public class MediatRConfiguration
         Type[]? customPipelineBehaviors = null,
         Type[]? customStreamPipelineBehaviors = null,
         RegistrationScope registrationScope = RegistrationScope.Transient,
-        Action<IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle>>?
+        IReadOnlyDictionary<Type?, Action<IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle>>>?
             internalCustomRegistrationAction = null)
     {
         this.InternalCustomRegistrationAction = internalCustomRegistrationAction;
@@ -44,9 +44,12 @@ public class MediatRConfiguration
         this.CustomStreamPipelineBehaviors = customStreamPipelineBehaviors ?? Array.Empty<Type>();
         this.RegistrationScope = registrationScope;
     }
-
-    public void OpenGenericTypesToRegisterCallback(IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle> registeredType)
+    
+    internal void OpenGenericTypesToRegisterCallback(Type type, IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle> registeredType)
     {
-        this.InternalCustomRegistrationAction?.Invoke(registeredType);
+        if (this.InternalCustomRegistrationAction?.TryGetValue(type, out var action) == true)
+        {
+            action.Invoke(registeredType);
+        }
     }
 }

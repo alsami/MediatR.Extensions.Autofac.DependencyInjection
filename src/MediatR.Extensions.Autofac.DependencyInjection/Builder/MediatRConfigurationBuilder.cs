@@ -16,10 +16,8 @@ public class MediatRConfigurationBuilder
     private readonly HashSet<Type> internalCustomPipelineBehaviorTypes = new();
     private readonly HashSet<Type> internalCustomStreamPipelineBehaviorTypes = new();
     private readonly HashSet<Type> internalOpenGenericHandlerTypesToRegister = new();
+    private readonly Dictionary<Type?, Action<IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle>>> internalCustomRegistrationAction = new();
 
-    private Action<IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle>>
-        internalCustomRegistrationAction = _ => { };
-    
     private RegistrationScope registrationScope = RegistrationScope.Transient;
 
     private MediatRConfigurationBuilder(Assembly[] handlersFromAssembly)
@@ -151,22 +149,73 @@ public class MediatRConfigurationBuilder
     }
 
     public MediatRConfiguration Build() => new(
-            this.handlersFromAssembly,
-            this.mediatorType,
-            this.notificationPublisherType,
-            this.internalOpenGenericHandlerTypesToRegister.ToArray(),
-            this.internalCustomPipelineBehaviorTypes.ToArray(),
-            this.internalCustomStreamPipelineBehaviorTypes.ToArray(),
-            this.registrationScope, this.internalCustomRegistrationAction);
+        this.handlersFromAssembly,
+        this.mediatorType,
+        this.notificationPublisherType,
+        this.internalOpenGenericHandlerTypesToRegister.ToArray(),
+        this.internalCustomPipelineBehaviorTypes.ToArray(),
+        this.internalCustomStreamPipelineBehaviorTypes.ToArray(),
+        this.registrationScope,
+        this.internalCustomRegistrationAction);
     
     private void AddOpenGenericHandlerToRegister(Type openHandlerType)
     {
         this.internalOpenGenericHandlerTypesToRegister.Add(openHandlerType);
     }
 
+    /// <summary>
+    /// Register all open-generic handler-types with a callback. from <see cref="MediatR.Extensions.Autofac.DependencyInjection.KnownHandlerTypes"/>
+    /// </summary>
+    /// <param name="openGenericHandlerTypeToRegisterCallback">Delegate callback</param>
+    /// <returns>Self configured instance</returns>
     public MediatRConfigurationBuilder WithOpenGenericHandlerTypeToRegisterCallback(Action<IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle>> openGenericHandlerTypeToRegisterCallback)
     {
-        this.internalCustomRegistrationAction = openGenericHandlerTypeToRegisterCallback;
+        foreach (var type in internalOpenGenericHandlerTypesToRegister)
+        {
+            WithOpenGenericHandlerTypeToRegisterCallback(type, openGenericHandlerTypeToRegisterCallback);
+        }
+        return this;
+    }
+    
+    
+    /// <summary>
+    /// Register a callback for a specific open-generic handler-type.
+    /// </summary>
+    /// <param name="openGenericHandlerTypeToRegisterCallback"></param>
+    /// <typeparam name="TOpenGenericType">Type from <see cref="MediatR.Extensions.Autofac.DependencyInjection.KnownHandlerTypes"/></typeparam>
+    /// <returns></returns>
+    /// <exception cref="ArgumentException">If type that registered is out of scope of <see cref="MediatR.Extensions.Autofac.DependencyInjection.KnownHandlerTypes"/></exception>
+    internal MediatRConfigurationBuilder WithOpenGenericHandlerTypeToRegisterCallback<TOpenGenericType>(Action<IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle>> openGenericHandlerTypeToRegisterCallback)
+    {
+        var openGenericType = typeof(TOpenGenericType);
+        
+        return WithOpenGenericHandlerTypeToRegisterCallback(openGenericType, openGenericHandlerTypeToRegisterCallback);
+    }
+    
+    /// <summary>
+    /// Register a callback for a specific open-generic handler-type.
+    /// </summary>
+    /// <param name="openGenericType">Type of Handler like (IRequestHandler, INotificationHandler) etc.</param>
+    /// <param name="openGenericHandlerTypeToRegisterCallback">Callback</param>
+    /// <returns>Self configured instance</returns>
+    /// <exception cref="ArgumentException">If type that registered is out of scope of <see cref="MediatR.Extensions.Autofac.DependencyInjection.KnownHandlerTypes"/></exception>
+    internal MediatRConfigurationBuilder WithOpenGenericHandlerTypeToRegisterCallback(Type openGenericType, Action<IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle>> openGenericHandlerTypeToRegisterCallback)
+    {
+        if (!KnownHandlerTypes.AllTypes.Contains(openGenericType))
+        {
+            throw new ArgumentException(
+                $"Invalid open-generic handler-type {openGenericType.Name}",
+                nameof(openGenericType));
+        }
+
+        if (this.internalCustomRegistrationAction.ContainsKey(openGenericType))
+        {
+            this.internalCustomRegistrationAction[openGenericType] = openGenericHandlerTypeToRegisterCallback;
+        }
+        else
+        {
+            this.internalCustomRegistrationAction.Add(openGenericType, openGenericHandlerTypeToRegisterCallback);
+        }
         return this;
     }
 }

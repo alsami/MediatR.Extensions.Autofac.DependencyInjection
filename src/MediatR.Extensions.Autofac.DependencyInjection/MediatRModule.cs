@@ -43,10 +43,7 @@ internal class MediatRModule : Module
 
         foreach (var openHandlerType in this.mediatRConfiguration.OpenGenericTypesToRegister)
         {
-            var registeredType = builder.RegisterAssemblyTypes(this.mediatRConfiguration.HandlersFromAssemblies)
-                .AsClosedTypesOf(openHandlerType)
-                .ApplyTargetScope(this.mediatRConfiguration.RegistrationScope);
-            this.mediatRConfiguration.OpenGenericTypesToRegisterCallback(registeredType);
+            this.RegisterOpenType(builder, openHandlerType);
         }
 
         foreach (var builtInPipelineBehaviorType in this.builtInPipelineBehaviorTypes)
@@ -65,10 +62,20 @@ internal class MediatRModule : Module
         }
     }
 
+    private void RegisterOpenType(ContainerBuilder builder, Type openHandlerType)
+    {
+        var registeredType = builder.RegisterAssemblyTypes(this.mediatRConfiguration.HandlersFromAssemblies)
+            .AsClosedTypesOf(openHandlerType)
+            .ApplyTargetScope(this.mediatRConfiguration.RegistrationScope);
+        
+        this.mediatRConfiguration.OpenGenericTypesToRegisterCallback(openHandlerType, registeredType);
+    }
+
     private void RegisterGeneric(ContainerBuilder builder, Type implementationType, Type asType)
     {
         builder.RegisterGeneric(implementationType)
             .As(asType)
             .ApplyTargetScope(this.mediatRConfiguration.RegistrationScope);
     }
+    
 }

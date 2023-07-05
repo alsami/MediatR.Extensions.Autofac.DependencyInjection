@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Autofac.Features.AttributeFilters;
 using FluentAssertions;
 using MediatR.Extensions.Autofac.DependencyInjection.Builder;
 using MediatR.Extensions.Autofac.DependencyInjection.Tests.Behaviors;
 using MediatR.Extensions.Autofac.DependencyInjection.Tests.Commands;
 using MediatR.Extensions.Autofac.DependencyInjection.Tests.CustomTypes;
 using MediatR.Extensions.Autofac.DependencyInjection.Tests.Handler;
+using MediatR.Extensions.Autofac.DependencyInjection.Tests.Services;
 using MediatR.Pipeline;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -181,6 +183,29 @@ public class ContainerBuilderExtensionsTests : IAsyncLifetime
             .Select(type => type.GetType())
             .Should()
             .Contain(typeof(LoggingBehavior<ResponseCommand, Response>));
+    }
+
+    
+    [Fact]
+    public void RegisterMediatR_ConfigurationProvidedWithOpenGenericCallback()
+    {
+        var configuration = MediatRConfigurationBuilder
+            .Create(typeof(ResponseCommand).Assembly)
+            .WithAllOpenGenericHandlerTypesRegistered()
+            .WithOpenGenericHandlerTypeToRegisterCallback(x =>
+            {
+                x.WithAttributeFiltering();
+            })
+            .Build();
+        this.builder.RegisterType<EstDateTimeConverterService>().Keyed<IDateTimeConverterService>("EST");
+        this.builder.RegisterType<UtcDateTimeConverterService>().Keyed<IDateTimeConverterService>("UTC");
+        this.builder.RegisterMediatR(configuration);
+        this.container = this.builder.Build();
+
+        this.container.ResolveKeyed<IDateTimeConverterService>("EST").Should().BeOfType<EstDateTimeConverterService>();
+        this.container.ResolveKeyed<IDateTimeConverterService>("UTC").Should().BeOfType<UtcDateTimeConverterService>();
+        Assert.True(this.container.IsRegistered<IRequestHandler<ConvertEstDateTimeCommand, DateTime>>(), "EST KeyFilter Response handler not registered");
+        Assert.True(this.container.IsRegistered<IRequestHandler<ConvertUtcDateTimeCommand, DateTime>>(), "UTC KeyFilter Response handler not registered");
     }
     
     private void AssertServiceResolvable()
