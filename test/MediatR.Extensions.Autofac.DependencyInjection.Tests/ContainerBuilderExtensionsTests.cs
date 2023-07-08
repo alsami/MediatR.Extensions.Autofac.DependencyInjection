@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Autofac.Features.AttributeFilters;
 using FluentAssertions;
 using MediatR.Extensions.Autofac.DependencyInjection.Builder;
 using MediatR.Extensions.Autofac.DependencyInjection.Tests.Behaviors;
 using MediatR.Extensions.Autofac.DependencyInjection.Tests.Commands;
 using MediatR.Extensions.Autofac.DependencyInjection.Tests.CustomTypes;
 using MediatR.Extensions.Autofac.DependencyInjection.Tests.Handler;
+using MediatR.Extensions.Autofac.DependencyInjection.Tests.Services;
 using MediatR.Pipeline;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -181,6 +183,55 @@ public class ContainerBuilderExtensionsTests : IAsyncLifetime
             .Select(type => type.GetType())
             .Should()
             .Contain(typeof(LoggingBehavior<ResponseCommand, Response>));
+    }
+
+    
+    [Fact]
+    public void RegisterMediatR_ConfigurationProvidedWithOpenGenericCallback()
+    {
+        var configuration = MediatRConfigurationBuilder
+            .Create(typeof(ResponseCommand).Assembly)
+            .WithAllOpenGenericHandlerTypesRegistered()
+            .WithOpenGenericHandlerTypeToRegisterCallback(x=>x.WithAttributeFiltering())
+            .Build();
+        this.builder.RegisterType<EstDateTimeConverterService>().Keyed<IDateTimeConverterService>("EST");
+        this.builder.RegisterType<UtcDateTimeConverterService>().Keyed<IDateTimeConverterService>("UTC");
+        this.builder.RegisterMediatR(configuration);
+        this.container = this.builder.Build();
+
+        this.container.ResolveKeyed<IDateTimeConverterService>("EST").Should().BeOfType<EstDateTimeConverterService>();
+        this.container.ResolveKeyed<IDateTimeConverterService>("UTC").Should().BeOfType<UtcDateTimeConverterService>();
+        var estHandler = this.container.ResolveOptional<IRequestHandler<ConvertEstDateTimeCommand, DateTime>>();
+        var utcHandler = this.container.ResolveOptional<IRequestHandler<ConvertUtcDateTimeCommand, DateTime>>();
+        estHandler.Should().NotBeNull();
+        utcHandler.Should().NotBeNull();
+    }
+    
+    [Fact]
+    public void RegisterMediatR_ConfigurationProvidedWithOpenGenericCallback_NotRegistered()
+    {
+        var configuration = MediatRConfigurationBuilder
+            .Create(typeof(ResponseCommand).Assembly)
+            .WithAllOpenGenericHandlerTypesRegistered()
+            .Build();
+        this.builder.RegisterType<EstDateTimeConverterService>().Keyed<IDateTimeConverterService>("EST");
+        this.builder.RegisterType<UtcDateTimeConverterService>().Keyed<IDateTimeConverterService>("UTC");
+        this.builder.RegisterMediatR(configuration);
+        this.container = this.builder.Build();
+
+        this.container.ResolveKeyed<IDateTimeConverterService>("EST").Should().BeOfType<EstDateTimeConverterService>();
+        this.container.ResolveKeyed<IDateTimeConverterService>("UTC").Should().BeOfType<UtcDateTimeConverterService>();
+        try
+        {
+            var estHandler = this.container.ResolveOptional<IRequestHandler<ConvertEstDateTimeCommand, DateTime>>();
+            var utcHandler = this.container.ResolveOptional<IRequestHandler<ConvertUtcDateTimeCommand, DateTime>>();
+            Assert.True(false);
+        }
+        catch
+        {
+            Assert.True(true);
+        }
+        
     }
     
     private void AssertServiceResolvable()

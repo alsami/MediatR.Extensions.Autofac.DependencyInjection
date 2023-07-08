@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using Autofac;
+﻿using Autofac;
 using MediatR.Extensions.Autofac.DependencyInjection.Extensions;
 using MediatR.Pipeline;
 using Module = Autofac.Module;
@@ -44,9 +43,7 @@ internal class MediatRModule : Module
 
         foreach (var openHandlerType in this.mediatRConfiguration.OpenGenericTypesToRegister)
         {
-            builder.RegisterAssemblyTypes(this.mediatRConfiguration.HandlersFromAssemblies)
-                .AsClosedTypesOf(openHandlerType)
-                .ApplyTargetScope(this.mediatRConfiguration.RegistrationScope);
+            this.RegisterOpenType(builder, openHandlerType);
         }
 
         foreach (var builtInPipelineBehaviorType in this.builtInPipelineBehaviorTypes)
@@ -65,10 +62,20 @@ internal class MediatRModule : Module
         }
     }
 
+    private void RegisterOpenType(ContainerBuilder builder, Type openHandlerType)
+    {
+        var registeredType = builder.RegisterAssemblyTypes(this.mediatRConfiguration.HandlersFromAssemblies)
+            .AsClosedTypesOf(openHandlerType)
+            .ApplyTargetScope(this.mediatRConfiguration.RegistrationScope);
+        
+        this.mediatRConfiguration.OpenGenericTypesToRegisterCallback(openHandlerType, registeredType);
+    }
+
     private void RegisterGeneric(ContainerBuilder builder, Type implementationType, Type asType)
     {
         builder.RegisterGeneric(implementationType)
             .As(asType)
             .ApplyTargetScope(this.mediatRConfiguration.RegistrationScope);
     }
+    
 }
