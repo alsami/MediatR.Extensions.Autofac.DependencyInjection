@@ -1,3 +1,9 @@
+# [11.3.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/11.3.0) (2023-11-21)
+
+## Chores
+
+* Update `MediatR` to `12.2.0`
+
 # [11.2.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/11.2.0) (2023-08-28)
 
 ## Chores
