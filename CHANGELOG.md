@@ -1,3 +1,9 @@
+# [12.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/12.0.0) (2024-01-22)
+
+## Breaking changes
+
+* Update `Autofac` to `8.0.0`. For the list of breaking-changes, take a look at the [official release](https://github.com/autofac/Autofac/releases/tag/v8.0.0)
+
 # [11.3.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/11.3.0) (2023-11-21)
 
 ## Chores
