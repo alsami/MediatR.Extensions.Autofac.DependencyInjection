@@ -1,3 +1,9 @@
+# [12.1.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/12.1.0) (2024-06-28)
+
+## Features
+
+* Update `MediatR` to `12.3.0`
+
 # [12.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/12.0.0) (2024-01-22)
 
 ## Breaking changes
