@@ -13,8 +13,8 @@
     <PackageIcon>icon.png</PackageIcon>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>git://github.com/alsami/MediatR.Extensions.Autofac.DependencyInjection</RepositoryUrl>
-    <Version>12.1.0</Version>
-    <FileVersion>12.1.0.0</FileVersion>
+    <Version>12.2.0</Version>
+    <FileVersion>12.2.0.0</FileVersion>
     <EmbedAllSources>true</EmbedAllSources>
     <TreatWarningAsError>true</TreatWarningAsError>
     <Nullable>enable</Nullable>
