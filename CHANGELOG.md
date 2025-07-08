@@ -1,3 +1,34 @@
+# [13.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/13.0.0) (2025-07-08)
+
+## Features
+
+* Update `Autofac` to `8.3.0`
+* Update `MediatR` to `13.0.0`
+
+## Breaking changes
+
+`MediatR` with version `13.0.0` now requires a license key. As of now, you can pass in any string and it works (but we don't know when it will stop working).
+You can read more about that here [here](https://github.com/LuckyPennySoftware/MediatR/releases) on how to acquire a license.
+
+The only change you will have to do is the following:
+
+Before update to 13.0.0:
+```csharp
+var configuration = MediatRConfigurationBuilder
+    .Create(assemblyOne, assemblyTwo)
+    .WithAllOpenGenericHandlerTypesRegistered()
+    .Build();
+```
+
+After update to 13.0.0:
+```csharp
+var configuration = MediatRConfigurationBuilder
+    .Create("yourLicenseKeyGoesHere", assemblyOne, assemblyTwo)
+    .WithAllOpenGenericHandlerTypesRegistered()
+    .Build();
+```
+
+
 # [12.3.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/12.3.0) (2025-02-20)
 
 ## Features
