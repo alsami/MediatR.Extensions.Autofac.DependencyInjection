@@ -4,6 +4,8 @@ namespace MediatR.Extensions.Autofac.DependencyInjection;
 
 public class MediatRConfiguration
 {
+    internal string LicenseKey { get; }
+    
     internal Assembly[] HandlersFromAssemblies { get; }
     
     internal Type MediatorType { get; }
@@ -19,6 +21,7 @@ public class MediatRConfiguration
     internal RegistrationScope RegistrationScope { get; }
     
     internal MediatRConfiguration(
+        string licenseKey,
         Assembly[] fromAssemblies,
         Type mediatorType,
         Type notificationPublisherType,
@@ -27,12 +30,13 @@ public class MediatRConfiguration
         Type[]? customStreamPipelineBehaviors = null,
         RegistrationScope registrationScope = RegistrationScope.Transient)
     {
+        this.LicenseKey = licenseKey;
         this.HandlersFromAssemblies = fromAssemblies ?? throw new ArgumentNullException(nameof(fromAssemblies));
         this.MediatorType = mediatorType ?? throw new ArgumentNullException(nameof(mediatorType));
         this.NotificationPublisherType = notificationPublisherType ?? throw new ArgumentNullException(nameof(notificationPublisherType));
         this.OpenGenericTypesToRegister = openGenericTypesToRegister ?? throw new ArgumentNullException(nameof(openGenericTypesToRegister));
-        this.CustomPipelineBehaviors = customPipelineBehaviors ?? Array.Empty<Type>();
-        this.CustomStreamPipelineBehaviors = customStreamPipelineBehaviors ?? Array.Empty<Type>();
+        this.CustomPipelineBehaviors = customPipelineBehaviors ?? [];
+        this.CustomStreamPipelineBehaviors = customStreamPipelineBehaviors ?? [];
         this.RegistrationScope = registrationScope;
     }
 }

@@ -6,6 +6,7 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.Builder;
 
 public class MediatRConfigurationBuilder
 {
+    private readonly string licenseKey;
     private readonly Assembly[] handlersFromAssembly;
 
     private Type mediatorType = typeof(Mediator);
@@ -17,7 +18,7 @@ public class MediatRConfigurationBuilder
 
     private RegistrationScope registrationScope = RegistrationScope.Transient;
 
-    private MediatRConfigurationBuilder(Assembly[] handlersFromAssembly)
+    private MediatRConfigurationBuilder(string licenseKey, Assembly[] handlersFromAssembly)
     {
         if (handlersFromAssembly == null || !handlersFromAssembly.Any() || handlersFromAssembly.All(x => x == null))
         {
@@ -25,10 +26,12 @@ public class MediatRConfigurationBuilder
                 $"Must provide assemblies in order to request {nameof(Mediator)}");
         }
 
+        this.licenseKey = licenseKey;
         this.handlersFromAssembly = handlersFromAssembly;
     }
 
-    public static MediatRConfigurationBuilder Create(params Assembly[] handlersFromAssembly) => new(handlersFromAssembly);
+    public static MediatRConfigurationBuilder Create(string licenseKey, params Assembly[] handlersFromAssembly) 
+        => new(licenseKey, handlersFromAssembly);
     
     public MediatRConfigurationBuilder UseMediatorType(Type customMediatorType)
     {
@@ -146,6 +149,7 @@ public class MediatRConfigurationBuilder
     }
 
     public MediatRConfiguration Build() => new(
+            this.licenseKey,
             this.handlersFromAssembly,
             this.mediatorType,
             this.notificationPublisherType,

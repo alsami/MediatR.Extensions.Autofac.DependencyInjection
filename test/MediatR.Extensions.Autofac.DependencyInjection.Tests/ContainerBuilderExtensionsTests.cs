@@ -18,6 +18,7 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.Tests;
 
 public class ContainerBuilderExtensionsTests : IAsyncLifetime
 {
+    private const string LicenseKey = "LicenseKey";
     private readonly ContainerBuilder builder;
     private IContainer container;
 
@@ -30,7 +31,7 @@ public class ContainerBuilderExtensionsTests : IAsyncLifetime
     public void RegisterMediatR_RegistrationScopeScoped_InstancesSameInScope()
     {
         var configuration = MediatRConfigurationBuilder
-            .Create(typeof(ResponseCommand).Assembly)
+            .Create(LicenseKey, typeof(ResponseCommand).Assembly)
             .WithAllOpenGenericHandlerTypesRegistered()
             .WithRegistrationScope(RegistrationScope.Scoped)
             .Build();
@@ -48,7 +49,7 @@ public class ContainerBuilderExtensionsTests : IAsyncLifetime
     public void RegisterMediatR_RegistrationScopeTransient_InstancesNotSameInScope()
     {
         var configuration = MediatRConfigurationBuilder
-            .Create(typeof(ResponseCommand).Assembly)
+            .Create(LicenseKey, typeof(ResponseCommand).Assembly)
             .WithAllOpenGenericHandlerTypesRegistered()
             .WithRegistrationScope(RegistrationScope.Transient)
             .Build();
@@ -66,7 +67,7 @@ public class ContainerBuilderExtensionsTests : IAsyncLifetime
     public void RegisterMediatR_CustomMediatorProvided_ExpectInstances()
     {
         var configuration = MediatRConfigurationBuilder
-            .Create(typeof(ResponseCommand).Assembly)
+            .Create(LicenseKey, typeof(ResponseCommand).Assembly)
             .UseMediatorType(typeof(CustomMediator))
             .WithAllOpenGenericHandlerTypesRegistered()
             .Build();
@@ -83,7 +84,7 @@ public class ContainerBuilderExtensionsTests : IAsyncLifetime
     public void RegisterMediatR_CustomPublisherProvided_ExpectInstances()
     {
         var configuration = MediatRConfigurationBuilder
-            .Create(typeof(ResponseCommand).Assembly)
+            .Create(LicenseKey, typeof(ResponseCommand).Assembly)
             .UseNotificationPublisher(typeof(CustomNotificationPublisher))
             .WithAllOpenGenericHandlerTypesRegistered()
             .Build();
@@ -100,7 +101,7 @@ public class ContainerBuilderExtensionsTests : IAsyncLifetime
     public void RegisterMediatR_ConfigurationProvided_ExpectInstances()
     {
         var configuration = MediatRConfigurationBuilder
-            .Create(typeof(ResponseCommand).Assembly)
+            .Create(LicenseKey, typeof(ResponseCommand).Assembly)
             .WithAllOpenGenericHandlerTypesRegistered()
             .Build();
 
@@ -114,7 +115,7 @@ public class ContainerBuilderExtensionsTests : IAsyncLifetime
     public void RegisterMediatR_ServiceProviderNotProvided_WrapperResolved()
     {
         var configuration = MediatRConfigurationBuilder
-            .Create(typeof(ResponseCommand).Assembly)
+            .Create(LicenseKey, typeof(ResponseCommand).Assembly)
             .WithAllOpenGenericHandlerTypesRegistered()
             .Build();
 
@@ -132,7 +133,7 @@ public class ContainerBuilderExtensionsTests : IAsyncLifetime
         this.builder.Populate(new ServiceCollection());
         
         var configuration = MediatRConfigurationBuilder
-            .Create(typeof(ResponseCommand).Assembly)
+            .Create(LicenseKey, typeof(ResponseCommand).Assembly)
             .WithAllOpenGenericHandlerTypesRegistered()
             .Build();
 
@@ -148,7 +149,7 @@ public class ContainerBuilderExtensionsTests : IAsyncLifetime
     public void RegisterMediatR_Manual_ExpectInstances()
     {
         var configuration = MediatRConfigurationBuilder
-            .Create(typeof(ResponseCommand).Assembly)
+            .Create(LicenseKey, typeof(ResponseCommand).Assembly)
             .WithRequestHandlersManuallyRegistered()
             .Build();
 
@@ -166,7 +167,7 @@ public class ContainerBuilderExtensionsTests : IAsyncLifetime
     public void RegisterMediatR_ConfigurationProvidedWithCustomBehaviors_Resolvable()
     {
         var configuration = MediatRConfigurationBuilder
-            .Create(typeof(ResponseCommand).Assembly)
+            .Create(LicenseKey, typeof(ResponseCommand).Assembly)
             .WithCustomPipelineBehavior(typeof(LoggingBehavior<,>))
             .WithAllOpenGenericHandlerTypesRegistered()
             .Build();

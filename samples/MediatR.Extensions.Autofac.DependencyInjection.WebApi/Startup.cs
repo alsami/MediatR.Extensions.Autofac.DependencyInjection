@@ -36,7 +36,7 @@ public class Startup
             .As<ICustomersRepository>()
             .SingleInstance();
 
-        var configuration = MediatRConfigurationBuilder.Create(typeof(CustomerLoadQuery).Assembly)
+        var configuration = MediatRConfigurationBuilder.Create("<YourLicenseGoesHere>", typeof(CustomerLoadQuery).Assembly)
             .WithAllOpenGenericHandlerTypesRegistered()
             .Build();
         
