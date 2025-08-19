@@ -58,7 +58,7 @@ public class Program
         var builder = new ContainerBuilder();
 
         var configuration = MediatRConfigurationBuilder
-            .Create(typeof(ResponseCommand).Assembly)
+            .Create("<your license-key goes here>", typeof(ResponseCommand).Assembly)
             .WithAllOpenGenericHandlerTypesRegistered()
             .Build();
 
@@ -83,9 +83,10 @@ By default all `MediatR` dependencies will be registered as transient (`Instance
 var builder = new ContainerBuilder();
 
 var configuration = MediatRConfigurationBuilder
-    .Create(typeof(ResponseCommand).Assembly)
+    .Create("<your license-key goes here>", typeof(ResponseCommand).Assembly)
     .WithAllOpenGenericHandlerTypesRegistered()
-    .WithRegistrationScope(RegistrationScope.Scoped) // currently only supported values are `Transient` and `Scoped`
+    // only supported values are `Transient` and `Scoped`, `Transient` is the default
+    .WithRegistrationScope(RegistrationScope.Scoped)
     .Build();
 
 builder.RegisterMediatR(configuration);

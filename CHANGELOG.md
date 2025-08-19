@@ -1,9 +1,15 @@
+# [13.1.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/13.1.0) (2025-08-19)
+
+## Chores
+
+* Update `Autofac` to `8.4.0`
+
 # [13.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/13.0.0) (2025-07-08)
 
 ## Features
 
 * Update `Autofac` to `8.3.0`
-* Update `MediatR` to `13.0.0`
+* Update `MediatR` to `13.0.0` and register new license types
 
 ## Breaking changes
 
