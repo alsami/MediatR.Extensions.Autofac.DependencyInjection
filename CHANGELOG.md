@@ -1,3 +1,10 @@
+# [14.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/14.0.0) (2026-02-10)
+
+## Features
+
+* Update `Autofac` to `9.0.0`
+* Update `MediatR` to `14.0.0`
+
 # [13.0.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/13.0.0) (2025-07-08)
 
 ## Features

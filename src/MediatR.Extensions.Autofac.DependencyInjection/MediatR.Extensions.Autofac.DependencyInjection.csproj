@@ -3,7 +3,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="8.4.0" />
-    <PackageReference Include="MediatR" Version="13.1.0" />
+    <PackageReference Include="Autofac" Version="9.0.0" />
+    <PackageReference Include="MediatR" Version="14.0.0" />
   </ItemGroup>
 </Project>

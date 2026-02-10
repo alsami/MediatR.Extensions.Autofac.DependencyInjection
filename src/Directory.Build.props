@@ -2,7 +2,7 @@
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
     <IsPackable>true</IsPackable>
-    <Copyright>2025©Sami Al Khatib</Copyright>
+    <Copyright>2026©Sami Al Khatib</Copyright>
     <Authors>Sami Al Khatib</Authors>
     <Title>MediatR-Autofac-Extension</Title>
     <Description>An extension for Autofac-IoC to use MediatR and CQRS with ease.</Description>
@@ -13,8 +13,8 @@
     <PackageIcon>icon.png</PackageIcon>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>git://github.com/alsami/MediatR.Extensions.Autofac.DependencyInjection</RepositoryUrl>
-    <Version>13.0.0</Version>
-    <FileVersion>13.0.0.0</FileVersion>
+    <Version>14.0.0</Version>
+    <FileVersion>14.0.0.0</FileVersion>
     <EmbedAllSources>true</EmbedAllSources>
     <TreatWarningAsError>true</TreatWarningAsError>
     <Nullable>enable</Nullable>
@@ -26,7 +26,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.102">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
