@@ -15,7 +15,7 @@
 ## Breaking changes
 
 `MediatR` with version `13.0.0` now requires a license key. As of now, you can pass in any string and it works (but we don't know when it will stop working).
-You can read more about that here [here](https://github.com/LuckyPennySoftware/MediatR/releases) on how to acquire a license.
+You can read more about that [here](https://github.com/LuckyPennySoftware/MediatR/releases) on how to acquire a license.
 
 The only change you will have to do is the following:
 
