@@ -75,32 +75,43 @@ internal class MediatRModule : Module
         const string baseNamespace = "MediatR.Licensing";
         
         var mediatrAssembly = typeof(INotificationPublisher).Assembly;
-        var licenseAccessorType = mediatrAssembly.GetType($"{baseNamespace}.LicenseAccessor");
+
+        // Resolved here so that a changed MediatR internal API fails while the container is built,
+        // naming what is missing, rather than on the first resolve of IMediator.
+        var licenseAccessorType = GetRequiredType(mediatrAssembly, $"{baseNamespace}.LicenseAccessor");
+        var licenseAccessorConstructor = licenseAccessorType.GetRequiredPublicConstructor(
+            typeof(MediatRServiceConfiguration), typeof(IServiceProvider), typeof(ILoggerFactory));
 
         builder.Register((ctx) =>
             {
-                var constructor = licenseAccessorType.GetFirstPublicConstructor();
                 var mediatorServiceConfiguration = new MediatRServiceConfiguration
                 {
                     LicenseKey = this.mediatRConfiguration.LicenseKey,
                 };
+                // SingleInstance, so ctx is the root scope; resolve now because ctx is only valid during this call.
+                var serviceProvider = ctx.Resolve<IServiceProvider>();
                 var loggerFactory = ctx.ResolveOptional<ILoggerFactory>() ?? new NullLoggerFactory();
-                return constructor.Invoke([mediatorServiceConfiguration, loggerFactory]);
+                return licenseAccessorConstructor.Invoke([mediatorServiceConfiguration, serviceProvider, loggerFactory]);
             })
             .As(licenseAccessorType)
             .SingleInstance();
-        
-        var licenseValidatorType = mediatrAssembly.GetType($"{baseNamespace}.LicenseValidator");
-        
+
+        var licenseValidatorType = GetRequiredType(mediatrAssembly, $"{baseNamespace}.LicenseValidator");
+        var licenseValidatorConstructor = licenseValidatorType.GetRequiredPublicConstructor(typeof(ILoggerFactory));
+
         builder.Register((ctx) =>
             {
-                var constructor = licenseValidatorType.GetFirstPublicConstructor();
                 var loggerFactory = ctx.ResolveOptional<ILoggerFactory>() ?? new NullLoggerFactory();
-                return constructor.Invoke([loggerFactory]);
+                return licenseValidatorConstructor.Invoke([loggerFactory]);
             })
             .As(licenseValidatorType)
             .SingleInstance();
     }
+
+    private static Type GetRequiredType(Assembly assembly, string typeName)
+        => assembly.GetType(typeName)
+           ?? throw new InvalidOperationException(
+               $"Type '{typeName}' was not found in assembly '{assembly.FullName}'.");
 
     private void RegisterGeneric(ContainerBuilder builder, Type implementationType, Type asType)
     {

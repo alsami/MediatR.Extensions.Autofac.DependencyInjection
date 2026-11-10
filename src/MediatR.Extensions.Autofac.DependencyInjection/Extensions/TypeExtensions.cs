@@ -4,6 +4,9 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.Extensions;
 
 internal static class TypeExtensions
 {
-    public static ConstructorInfo GetFirstPublicConstructor(this Type type)
-        => type.GetConstructors( BindingFlags.Instance | BindingFlags.Public)[0];
+    public static ConstructorInfo GetRequiredPublicConstructor(this Type type, params Type[] parameterTypes)
+        => type.GetConstructor(BindingFlags.Instance | BindingFlags.Public, null, parameterTypes, null)
+           ?? throw new InvalidOperationException(
+               $"Type '{type.FullName}' has no public constructor with parameters " +
+               $"({string.Join(", ", parameterTypes.Select(parameterType => parameterType.FullName))}).");
 }
