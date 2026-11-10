@@ -1,3 +1,16 @@
+# [14.3.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/14.3.0) (2026-11-10)
+
+## Features
+
+* Update `MediatR` to `14.3.0`
+* Add `MediatRConfigurationBuilder.WithLicenseKeyFactory` to read the license key from a service registered in the container. The factory receives the root service provider
+* `MediatRConfigurationBuilder.Create` accepts a `null` license key when the key comes from the factory or environment variables
+
+## Bugfixes
+
+* Build `MediatR`'s internal license services by constructor signature. Without this, `MediatR` `14.3.0` failed to construct `Mediator`
+* Fail during container build, naming the missing type or constructor, if `MediatR`'s internal license API changes
+
 # [14.1.0](https://www.nuget.org/packages/MediatR.Extensions.Autofac.DependencyInjection/14.1.0) (2026-04-22)
 
 ## Features
