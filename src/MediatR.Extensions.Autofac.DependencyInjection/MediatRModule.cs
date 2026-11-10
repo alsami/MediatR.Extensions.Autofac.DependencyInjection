@@ -76,9 +76,7 @@ internal class MediatRModule : Module
         
         var mediatrAssembly = typeof(INotificationPublisher).Assembly;
 
-        // Resolved here so that a changed MediatR internal API fails while the container is built,
-        // naming what is missing, rather than on the first resolve of IMediator.
-        var licenseAccessorType = GetRequiredType(mediatrAssembly, $"{baseNamespace}.LicenseAccessor");
+        var licenseAccessorType = mediatrAssembly.GetRequiredType($"{baseNamespace}.LicenseAccessor");
         var licenseAccessorConstructor = licenseAccessorType.GetRequiredPublicConstructor(
             typeof(MediatRServiceConfiguration), typeof(IServiceProvider), typeof(ILoggerFactory));
 
@@ -97,7 +95,7 @@ internal class MediatRModule : Module
             .As(licenseAccessorType)
             .SingleInstance();
 
-        var licenseValidatorType = GetRequiredType(mediatrAssembly, $"{baseNamespace}.LicenseValidator");
+        var licenseValidatorType = mediatrAssembly.GetRequiredType($"{baseNamespace}.LicenseValidator");
         var licenseValidatorConstructor = licenseValidatorType.GetRequiredPublicConstructor(typeof(ILoggerFactory));
 
         builder.Register((ctx) =>
@@ -108,11 +106,6 @@ internal class MediatRModule : Module
             .As(licenseValidatorType)
             .SingleInstance();
     }
-
-    private static Type GetRequiredType(Assembly assembly, string typeName)
-        => assembly.GetType(typeName)
-           ?? throw new InvalidOperationException(
-               $"Type '{typeName}' was not found in assembly '{assembly.FullName}'.");
 
     private void RegisterGeneric(ContainerBuilder builder, Type implementationType, Type asType)
     {
