@@ -87,6 +87,7 @@ internal class MediatRModule : Module
                 var mediatorServiceConfiguration = new MediatRServiceConfiguration
                 {
                     LicenseKey = this.mediatRConfiguration.LicenseKey,
+                    LicenseKeyFactory = this.mediatRConfiguration.LicenseKeyFactory,
                 };
                 // SingleInstance, so ctx is the root scope; resolve now because ctx is only valid during this call.
                 var serviceProvider = ctx.Resolve<IServiceProvider>();

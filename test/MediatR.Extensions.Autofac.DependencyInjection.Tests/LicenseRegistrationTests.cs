@@ -99,6 +99,70 @@ public class LicenseRegistrationTests : IAsyncLifetime
             .Which.ParameterType.Should().Be(typeof(DateTime));
     }
 
+    [Fact]
+    public void WithLicenseKeyFactory_Null_ThrowsArgumentNullException()
+    {
+        var act = () => MediatRConfigurationBuilder
+            .Create(LicenseKey, typeof(ResponseCommand).Assembly)
+            .WithLicenseKeyFactory(null);
+
+        act.Should().Throw<ArgumentNullException>();
+    }
+
+    [Fact]
+    public void Create_NullLicenseKey_MediatorResolvable()
+    {
+        var configuration = MediatRConfigurationBuilder
+            .Create(null, typeof(ResponseCommand).Assembly)
+            .WithAllOpenGenericHandlerTypesRegistered()
+            .Build();
+
+        this.container = new ContainerBuilder().RegisterMediatR(configuration).Build();
+
+        this.container.Resolve<IMediator>().Should().NotBeNull();
+    }
+
+    [Fact]
+    public void WithLicenseKeyFactory_LicenseRead_FactoryReceivesProviderResolvingContainerServices()
+    {
+        var keySource = new KeySource();
+        var invocations = 0;
+        IKeySource resolvedKeySource = null;
+
+        var configuration = MediatRConfigurationBuilder
+            .Create(null, typeof(ResponseCommand).Assembly)
+            .WithAllOpenGenericHandlerTypesRegistered()
+            .WithLicenseKeyFactory(serviceProvider =>
+            {
+                invocations++;
+                resolvedKeySource = (IKeySource)serviceProvider.GetService(typeof(IKeySource));
+                return resolvedKeySource?.Key;
+            })
+            .Build();
+
+        var builder = new ContainerBuilder();
+        builder.RegisterInstance(keySource).As<IKeySource>();
+        this.container = builder.RegisterMediatR(configuration).Build();
+
+        ReadCurrentLicense(this.container.Resolve(LicenseAccessorType));
+
+        invocations.Should().Be(1);
+        resolvedKeySource.Should().BeSameAs(keySource);
+    }
+
+    [Fact]
+    public void RegisterMediatR_NoLicenseKeyFactory_LicenseReadFromConfiguredKey()
+    {
+        this.container = BuildContainer(new ContainerBuilder());
+
+        var license = ReadCurrentLicense(this.container.Resolve(LicenseAccessorType));
+
+        license.Should().NotBeNull();
+    }
+
+    private static object ReadCurrentLicense(object licenseAccessor)
+        => LicenseAccessorType.GetProperty("Current")!.GetValue(licenseAccessor);
+
     private static IContainer BuildContainer(ContainerBuilder builder)
     {
         var configuration = MediatRConfigurationBuilder
@@ -107,6 +171,16 @@ public class LicenseRegistrationTests : IAsyncLifetime
             .Build();
 
         return builder.RegisterMediatR(configuration).Build();
+    }
+
+    public interface IKeySource
+    {
+        string Key { get; }
+    }
+
+    private sealed class KeySource : IKeySource
+    {
+        public string Key => "KeyFromContainer";
     }
 
     public Task InitializeAsync() => Task.CompletedTask;
