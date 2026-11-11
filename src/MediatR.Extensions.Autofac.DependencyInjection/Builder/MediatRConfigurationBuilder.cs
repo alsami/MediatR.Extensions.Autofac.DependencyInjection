@@ -6,8 +6,10 @@ namespace MediatR.Extensions.Autofac.DependencyInjection.Builder;
 
 public class MediatRConfigurationBuilder
 {
-    private readonly string licenseKey;
+    private readonly string? licenseKey;
     private readonly Assembly[] handlersFromAssembly;
+
+    private Func<IServiceProvider, string?>? licenseKeyFactory;
 
     private Type mediatorType = typeof(Mediator);
     private Type notificationPublisherType = typeof(ForeachAwaitPublisher);
@@ -18,7 +20,7 @@ public class MediatRConfigurationBuilder
 
     private RegistrationScope registrationScope = RegistrationScope.Transient;
 
-    private MediatRConfigurationBuilder(string licenseKey, Assembly[] handlersFromAssembly)
+    private MediatRConfigurationBuilder(string? licenseKey, Assembly[] handlersFromAssembly)
     {
         if (handlersFromAssembly == null || !handlersFromAssembly.Any() || handlersFromAssembly.All(x => x == null))
         {
@@ -30,9 +32,20 @@ public class MediatRConfigurationBuilder
         this.handlersFromAssembly = handlersFromAssembly;
     }
 
-    public static MediatRConfigurationBuilder Create(string licenseKey, params Assembly[] handlersFromAssembly) 
+    public static MediatRConfigurationBuilder Create(string? licenseKey, params Assembly[] handlersFromAssembly)
         => new(licenseKey, handlersFromAssembly);
-    
+
+    /// <summary>
+    /// Supplies the MediatR license key from a factory. MediatR invokes it with the root service provider,
+    /// at most once per process, on a background thread. Its result takes precedence over the license key
+    /// passed to <see cref="Create"/>.
+    /// </summary>
+    public MediatRConfigurationBuilder WithLicenseKeyFactory(Func<IServiceProvider, string?> licenseKeyFactory)
+    {
+        this.licenseKeyFactory = licenseKeyFactory ?? throw new ArgumentNullException(nameof(licenseKeyFactory));
+        return this;
+    }
+
     public MediatRConfigurationBuilder UseMediatorType(Type customMediatorType)
     {
         if (!customMediatorType.IsAssignableTo<IMediator>() || !customMediatorType.IsAssignableTo<ISender>() || !customMediatorType.IsAssignableTo<IPublisher>())
@@ -156,7 +169,8 @@ public class MediatRConfigurationBuilder
             this.internalOpenGenericHandlerTypesToRegister.ToArray(),
             this.internalCustomPipelineBehaviorTypes.ToArray(),
             this.internalCustomStreamPipelineBehaviorTypes.ToArray(),
-            this.registrationScope);
+            this.registrationScope,
+            this.licenseKeyFactory);
     
     private void AddOpenGenericHandlerToRegister(Type openHandlerType)
     {

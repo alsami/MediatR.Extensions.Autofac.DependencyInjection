@@ -58,7 +58,7 @@ public class Program
         var builder = new ContainerBuilder();
 
         var configuration = MediatRConfigurationBuilder
-            .Create(typeof(ResponseCommand).Assembly)
+            .Create("yourLicenseKeyGoesHere", typeof(PingCommand).Assembly)
             .WithAllOpenGenericHandlerTypesRegistered()
             .Build();
 
@@ -83,12 +83,45 @@ By default all `MediatR` dependencies will be registered as transient (`Instance
 var builder = new ContainerBuilder();
 
 var configuration = MediatRConfigurationBuilder
-    .Create(typeof(ResponseCommand).Assembly)
+    .Create("yourLicenseKeyGoesHere", typeof(PingCommand).Assembly)
     .WithAllOpenGenericHandlerTypesRegistered()
     .WithRegistrationScope(RegistrationScope.Scoped) // currently only supported values are `Transient` and `Scoped`
     .Build();
 
 builder.RegisterMediatR(configuration);
 ```
+
+## License key
+
+`MediatR` requires a license key. You can read more about how to acquire one [here](https://github.com/LuckyPennySoftware/MediatR/releases). There are two ways to supply it.
+
+Pass the key to `Create`:
+
+```csharp
+var configuration = MediatRConfigurationBuilder
+    .Create("yourLicenseKeyGoesHere", typeof(PingCommand).Assembly)
+    .WithAllOpenGenericHandlerTypesRegistered()
+    .Build();
+```
+
+Or, starting with version `14.3.0`, read it from a service registered in the container, such as a secret store, with `WithLicenseKeyFactory`.
+If you only use the factory or environment variables, you can pass `null` to `Create`.
+
+```csharp
+var configuration = MediatRConfigurationBuilder
+    .Create(null, typeof(PingCommand).Assembly)
+    .WithAllOpenGenericHandlerTypesRegistered()
+    .WithLicenseKeyFactory(serviceProvider => serviceProvider.GetRequiredService<ISecretStore>().Get("MediatR"))
+    .Build();
+```
+
+`MediatR` uses the first key it finds, in this order: the factory result, the key passed to `Create`, the static `Mediator.LicenseKey`, then environment variables.
+
+Keep the following in mind when using the factory:
+
+* It receives the root service provider, not the lifetime scope that resolved `IMediator`.
+  Autofac's root scope also resolves `InstancePerLifetimeScope` services, so only resolve what you need to read the key and don't keep a reference to it.
+* It runs at most once per process, on a background thread, the first time a `Mediator` is constructed.
+* Exceptions thrown by the factory are only logged when an `ILoggerFactory` is registered in the container, so register logging to see them.
 
 For more information about the usage please check out the [samples](https://github.com/alsami/MediatR.Extensions.Autofac.DependencyInjection/tree/main/samples) and [tests](https://github.com/alsami/MediatR.Extensions.Autofac.DependencyInjection/tree/main/test) of the solution.

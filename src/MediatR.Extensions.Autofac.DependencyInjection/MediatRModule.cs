@@ -75,28 +75,33 @@ internal class MediatRModule : Module
         const string baseNamespace = "MediatR.Licensing";
         
         var mediatrAssembly = typeof(INotificationPublisher).Assembly;
-        var licenseAccessorType = mediatrAssembly.GetType($"{baseNamespace}.LicenseAccessor");
+
+        var licenseAccessorType = mediatrAssembly.GetRequiredType($"{baseNamespace}.LicenseAccessor");
+        var licenseAccessorConstructor = licenseAccessorType.GetRequiredPublicConstructor(
+            typeof(MediatRServiceConfiguration), typeof(IServiceProvider), typeof(ILoggerFactory));
 
         builder.Register((ctx) =>
             {
-                var constructor = licenseAccessorType.GetFirstPublicConstructor();
                 var mediatorServiceConfiguration = new MediatRServiceConfiguration
                 {
                     LicenseKey = this.mediatRConfiguration.LicenseKey,
+                    LicenseKeyFactory = this.mediatRConfiguration.LicenseKeyFactory,
                 };
+                // SingleInstance, so ctx is the root scope; resolve now because ctx is only valid during this call.
+                var serviceProvider = ctx.Resolve<IServiceProvider>();
                 var loggerFactory = ctx.ResolveOptional<ILoggerFactory>() ?? new NullLoggerFactory();
-                return constructor.Invoke([mediatorServiceConfiguration, loggerFactory]);
+                return licenseAccessorConstructor.Invoke([mediatorServiceConfiguration, serviceProvider, loggerFactory]);
             })
             .As(licenseAccessorType)
             .SingleInstance();
-        
-        var licenseValidatorType = mediatrAssembly.GetType($"{baseNamespace}.LicenseValidator");
-        
+
+        var licenseValidatorType = mediatrAssembly.GetRequiredType($"{baseNamespace}.LicenseValidator");
+        var licenseValidatorConstructor = licenseValidatorType.GetRequiredPublicConstructor(typeof(ILoggerFactory));
+
         builder.Register((ctx) =>
             {
-                var constructor = licenseValidatorType.GetFirstPublicConstructor();
                 var loggerFactory = ctx.ResolveOptional<ILoggerFactory>() ?? new NullLoggerFactory();
-                return constructor.Invoke([loggerFactory]);
+                return licenseValidatorConstructor.Invoke([loggerFactory]);
             })
             .As(licenseValidatorType)
             .SingleInstance();

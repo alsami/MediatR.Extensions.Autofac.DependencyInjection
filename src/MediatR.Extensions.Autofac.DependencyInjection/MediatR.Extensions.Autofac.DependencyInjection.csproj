@@ -4,6 +4,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Autofac" Version="9.1.0" />
-    <PackageReference Include="MediatR" Version="14.1.0" />
+    <PackageReference Include="MediatR" Version="14.3.0" />
   </ItemGroup>
 </Project>
